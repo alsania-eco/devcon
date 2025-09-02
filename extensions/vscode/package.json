@@ -1,5 +1,6 @@
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
   "name": "echo-devcon-plugin",
   "icon": "media/echo-icon.png",
   "author": "Echo & Alsania Team",
@@ -16,12 +17,22 @@
     "type": "git",
     "url": "https://github.com/alsania-labs/echo-devcon"
 >>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
+=======
+  "name": "echo-devcon",
+  "icon": "media/branding/icons/echo-logo.png",
+  "author": "Echo & Alsania Team",
+  "version": "0.3.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alsania-labs/echo-devcon"
+>>>>>>> 55d4df0da (big push)
   },
   "extensionKind": [
     "ui",
     "workspace"
   ],
   "bugs": {
+<<<<<<< HEAD
 <<<<<<< HEAD
     "url": "https://github.com/SigmaSauer07/echo-dev/issues",
     "email": "support@alsania.com"
@@ -45,6 +56,18 @@
   "description": "Echo AI agent for substantial codebase changes, chat, edit, and autocomplete",
   "publisher": "alsania",
 >>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
+=======
+    "url": "https://github.com/alsania-labs/echo-devcon/issues",
+    "email": "support@alsania.com"
+  },
+  "homepage": "https://alsania.io",
+  "qna": "https://github.com/continuedev/continue/issues/new/choose",
+  "license": "Apache-2.0",
+  "displayName": "Echo DevCon - Alsania AI Code Assistant",
+  "pricing": "Free",
+  "description": "Echo AI agent for substantial codebase changes, chat, edit, and autocomplete",
+  "publisher": "alsania",
+>>>>>>> 55d4df0da (big push)
   "engines": {
     "vscode": "^1.70.0",
     "node": ">=20.19.0"
@@ -52,23 +75,31 @@
   "engine-strict": true,
   "galleryBanner": {
 <<<<<<< HEAD
+<<<<<<< HEAD
     "color": "#0A2472",
 =======
     "color": "#1a1a2e",
 >>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
+=======
+    "color": "#1a1a2e",
+>>>>>>> 55d4df0da (big push)
     "theme": "dark"
   },
   "categories": [
     "AI",
 <<<<<<< HEAD
+<<<<<<< HEAD
     "Programming Languages",
     "Education",
 =======
 >>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
+=======
+>>>>>>> 55d4df0da (big push)
     "Machine Learning",
     "Other"
   ],
   "keywords": [
+<<<<<<< HEAD
 <<<<<<< HEAD
     "echo",
     "alsania",
@@ -80,13 +111,18 @@
     "sidebar",
     "branding"
 =======
+=======
+>>>>>>> 55d4df0da (big push)
     "ai",
     "assistant",
     "echo",
     "alsania",
     "devcon",
     "autocomplete"
+<<<<<<< HEAD
 >>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
+=======
+>>>>>>> 55d4df0da (big push)
   ],
   "activationEvents": [
     "onStartupFinished",
@@ -121,6 +157,7 @@
       }
     ],
     "configuration": {
+<<<<<<< HEAD
 <<<<<<< HEAD
       "title": "Echo DevCon Plugin",
       "properties": {
@@ -162,12 +199,44 @@
           "default": true,
           "markdownDescription": "Echo DevCon collects anonymous usage data, cleaned of PII, to help us improve the product for our users. Read more at [alsania.com/devcon › Telemetry](https://alsania.com/devcon/telemetry)."
         },
+=======
+      "title": "Echo DevCon",
+      "properties": {
+        "echoDevcon.backendUrl": {
+          "type": "string",
+          "default": "http://127.0.0.1:8001",
+          "description": "Echo backend API URL"
+        },
+        "echoDevcon.backendWs": {
+          "type": "string",
+          "default": "ws://127.0.0.1:8001/ws/echo",
+          "description": "Echo WebSocket URL"
+        },
+        "echoDevcon.mcpUrl": {
+          "type": "string",
+          "default": "http://127.0.0.1:8050/mcp",
+          "description": "MCP server URL"
+        },
+        "echoDevcon.autoStart": {
+          "type": "boolean",
+          "default": true,
+          "description": "Auto-start Echo on VS Code launch"
+        },
+        "echoDevCon.telemetryEnabled": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "Echo DevCon collects anonymous usage data, cleaned of PII, to help us improve the product for our users. Read more at [alsania.com/devcon › Telemetry](https://alsania.com/devcon/telemetry)."
+        },
+>>>>>>> 55d4df0da (big push)
         "echoDevCon.showInlineTip": {
           "type": "boolean",
           "default": true,
           "description": "Show inline suggestion to use the Echo DevCon keyboard shortcuts (e.g. \"Cmd/Ctrl L\" to select code, \"Cmd/Ctrl I\" to edit)."
         },
+<<<<<<< HEAD
 >>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
+=======
+>>>>>>> 55d4df0da (big push)
         "echo.disableQuickFix": {
           "type": "boolean",
           "default": false,
@@ -177,19 +246,27 @@
           "type": "boolean",
           "default": false,
 <<<<<<< HEAD
+<<<<<<< HEAD
           "markdownDescription": "Enable the experimental Quick Actions feature. Read our walkthrough to learn about configuration and how to share feedback: [alsania.com/echo-devcon › Walkthrough: Quick Actions (experimental)](https://alsania.com/echo-devcon/customize/deep-dives/vscode-actions#quick-actions)"
 =======
           "markdownDescription": "Enable the experimental Quick Actions feature. Read our walkthrough to learn about configuration and how to share feedback: [alsania.com/devcon › Walkthrough: Quick Actions (experimental)](https://alsania.com/devcon/customize/deep-dives/vscode-actions#quick-actions)"
 >>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
+=======
+          "markdownDescription": "Enable the experimental Quick Actions feature. Read our walkthrough to learn about configuration and how to share feedback: [alsania.com/devcon › Walkthrough: Quick Actions (experimental)](https://alsania.com/devcon/customize/deep-dives/vscode-actions#quick-actions)"
+>>>>>>> 55d4df0da (big push)
         },
         "echo.enableTabAutocomplete": {
           "type": "boolean",
           "default": true,
 <<<<<<< HEAD
+<<<<<<< HEAD
           "markdownDescription": "Enable Echo's tab autocomplete feature. Read our walkthrough to learn about configuration and how to share feedback: [alsania.com/echo-devcon › Walkthrough: Tab Autocomplete (beta)](https://alsania.com/echo-devcon/features/tab-autocomplete)"
 =======
           "markdownDescription": "Enable Echo's tab autocomplete feature. Read our walkthrough to learn about configuration and how to share feedback: [alsania.com/devcon › Walkthrough: Tab Autocomplete (beta)](https://alsania.com/devcon/features/tab-autocomplete)"
 >>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
+=======
+          "markdownDescription": "Enable Echo's tab autocomplete feature. Read our walkthrough to learn about configuration and how to share feedback: [alsania.com/devcon › Walkthrough: Tab Autocomplete (beta)](https://alsania.com/devcon/features/tab-autocomplete)"
+>>>>>>> 55d4df0da (big push)
         },
         "echo.pauseTabAutocompleteOnBattery": {
           "type": "boolean",
@@ -736,10 +813,14 @@
           "id": "echoDevCon",
           "title": "Echo DevCon",
 <<<<<<< HEAD
+<<<<<<< HEAD
           "icon": "../../echo-devcon-brand-kit/plugin-assets/echo_toolbar_16.svg"
 =======
           "icon": "../../devcon-brand-kit/plugin-assets/echo_toolbar_16.svg"
 >>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
+=======
+          "icon": "../../devcon-brand-kit/plugin-assets/echo_toolbar_16.svg"
+>>>>>>> 55d4df0da (big push)
         }
       ],
       "panel": [
@@ -757,10 +838,14 @@
           "id": "echoDevCon.mainView",
           "name": "Echo DevCon",
 <<<<<<< HEAD
+<<<<<<< HEAD
           "icon": "../../echo-devcon-brand-kit/plugin-assets/sidebar-icon.svg",
 =======
           "icon": "../../devcon-brand-kit/plugin-assets/sidebar-icon.svg",
 >>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
+=======
+          "icon": "../../devcon-brand-kit/plugin-assets/sidebar-icon.svg",
+>>>>>>> 55d4df0da (big push)
           "visibility": "visible"
         }
       ],
