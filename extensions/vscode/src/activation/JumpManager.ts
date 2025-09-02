@@ -8,6 +8,12 @@ export interface CompletionDataForAfterJump {
   currentPosition: vscode.Position;
 }
 
+/**
+ * This is how we handle jumps and manage decoration object lifetime.
+ * There are mainly three states the user can be in: not jumping, jumping in progress, and just jumped.
+ * This can potentially be an enum for better readability, but there is logic here that relies on
+ * the _jumpAccepted flag to determine whether we should delete chains.
+ */
 export class JumpManager {
   private static _instance: JumpManager | undefined;
 
@@ -45,6 +51,76 @@ export class JumpManager {
     this._disposables = [];
   }
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> fe9dda39e (docs: add comments on jump manager)
+=======
+  private _createSvgJumpIcon() {
+    const baseTextConfig = {
+      y: SVG_CONFIG.getTextY(),
+      "font-family": SVG_CONFIG.getFontFamily(),
+      "font-size": SVG_CONFIG.getFontSize(),
+    };
+
+    try {
+      // NOTE: it's critical to use svgBuilder.newInstance.
+      // svgBuilder holds state of previously created SVGs,
+      // so you end up with SVGs stacking on top of each other and being interleaved.
+      const builder = svgBuilder.newInstance
+        ? svgBuilder.newInstance()
+        : svgBuilder;
+      const svgContent = builder
+        .width(SVG_CONFIG.getTipWidth())
+        .height(SVG_CONFIG.getTipHeight())
+        .text(
+          {
+            ...baseTextConfig,
+            x: 4,
+            fill: this._theme?.colors["editor.foreground"] ?? SVG_CONFIG.stroke,
+          },
+          SVG_CONFIG.label,
+        )
+        .render();
+
+      const dataUri = `data:image/svg+xml;base64,${Buffer.from(
+        svgContent,
+      ).toString("base64")}`;
+      this._jumpIcon = vscode.Uri.parse(dataUri);
+
+      // Dispose the old decoration (if any) and create a fresh one.
+      if (this._jumpDecoration) {
+        this._jumpDecoration.dispose();
+      }
+      this._jumpDecoration = this._createSvgJumpDecoration();
+    } catch (err) {
+      console.error("Error creating SVG jump tooltip:", err);
+    }
+  }
+
+  private _createSvgJumpDecoration(): vscode.TextEditorDecorationType {
+    const backgroundColour =
+      this._theme?.colors["editor.background"] ?? "#333333";
+
+    return vscode.window.createTextEditorDecorationType({
+      after: {
+        contentIconPath: this._jumpIcon,
+        border: `;box-shadow: inset 0 0 0 ${SVG_CONFIG.strokeWidth}px ${SVG_CONFIG.stroke}, inset 0 0 0 ${SVG_CONFIG.getTipHeight()}px ${backgroundColour};
+                  border-radius: ${SVG_CONFIG.radius}px;
+                  filter: ${SVG_CONFIG.filter}`,
+        margin: `0 0 0 ${SVG_CONFIG.leftMargin}px`,
+        width: `${SVG_CONFIG.getTipWidth()}px`,
+      },
+    });
+  }
+
+>>>>>>> 2007d0a41 (docs: add comments on jump manager)
+<<<<<<< HEAD
+=======
+>>>>>>> 55d4df0da (big push)
+=======
+>>>>>>> fe9dda39e (docs: add comments on jump manager)
   public async suggestJump(
     currentPosition: vscode.Position,
     nextJumpLocation: vscode.Position,
@@ -209,6 +285,13 @@ export class JumpManager {
     await this.clearJumpDecoration();
 
     // Create a decoration for jump.
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 55d4df0da (big push)
+=======
+>>>>>>> fe9dda39e (docs: add comments on jump manager)
     this._jumpDecoration = vscode.window.createTextEditorDecorationType({
       before: {
         contentText: "🦘 Press Tab to jump, Esc to cancel",
@@ -217,6 +300,20 @@ export class JumpManager {
         margin: `0 0 0 4px`,
       },
     });
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> fe9dda39e (docs: add comments on jump manager)
+=======
+    if (!this._jumpDecoration) {
+      this._createSvgJumpIcon(); // makes both the icon & decoration
+    }
+>>>>>>> 2007d0a41 (docs: add comments on jump manager)
+<<<<<<< HEAD
+=======
+>>>>>>> 55d4df0da (big push)
+=======
+>>>>>>> fe9dda39e (docs: add comments on jump manager)
 
     // Apply the decoration.
     const lastIndexOfLine = editor.document.lineAt(lineToRenderOn).text.length;

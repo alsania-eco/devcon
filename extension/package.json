@@ -33,11 +33,27 @@
       },
       {
         "command": "devcon.ask",
+<<<<<<< HEAD
+<<<<<<< HEAD
         "title": "DevCon: Ask About Selection"
       },
       {
         "command": "devcon.applyPatch",
         "title": "DevCon: Apply Suggested Patch"
+=======
+        "title": "Echo DevCon: Ask About Selection"
+      },
+      {
+        "command": "devcon.applyPatch",
+        "title": "Echo DevCon: Apply Suggested Patch"
+>>>>>>> 55d4df0da (big push)
+=======
+        "title": "DevCon: Ask About Selection"
+      },
+      {
+        "command": "devcon.applyPatch",
+        "title": "DevCon: Apply Suggested Patch"
+>>>>>>> d58c01a56 (package patch)
       },
       {
         "command": "devcon.openScribeToday",
@@ -46,4 +62,14 @@
     ]
   },
   "main": "./extension.js"
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
 }
+=======
+=======
+>>>>>>> 55d4df0da (big push)
+}
+=======
+}
+>>>>>>> d58c01a56 (package patch)

@@ -2,12 +2,22 @@
   "mcpServers": [
     {
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
       "name": "EchoMCP",
       "url": "http://localhost:8000",
 =======
       "name": "alsaniamcp",
       "url": "http://localhost:8050",
 >>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
+=======
+      "name": "alsaniamcp",
+      "url": "http://localhost:8050",
+>>>>>>> 55d4df0da (big push)
+=======
+      "name": "alsaniamcp",
+      "url": "http://localhost:8050",
+>>>>>>> 55d4df0da (big push)
       "provider": "alsania",
       "requestOptions": {
         "headers": {
@@ -24,10 +34,18 @@
       "provider": "alsania",
       "model": "echo-001",
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
       "mcpServer": "EchoMCP",
 =======
       "mcpServer": "alsaniamcp",
 >>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
+=======
+      "mcpServer": "alsaniamcp",
+>>>>>>> 55d4df0da (big push)
+=======
+      "mcpServer": "alsaniamcp",
+>>>>>>> 55d4df0da (big push)
       "maxTokens": 30000,
       "temperature": 0.7,
       "topP": 1,
@@ -48,16 +66,28 @@
   "contextProviders": [
     {
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
       "name": "alsania",
       "params": {
         "title": "EchoMCP Context",
         "description": "Get context from EchoMCP backend",
 =======
+=======
+>>>>>>> 55d4df0da (big push)
+=======
+>>>>>>> 55d4df0da (big push)
       "name": "Echo-001",
       "params": {
         "title": "Echo-001 Context",
         "description": "Get context from AlsaniaMCP backend",
+<<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
+=======
+>>>>>>> 55d4df0da (big push)
+=======
+>>>>>>> 55d4df0da (big push)
         "displayTitle": "Echo-001"
       }
     },
@@ -73,16 +103,28 @@
   ],
   "rules": [
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
     "You are EchoMCP, a helpful AI assistant connected to the EchoMCP backend.",
     "Always provide clear and concise responses.",
     "When asked about your capabilities, mention that you're connected to the EchoMCP backend running on localhost:8000.",
     "Use the EchoMCP backend for all chat interactions and context retrieval.",
 =======
+=======
+>>>>>>> 55d4df0da (big push)
+=======
+>>>>>>> 55d4df0da (big push)
     "You are AlsaniaMCP, a helpful AI assistant connected to the AlsaniaMCP backend.",
     "Always provide clear and concise responses.",
     "When asked about your capabilities, mention that you're connected to the AlsaniaMCP backend running on localhost:8000.",
     "Use the AlsaniaMCP backend for all chat interactions and context retrieval.",
+<<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
+=======
+>>>>>>> 55d4df0da (big push)
+=======
+>>>>>>> 55d4df0da (big push)
     "Always follow the alsania-rules.md rules.",
     "Always follow the alsania-code-of-conduct.md code of conduct."
   ],
@@ -104,6 +146,8 @@
     "stream": false
   },
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
   "extensions": [],
   "plugins": [
     {
@@ -113,6 +157,10 @@
   ]
 }
 =======
+=======
+>>>>>>> 55d4df0da (big push)
+=======
+>>>>>>> 55d4df0da (big push)
   "extensions": [
     {
       "name": "DevCon",
@@ -126,4 +174,10 @@
     }
   ]
 }
+<<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
+=======
+>>>>>>> 55d4df0da (big push)
+=======
+>>>>>>> 55d4df0da (big push)
