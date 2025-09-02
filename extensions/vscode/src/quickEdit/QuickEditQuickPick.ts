@@ -238,15 +238,15 @@ export class QuickEdit {
     prompt: string,
     path: string | undefined,
   ) => {
-    const modelTitle = await this.getCurModel();
-    if (!modelTitle) {
+    const model = await this.getCurModel();
+    if (!model) {
       throw new Error("No model selected");
     }
 
     const { config } = await this.configHandler.loadConfig();
     const rules = config?.rules ?? []; // no need to error - getCurModel above will handle
 
-    await this._streamEditWithInputAndContext(prompt, modelTitle, rules);
+    await this._streamEditWithInputAndContext(prompt, model, rules);
     this.openAcceptRejectMenu(prompt, path);
   };
 
@@ -352,9 +352,9 @@ export class QuickEdit {
     label: QuickEditInitialItemLabels | undefined;
     value: string | undefined;
   }> {
-    const model = await this.getCurModel();
+    const modelTitle = await this.getCurModel();
 
-    if (!model) {
+    if (!modelTitle) {
       this.ide.showToast("error", "Please configure a model to use Quick Edit");
       return { label: undefined, value: undefined };
     }

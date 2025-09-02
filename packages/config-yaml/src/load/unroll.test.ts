@@ -5,10 +5,10 @@ describe("parseMarkdownRuleOrAssistantUnrolled tests", () => {
   it("parses valid YAML content as AssistantUnrolled", () => {
     const mockId: PackageIdentifier = {
       uriType: "file",
-      fileUri: "./foo/bar.yaml",
+      filePath: "./foo/bar.yaml",
     };
     const yamlContent = `
-name: Test Agent
+name: Test Assistant
 version: 1.0.0
  
 models:
@@ -17,7 +17,7 @@ models:
     provider: ollama
 `;
     const result = parseMarkdownRuleOrAssistantUnrolled(yamlContent, mockId);
-    expect(result).toHaveProperty("name", "Test Agent");
+    expect(result).toHaveProperty("name", "Test Assistant");
     expect(result).toHaveProperty("version", "1.0.0");
     expect(result.models?.length).toBe(1);
     expect(result.models?.[0]).toHaveProperty("name", "model");
@@ -26,7 +26,7 @@ models:
   it("parses markdown rule content as AssistantUnrolled", () => {
     const mockId: PackageIdentifier = {
       uriType: "file",
-      fileUri: "./foo/bar.md",
+      filePath: "./foo/bar.md",
     };
     const markdownContent = `
 ---
@@ -55,10 +55,10 @@ This is the rule
   it("throws error for invalid content in yaml file", () => {
     const mockId: PackageIdentifier = {
       uriType: "file",
-      fileUri: "./foo/bar.yaml",
+      filePath: "./foo/bar.yaml",
     };
     const invalidContent = `
-name: Test Agent
+name: Test Assistant
 version: 1.0.0
  
 model: # should be models
@@ -74,7 +74,7 @@ model: # should be models
   it("Every non-YAML file is a rule", () => {
     const mockId: PackageIdentifier = {
       uriType: "file",
-      fileUri: "./foo/bar",
+      filePath: "./foo/bar",
     };
     const dubiousContent = `This is not \nproper #YAML#`;
     const result = parseMarkdownRuleOrAssistantUnrolled(dubiousContent, mockId);

@@ -1,32 +1,15 @@
-import { DiffLine } from "..";
-import { NEXT_EDIT_MODELS } from "../llm/constants";
+type NextEditModelName = "mercury-coder-nextedit";
 
-export function isNextEditTest(): boolean {
-  const enabled = process.env.NEXT_EDIT_TEST_ENABLED;
-
-  if (enabled === "false") {
+export function isModelCapableOfNextEdit(modelName: string): boolean {
+  // In test mode, we can control whether next edit is enabled via environment variable.
+  if (process.env.NEXT_EDIT_TEST_ENABLED === "false") {
     return false;
   }
 
-  if (enabled === "true") {
+  if (process.env.NEXT_EDIT_TEST_ENABLED === "true") {
     return true;
   }
 
-  return false;
-}
-
-export function isWhitespaceOnlyDeletion(diffLines: DiffLine[]): boolean {
-  return diffLines.every(
-    (diff) =>
-      diff.type === "old" &&
-      (diff.line.trim() === "" || /^\s+$/.test(diff.line)),
-  );
-}
-
-export function convertNextEditModelNameToEnum(
-  modelName: string,
-): NEXT_EDIT_MODELS | undefined {
-  const nextEditModels = Object.values(NEXT_EDIT_MODELS);
-
-  return nextEditModels.find((model) => modelName.includes(model));
+  const supportedModels: NextEditModelName[] = ["mercury-coder-nextedit"];
+  return supportedModels.some((supported) => modelName.includes(supported));
 }

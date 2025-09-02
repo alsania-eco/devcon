@@ -1,11 +1,20 @@
-# Contributing to Continue
+# Contributing to Echo DevCon
 
-## Table of Contents
+## Tabl ## 👋 Echo DevCon Contribution Ideas
 
-- [Contributing to Continue](#contributing-to-continue)
+[This GitHub project board](https://github.com/SigmaSauer07/echo-dev/projects) is a list of ideas for how you can
+contribute to Echo DevCon. These aren't the only ways, but are a great starting point if you are new to the project. You
+can also browse the list
+of [good first issues](https://github.com/SigmaSauer07/echo-dev/issues?q=is:issue%20state:open%20label:good-first-issue).
+
+## 🐛 Report Bugs
+
+If you find a bug, please [create an issue](https://github.com/SigmaSauer07/echo-dev/issues) to report it! A great bugnts
+
+- [Contributing to Echo DevCon](#contributing-to-devcon)
   - [Table of Contents](#table-of-contents)
 - [❤️ Ways to Contribute](#️-ways-to-contribute)
-  - [👋 Continue Contribution Ideas](#-continue-contribution-ideas)
+  - [👋 Echo DevCon Contribution Ideas](#-devcon-contribution-ideas)
   - [🐛 Report Bugs](#-report-bugs)
   - [✨ Suggest Enhancements](#-suggest-enhancements)
   - [📖 Updating / Improving Documentation](#-updating--improving-documentation)
@@ -15,7 +24,7 @@
   - [🧑‍💻 Contributing Code](#-contributing-code)
     - [Environment Setup](#environment-setup)
       - [Pre-requisites](#pre-requisites)
-      - [Fork the Continue Repository](#fork-the-continue-repository)
+      - [Fork the Echo DevCon Repository](#fork-the-devcon-repository)
       - [VS Code](#vs-code)
         - [Debugging](#debugging)
       - [JetBrains](#jetbrains)
@@ -288,4 +297,4 @@ We require all contributors to accept the CLA and have made it as easy as commen
    I have read the CLA Document and I hereby sign the CLA
    ```
 
-3. The CLA-Assistant bot records your signature in the repo and marks the status check as passed.
+3. The CLA‑Assistant bot records your signature in the repo and marks the status check as passed.

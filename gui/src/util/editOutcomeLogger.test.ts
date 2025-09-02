@@ -1,10 +1,5 @@
-import {
-  ApplyState,
-  BrowserSerializedContinueConfig,
-  ToolCallState,
-} from "core";
+import { ApplyState, ToolCallState } from "core";
 import { describe, expect, it, vi } from "vitest";
-import { EMPTY_CONFIG } from "../redux/slices/configSlice";
 import { assembleEditOutcomeData } from "./editOutcomeLogger";
 
 vi.mock("../redux/store", () => ({
@@ -21,19 +16,6 @@ vi.mock("../redux/store", () => ({
     })),
   },
 }));
-
-const EMPTY_CONFIG_WITH_TEST_MODEL_SELECTED: BrowserSerializedContinueConfig = {
-  ...EMPTY_CONFIG,
-  selectedModelByRole: {
-    ...EMPTY_CONFIG.selectedModelByRole,
-    chat: {
-      provider: "test",
-      model: "test-model",
-      title: "Test model",
-      underlyingProviderName: "provider",
-    },
-  },
-};
 
 describe("assembleEditOutcomeData", () => {
   it("should assemble complete edit outcome data correctly", () => {
@@ -55,13 +37,7 @@ describe("assembleEditOutcomeData", () => {
       fileContent: "const new = 2;\nconst another = 3;",
     };
 
-    const result = assembleEditOutcomeData(
-      [],
-      EMPTY_CONFIG_WITH_TEST_MODEL_SELECTED,
-      toolCallState,
-      applyState,
-      true,
-    );
+    const result = assembleEditOutcomeData(toolCallState, applyState, true);
     console.log(result);
 
     expect(result).toMatchObject({
@@ -95,13 +71,7 @@ describe("assembleEditOutcomeData", () => {
       fileContent: "",
     };
 
-    const result = assembleEditOutcomeData(
-      [],
-      EMPTY_CONFIG_WITH_TEST_MODEL_SELECTED,
-      toolCallState,
-      applyState,
-      false,
-    );
+    const result = assembleEditOutcomeData(toolCallState, applyState, false);
 
     expect(result.previousCodeLines).toBe(0);
     expect(result.newCodeLines).toBe(0);

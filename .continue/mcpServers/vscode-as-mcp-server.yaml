@@ -1,0 +1,66 @@
+name: vscode
+version: 1.104.0-insider
+schema: v1
+
+mcpServers:
+  - name: Filesystem Server
+    description: A server that serves files from the filesystem.
+    command: npx
+    args:
+      - "@modelcontextprotocol/server-filesystem@latest"
+      - "/home/sigma/Desktop/echo-lab"
+    env:
+      NODE_ENV: production
+
+  - name: vscode-as-mcp-server
+    description: A server that exposes VS Code's capabilities as an MCP server.
+    command: npx
+    args:
+      - --no-install
+      - vscode-as-mcp-server
+    env:
+      NODE_ENV: production
+    tools:
+      - name: all mcp-server-tools
+        description: All the tools that are required.
+      - name: all extensions
+        description: All the extensions that are required.
+      - name: all database-extensions
+        description: All the database extensions that are required.
+
+tools:
+  - name: all communication tools
+    description: All the tools that are required.
+
+  - name: qdrant
+    description: database management system.
+    port: 6333:6333
+    command: docker run -p 6333:6333 qdrant/qdrant:latest
+
+  - name: Github
+    description: A server that exposes GitHub's capabilities as an MCP server.
+    command: npx
+    args:
+      - --no-install
+      - mcp-github
+    env:
+      NODE_ENV: production
+
+  - name: vscode_continue
+    description: vscode extensions for continue.dev
+    command: npx
+    args:
+      - --no-install
+      - vscode-continue
+    env:
+      NODE_ENV: production
+
+context:
+  - type: files
+
+models:
+  - name: ollama_model
+    model: mistral
+    model_path: mistral:7b-instruct-q4
+    provider: ollama
+    port: 11434

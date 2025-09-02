@@ -1,5 +1,6 @@
 import { BaseContextProvider } from "../";
 import { ContextProviderName } from "../../";
+import { Telemetry } from "../../util/posthog";
 
 import ClipboardContextProvider from "./ClipboardContextProvider";
 import CodebaseContextProvider from "./CodebaseContextProvider";
@@ -11,7 +12,6 @@ import DebugLocalsProvider from "./DebugLocalsProvider";
 import DiffContextProvider from "./DiffContextProvider";
 import DiscordContextProvider from "./DiscordContextProvider";
 import DocsContextProvider from "./DocsContextProvider";
-import FileContextProvider from "./FileContextProvider";
 import FileTreeContextProvider from "./FileTreeContextProvider";
 import FolderContextProvider from "./FolderContextProvider";
 import GitCommitContextProvider from "./GitCommitContextProvider";
@@ -41,7 +41,6 @@ import WebContextProvider from "./WebContextProvider";
  * See this issue for details: https://github.com/continuedev/continue/issues/1365
  */
 export const Providers: (typeof BaseContextProvider)[] = [
-  FileContextProvider,
   DiffContextProvider,
   FileTreeContextProvider,
   GitHubIssuesContextProvider,
@@ -78,6 +77,11 @@ export function contextProviderClassFromName(
   name: ContextProviderName,
 ): typeof BaseContextProvider | undefined {
   const provider = Providers.find((cls) => cls.description.title === name);
+
+  void Telemetry.capture("context_provider_load", {
+    providerName: name,
+    found: !!provider, // also capture those which user expected to be present
+  });
 
   return provider;
 }

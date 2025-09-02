@@ -158,7 +158,6 @@ extensions/intellij/.idea/**
 **/.idea/shelf/
 **/.idea/inspectionProfiles/Project_Default.xml
 **/.idea/php.xml
-**/.idea/kotlinc.xml
 
 
 extensions/intellij/bin
@@ -171,5 +170,7 @@ extensions/.continue-debug/
 
 .continuerules
 **/.continue/assistants/
-**/.continue/agents/
 keys
+
+#Ignore insiders AI rules
+.github/instructions/codacy.instructions.md

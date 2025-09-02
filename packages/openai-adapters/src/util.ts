@@ -1,5 +1,6 @@
 import { RequestOptions } from "@continuedev/config-types";
 import { fetchwithRequestOptions, patchedFetch } from "@continuedev/fetch";
+import { type RequestInfo, type RequestInit } from "openai/_shims/index";
 import {
   ChatCompletionChunk,
   CompletionUsage,
@@ -7,7 +8,7 @@ import {
   Model,
 } from "openai/resources/index";
 
-import { ChatCompletion } from "openai/resources/index.js";
+import { ChatCompletion } from "openai/src/resources/index.js";
 import { CreateRerankResponse } from "./apis/base.js";
 
 export function chatChunk(options: {
@@ -158,11 +159,11 @@ export function customFetch(
   if (process.env.FEATURE_FLAG_DISABLE_CUSTOM_FETCH) {
     return patchedFetch;
   }
-  return (req: URL | string | Request, init?: any) => {
+  return (req: URL | RequestInfo, init?: RequestInit) => {
     if (typeof req === "string" || req instanceof URL) {
       return fetchwithRequestOptions(req, init, requestOptions);
     } else {
-      return fetchwithRequestOptions(req.url, init, requestOptions);
+      return fetchwithRequestOptions(req.url, req, requestOptions);
     }
   };
 }

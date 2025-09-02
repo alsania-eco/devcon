@@ -262,10 +262,10 @@ class VsCodeIde implements IDE {
   }
 
   async getClipboardContent() {
-    return {
-      text: await vscode.env.clipboard.readText(),
-      copiedAt: new Date().toISOString(),
-    };
+    return this.context.workspaceState.get("continue.copyBuffer", {
+      text: "",
+      copiedAt: new Date("1900-01-01").toISOString(),
+    });
   }
 
   async getTerminalContents(): Promise<string> {

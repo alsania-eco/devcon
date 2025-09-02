@@ -1,12 +1,12 @@
-import { TrashIcon } from "@heroicons/react/24/outline";
 import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/24/solid";
+import { TrashIcon } from "@heroicons/react/24/outline";
 import { ChatHistoryItem } from "core";
 import { useState } from "react";
+import { AnimatedEllipsis } from "../";
 import { useAppSelector } from "../../redux/hooks";
-import { useDeleteCompaction } from "../../util/compactConversation";
-import { AnimatedEllipsis } from "../AnimatedEllipsis";
-import HeaderButtonWithToolTip from "../gui/HeaderButtonWithToolTip";
 import StyledMarkdownPreview from "../StyledMarkdownPreview";
+import { useDeleteCompaction } from "../../util/compactConversation";
+import HeaderButtonWithToolTip from "../gui/HeaderButtonWithToolTip";
 
 interface ConversationSummaryProps {
   item: ChatHistoryItem;
@@ -14,7 +14,7 @@ interface ConversationSummaryProps {
 }
 
 export default function ConversationSummary(props: ConversationSummaryProps) {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const isLoading = useAppSelector(
     (state) => state.session.compactionLoading[props.index] || false,
   );

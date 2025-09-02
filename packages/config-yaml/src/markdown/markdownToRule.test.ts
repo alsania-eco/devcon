@@ -5,7 +5,7 @@ describe("markdownToRule", () => {
   // Use a mock PackageIdentifier for testing
   const mockId: PackageIdentifier = {
     uriType: "file",
-    fileUri: "/path/to/file",
+    filePath: "/path/to/file",
   };
 
   it("should convert markdown with frontmatter to a rule", () => {
@@ -115,7 +115,7 @@ name: glob pattern testing
 
       const result = markdownToRule(content, {
         uriType: "file",
-        fileUri: "/",
+        filePath: "/",
       });
       expect(result.globs).toBe("/**/src/**/Dockerfile");
     });
@@ -151,7 +151,7 @@ name: glob pattern testing
 
       const result = markdownToRule(content, {
         uriType: "file",
-        fileUri: "/Documents/myproject/.continue/rules/rule1.md",
+        filePath: "/Documents/myproject/.continue/rules/rule1.md",
       });
       expect(result.globs).toBe(".git");
     });
@@ -268,7 +268,7 @@ describe("getRuleName", () => {
     const frontmatter = { name: "Custom Rule Name" };
     const id: PackageIdentifier = {
       uriType: "file",
-      fileUri: "/path/to/my-rule.md",
+      filePath: "/path/to/my-rule.md",
     };
 
     const result = getRuleName(frontmatter, id);
@@ -279,7 +279,7 @@ describe("getRuleName", () => {
     const frontmatter = {};
     const id: PackageIdentifier = {
       uriType: "file",
-      fileUri: "/long/path/to/rules/my-rule.md",
+      filePath: "/long/path/to/rules/my-rule.md",
     };
 
     const result = getRuleName(frontmatter, id);
@@ -290,7 +290,7 @@ describe("getRuleName", () => {
     const frontmatter = {};
     const id: PackageIdentifier = {
       uriType: "file",
-      fileUri: "C:\\long\\path\\to\\rules\\my-rule.md",
+      filePath: "C:\\long\\path\\to\\rules\\my-rule.md",
     };
 
     const result = getRuleName(frontmatter, id);
@@ -301,7 +301,7 @@ describe("getRuleName", () => {
     const frontmatter = {};
     const id: PackageIdentifier = {
       uriType: "file",
-      fileUri: "/path/to\\rules/my-rule.md",
+      filePath: "/path/to\\rules/my-rule.md",
     };
 
     const result = getRuleName(frontmatter, id);
@@ -312,7 +312,7 @@ describe("getRuleName", () => {
     const frontmatter = {};
     const id: PackageIdentifier = {
       uriType: "file",
-      fileUri: "my-rule.md",
+      filePath: "my-rule.md",
     };
 
     const result = getRuleName(frontmatter, id);
@@ -323,7 +323,7 @@ describe("getRuleName", () => {
     const frontmatter = {};
     const id: PackageIdentifier = {
       uriType: "file",
-      fileUri: "rules/my-rule.md",
+      filePath: "rules/my-rule.md",
     };
 
     const result = getRuleName(frontmatter, id);
@@ -349,7 +349,7 @@ describe("getRuleName", () => {
     const frontmatter = { name: "Override Name" };
     const id: PackageIdentifier = {
       uriType: "file",
-      fileUri: "/very/long/path/to/rules/original-name.md",
+      filePath: "/very/long/path/to/rules/original-name.md",
     };
 
     const result = getRuleName(frontmatter, id);
@@ -360,7 +360,7 @@ describe("getRuleName", () => {
     const frontmatter = { name: "" };
     const id: PackageIdentifier = {
       uriType: "file",
-      fileUri: "/path/to/rules/my-rule.md",
+      filePath: "/path/to/rules/my-rule.md",
     };
 
     const result = getRuleName(frontmatter, id);

@@ -1,12 +1,12 @@
 import { ChatMessage, PromptLog, TextMessagePart } from "../..";
 import { normalizeToMessageParts } from "../../util/messageContent";
 import { detectToolCallStart } from "./detectToolCallStart";
-import { createDelta, splitAtCodeblocksAndNewLines } from "./systemToolUtils";
 import {
-  getInitialToolCallParseState,
-  SystemMessageToolsFramework,
+  getInitialTooLCallParseState,
+  handleToolCallBuffer,
   ToolCallParseState,
-} from "./types";
+} from "./parseSystemToolCall";
+import { createDelta, splitAtCodeblocksAndNewLines } from "./systemToolUtils";
 
 /*
     Function to intercept tool calls in markdown code blocks format from a chat message stream
@@ -24,7 +24,6 @@ import {
 export async function* interceptSystemToolCalls(
   messageGenerator: AsyncGenerator<ChatMessage[], PromptLog | undefined>,
   abortController: AbortController,
-  systemToolFramework: SystemMessageToolsFramework,
 ): AsyncGenerator<ChatMessage[], PromptLog | undefined> {
   let buffer = "";
   let parseState: ToolCallParseState | undefined;
@@ -71,22 +70,19 @@ export async function* interceptSystemToolCalls(
           buffer += chunk;
           if (!parseState) {
             const { isInPartialStart, isInToolCall, modifiedBuffer } =
-              detectToolCallStart(buffer, systemToolFramework);
+              detectToolCallStart(buffer);
 
             if (isInPartialStart) {
               continue;
             }
             if (isInToolCall) {
-              parseState = getInitialToolCallParseState();
+              parseState = getInitialTooLCallParseState();
               buffer = modifiedBuffer;
             }
           }
 
           if (parseState && !parseState.done) {
-            const delta = systemToolFramework.handleToolCallBuffer(
-              buffer,
-              parseState,
-            );
+            const delta = handleToolCallBuffer(buffer, parseState);
             if (delta) {
               yield [
                 {

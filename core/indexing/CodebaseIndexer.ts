@@ -10,11 +10,12 @@ import {
 import type { FromCoreProtocol, ToCoreProtocol } from "../protocol";
 import type { IMessenger } from "../protocol/messenger";
 import { extractMinimalStackTraceInfo } from "../util/extractMinimalStackTraceInfo.js";
-import { Logger } from "../util/Logger.js";
 import { getIndexSqlitePath, getLanceDbPath } from "../util/paths.js";
+import { Telemetry } from "../util/posthog.js";
 import { findUriInDirs, getUriPathBasename } from "../util/uri.js";
 
 import { ConfigResult } from "@continuedev/config-yaml";
+import CodebaseContextProvider from "../context/providers/CodebaseContextProvider.js";
 import { ContinueServerClient } from "../continueServer/stubs/client";
 import { LLMError } from "../llm/index.js";
 import { getRootCause } from "../util/errors.js";
@@ -55,7 +56,7 @@ export class CodebaseIndexer {
   // and only need to `await` it for tests.
   public initPromise: Promise<void>;
   private config!: ContinueConfig;
-  private indexingCancellationController: AbortController;
+  private indexingCancellationController: AbortController | undefined;
   private codebaseIndexingState: IndexingProgressUpdate;
   private readonly pauseToken: PauseToken;
 
@@ -96,9 +97,6 @@ export class CodebaseIndexer {
     this.pauseToken = new PauseToken(initialPaused);
 
     this.initPromise = this.init(configHandler);
-
-    this.indexingCancellationController = new AbortController();
-    this.indexingCancellationController.abort(); // initialize and abort so that a new one can be created
   }
 
   // Initialization - load config and attach config listener
@@ -125,20 +123,12 @@ export class CodebaseIndexer {
     try {
       await fs.unlink(sqliteFilepath);
     } catch (error) {
-      // Capture indexer system failures to Sentry
-      Logger.error(error, {
-        filepath: sqliteFilepath,
-      });
       console.error(`Error deleting ${sqliteFilepath} folder: ${error}`);
     }
 
     try {
       await fs.rm(lanceDbFolder, { recursive: true, force: true });
     } catch (error) {
-      // Capture indexer system failures to Sentry
-      Logger.error(error, {
-        folderPath: lanceDbFolder,
-      });
       console.error(`Error deleting ${lanceDbFolder}: ${error}`);
     }
   }
@@ -666,6 +656,14 @@ export class CodebaseIndexer {
       update.desc,
       update.debugInfo,
     );
+    void Telemetry.capture(
+      "indexing_error",
+      {
+        error: update.desc,
+        stack: update.debugInfo,
+      },
+      false,
+    );
   }
 
   /**
@@ -695,7 +693,7 @@ export class CodebaseIndexer {
   }
 
   public async refreshCodebaseIndex(paths: string[]) {
-    if (!this.indexingCancellationController.signal.aborted) {
+    if (this.indexingCancellationController) {
       this.indexingCancellationController.abort();
     }
     const localController = new AbortController();
@@ -737,13 +735,16 @@ export class CodebaseIndexer {
       });
     }
     if (this.indexingCancellationController === localController) {
-      this.indexingCancellationController.abort();
+      this.indexingCancellationController = undefined;
     }
   }
 
   public async refreshCodebaseIndexFiles(files: string[]) {
     // Can be cancelled by codebase index but not vice versa
-    if (!this.indexingCancellationController.signal.aborted) {
+    if (
+      this.indexingCancellationController &&
+      !this.indexingCancellationController.signal.aborted
+    ) {
       return;
     }
     const localController = new AbortController();
@@ -769,7 +770,7 @@ export class CodebaseIndexer {
       });
     }
     if (this.indexingCancellationController === localController) {
-      this.indexingCancellationController.abort();
+      this.indexingCancellationController = undefined;
     }
   }
 
@@ -794,9 +795,11 @@ export class CodebaseIndexer {
     return this.codebaseIndexingState;
   }
 
-  private hasIndexingContextProvider() {
+  private hasCodebaseContextProvider() {
     return !!this.config.contextProviders?.some(
-      ({ description: { dependsOnIndexing } }) => dependsOnIndexing,
+      (provider) =>
+        provider.description.title ===
+        CodebaseContextProvider.description.title,
     );
   }
 
@@ -825,8 +828,8 @@ export class CodebaseIndexer {
       this.config = newConfig; // IMPORTANT - need to set up top, other methods below use this without passing it in
 
       // No point in indexing if no codebase context provider
-      const hasIndexingProviders = this.hasIndexingContextProvider();
-      if (!hasIndexingProviders) {
+      const hasCodebaseContextProvider = this.hasCodebaseContextProvider();
+      if (!hasCodebaseContextProvider) {
         return;
       }
 

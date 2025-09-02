@@ -1,0 +1,8 @@
+name: Echo DevCon
+version: 1.0.0
+schema: v1
+
+tools:
+  registry:
+    url: http://localhost:8060
+    type: http

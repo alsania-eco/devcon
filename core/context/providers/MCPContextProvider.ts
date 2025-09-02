@@ -18,7 +18,7 @@ class MCPContextProvider extends BaseContextProvider {
   static description: ContextProviderDescription = {
     title: "mcp",
     displayTitle: "MCP",
-    description: "MCP Resources",
+    description: "Model Context Protocol",
     type: "submenu",
     renderInlineAs: "",
   };
@@ -29,7 +29,7 @@ class MCPContextProvider extends BaseContextProvider {
         ? `${this.options["serverName"]} resources`
         : "MCP",
       renderInlineAs: "",
-      description: "MCP Resources",
+      description: "Model Context Protocol",
       type: "submenu",
     };
   }

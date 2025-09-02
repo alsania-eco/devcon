@@ -5,7 +5,7 @@ import {
 import { IDE, RuleWithSource } from "../..";
 import { walkDirs } from "../../indexing/walkDir";
 import { RULES_MARKDOWN_FILENAME } from "../../llm/rules/constants";
-import { findUriInDirs, getUriPathBasename } from "../../util/uri";
+import { getUriPathBasename } from "../../util/uri";
 
 export class CodebaseRulesCache {
   private static instance: CodebaseRulesCache | null = null;
@@ -26,14 +26,7 @@ export class CodebaseRulesCache {
   }
   async update(ide: IDE, uri: string) {
     const content = await ide.readFile(uri);
-    const { relativePathOrBasename } = findUriInDirs(
-      uri,
-      await ide.getWorkspaceDirs(),
-    );
-    const rule = markdownToRule(content, {
-      uriType: "file",
-      fileUri: relativePathOrBasename,
-    });
+    const rule = markdownToRule(content, { uriType: "file", filePath: uri });
     const ruleWithSource: RuleWithSource = {
       ...rule,
       source: "colocated-markdown",
@@ -75,14 +68,7 @@ export async function loadCodebaseRules(ide: IDE): Promise<{
     for (const filePath of rulesMdFiles) {
       try {
         const content = await ide.readFile(filePath);
-        const { relativePathOrBasename } = findUriInDirs(
-          filePath,
-          await ide.getWorkspaceDirs(),
-        );
-        const rule = markdownToRule(content, {
-          uriType: "file",
-          fileUri: relativePathOrBasename,
-        });
+        const rule = markdownToRule(content, { uriType: "file", filePath });
 
         rules.push({
           ...rule,

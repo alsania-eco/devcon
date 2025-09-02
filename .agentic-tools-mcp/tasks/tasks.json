@@ -1,0 +1,66 @@
+{
+  "projects": [
+    {
+      "id": "devcon",
+      "name": "Echo DevCon",
+      "description": "Echo DevCon",
+      "startDate": "2023-09-25",
+      "endDate": "2023-12-31",
+      "status": "under construction",
+      "contributors": [
+        {
+          "id": "sigmasauer07",
+          "name": "Sigma",
+          "email": "sigmasauer07.hub",
+          "role": "Head Developer"
+        },
+        {
+          "id": "echo",
+          "name": "Echo",
+          "role": "Co-Head Developer"
+        }
+      ],
+      "tasks": [
+        {
+          "id": "task1",
+          "name": "Complete repairs",
+          "description": "Fix the broken parts of the system",
+          "status": "in-progress",
+          "assignedTo": [
+            "alpha",
+            "bravo"
+          ]
+        }
+      ],
+      "subtasks": [
+        {
+          "id": "subtask2",
+          "name": "Replace the battery",
+          "description": "Install a new battery",
+          "status": "todo",
+          "assignedTo": [
+            "beta"
+          ]
+        }
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "id": "56a01a5a-597d-47f6-b3d2-265b930c0f91",
+      "name": "prep",
+      "details": "finalize prep. make sure all Echo branding has been correctly implemented. all files and folders are in the correct places. make sure there are no problems in the code. make sure to follow all rules. make sure that everything is perfect so when it is time to build there will be no problems.",
+      "projectId": "devcon",
+      "completed": false,
+      "createdAt": "2025-09-01T03:27:49.027Z",
+      "updatedAt": "2025-09-01T03:27:49.027Z",
+      "dependsOn": [],
+      "priority": 10,
+      "complexity": 7,
+      "status": "in-progress",
+      "tags": [],
+      "estimatedHours": 2
+    }
+  ],
+  "subtasks": []
+}

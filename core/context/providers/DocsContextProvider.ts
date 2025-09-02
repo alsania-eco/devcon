@@ -43,13 +43,9 @@ class DocsContextProvider extends BaseContextProvider {
     try {
       const scores = await reranker.rerank(fullInput, chunksCopy);
 
-      if (Array.isArray(scores)) {
-        // reranker model has returned a valid array
-        chunksCopy.sort(
-          (a, b) =>
-            scores[chunksCopy.indexOf(b)] - scores[chunksCopy.indexOf(a)],
-        );
-      }
+      chunksCopy.sort(
+        (a, b) => scores[chunksCopy.indexOf(b)] - scores[chunksCopy.indexOf(a)],
+      );
 
       chunksCopy = chunksCopy.splice(
         0,

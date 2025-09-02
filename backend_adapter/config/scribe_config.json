@@ -1,0 +1,15 @@
+{
+  "root": "/home/sigma/Desktop/AlsaniaProjects/devcon/.scribe",
+  "mode": "markdown",
+  "auto_log_tokens": true,
+  "auto_log_patches": true,
+  "redact": [
+    "Authorization",
+    "api_key",
+    "bearer",
+    "password",
+    "X-Alsania-Sig"
+  ],
+  "header_template": "# Scribe — {{date}} ({{session}})\n\n**Owner:** Sigma  \n**Model:** {{model}}  \n**MCP:** {{mcp_url}}\n\n---\n",
+  "entry_template": "## {{time}} — {{type}}\n\n{{content}}\n\n"
+}

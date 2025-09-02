@@ -59,7 +59,12 @@ const StreamErrorDialog = ({ error }: StreamErrorProps) => {
   const checkKeysButton = apiKeyUrl ? (
     <GhostButton
       className="flex items-center"
-      onClick={() => ideMessenger.ide.openUrl(apiKeyUrl)}
+      onClick={() => {
+        ideMessenger.post("controlPlane/openUrl", {
+          path: apiKeyUrl,
+          orgSlug: undefined,
+        });
+      }}
     >
       <KeyIcon className="mr-1.5 h-3.5 w-3.5" />
       <span>View key</span>
@@ -196,9 +201,9 @@ const StreamErrorDialog = ({ error }: StreamErrorProps) => {
       <div className="flex flex-col gap-2">
         {session && selectedProfile && !isLocalProfile(selectedProfile) && (
           <div className="flex flex-col gap-1">
-            <span>{`If your hub secret values may have changed, refresh your agents`}</span>
+            <span>{`If your hub secret values may have changed, refresh your assistants`}</span>
             <SecondaryButton onClick={handleRefreshProfiles}>
-              Refresh agent secrets
+              Refresh assistant secrets
             </SecondaryButton>
           </div>
         )}
