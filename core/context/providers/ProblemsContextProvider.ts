@@ -3,7 +3,6 @@ import {
   ContextProviderDescription,
   ContextProviderExtras,
 } from "../../index.js";
-import { isSecurityConcern } from "../../indexing/ignore.js";
 import { getUriDescription } from "../../util/uri.js";
 import { BaseContextProvider } from "../index.js";
 
@@ -41,7 +40,7 @@ class ProblemsContextProvider extends BaseContextProvider {
         return {
           description: "Problems in current file",
           content: `\`\`\`${relativePathOrBasename}\n${rangeContent}\n\`\`\`\n${problem.message}\n\n`,
-          name: `Warnings in ${baseName}`,
+          name: `Warning in ${baseName}`,
         };
       }),
     );

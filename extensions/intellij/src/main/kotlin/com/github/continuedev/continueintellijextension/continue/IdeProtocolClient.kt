@@ -4,7 +4,6 @@ import com.github.continuedev.continueintellijextension.*
 import com.github.continuedev.continueintellijextension.activities.ContinuePluginDisposable
 import com.github.continuedev.continueintellijextension.activities.showTutorial
 import com.github.continuedev.continueintellijextension.auth.ContinueAuthService
-import com.github.continuedev.continueintellijextension.browser.ContinueBrowserService.Companion.getBrowser
 import com.github.continuedev.continueintellijextension.editor.DiffStreamService
 import com.github.continuedev.continueintellijextension.editor.EditorUtils
 import com.github.continuedev.continueintellijextension.error.ContinueSentryService
@@ -49,6 +48,8 @@ class IdeProtocolClient(
     @OptIn(ExperimentalCoroutinesApi::class)
     private val limitedDispatcher = Dispatchers.IO.limitedParallelism(4)
 
+    init {}
+
     fun handleMessage(msg: String, respond: (Any?) -> Unit) {
         coroutineScope.launch(limitedDispatcher) {
             val message = Gson().fromJson(msg, Message::class.java)
@@ -58,7 +59,7 @@ class IdeProtocolClient(
             try {
                 when (messageType) {
                     "toggleDevTools" -> {
-                        project.getBrowser()?.openDevTools()
+                        continuePluginService.continuePluginWindow?.browser?.browser?.openDevtools()
                     }
 
                     "showTutorial" -> {
@@ -66,7 +67,8 @@ class IdeProtocolClient(
                     }
 
                     "jetbrains/isOSREnabled" -> {
-                        respond(true)
+                        val isOSREnabled = service<ContinueExtensionSettings>().continueState.enableOSR
+                        respond(isOSREnabled)
                     }
 
                     "jetbrains/getColors" -> {
@@ -472,12 +474,32 @@ class IdeProtocolClient(
         }
     }
 
+    fun sendHighlightedCode(edit: Boolean = false) {
+        val editor = EditorUtils.getEditor(project)
+        val rif = editor?.getHighlightedRIF() ?: return
+
+        val serializedRif = com.github.continuedev.continueintellijextension.RangeInFileWithContents(
+            filepath = rif.filepath,
+            range = rif.range,
+            contents = rif.contents
+        )
+
+        continuePluginService.sendToWebview(
+            "highlightedCode",
+            HighlightedCodePayload(
+                rangeInFileWithContents = serializedRif,
+                shouldRun = edit
+            )
+        )
+    }
+
+
     fun sendAcceptRejectDiff(accepted: Boolean, stepIndex: Int) {
-        project.getBrowser()?.sendToWebview("acceptRejectDiff", AcceptRejectDiff(accepted, stepIndex))
+        continuePluginService.sendToWebview("acceptRejectDiff", AcceptRejectDiff(accepted, stepIndex), uuid())
     }
 
 
     fun deleteAtIndex(index: Int) {
-        project.getBrowser()?.sendToWebview("deleteAtIndex", DeleteAtIndex(index))
+        continuePluginService.sendToWebview("deleteAtIndex", DeleteAtIndex(index), uuid())
     }
 }

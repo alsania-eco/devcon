@@ -128,46 +128,25 @@ async function constructFunctionDefinitionChunk(
   maxChunkSize: number,
 ): Promise<string> {
   const bodyNode = node.children[node.children.length - 1];
-  const collapsedBody = collapsedReplacement(bodyNode);
-  const signature = code.slice(node.startIndex, bodyNode.startIndex);
-  const funcText = signature + collapsedBody;
+  const funcText =
+    code.slice(node.startIndex, bodyNode.startIndex) +
+    collapsedReplacement(bodyNode);
 
-  const isInClass =
+  if (
     node.parent &&
     ["block", "declaration_list"].includes(node.parent.type) &&
     node.parent.parent &&
-    ["class_definition", "impl_item"].includes(node.parent.parent.type);
-
-  if (isInClass) {
-    const classNode = node.parent!.parent!;
-    const classBlock = node.parent!;
-    const classHeader = code.slice(classNode.startIndex, classBlock.startIndex);
-    const indent = " ".repeat(node.startPosition.column);
-    const combined = `${classHeader}...\n\n${indent}${funcText}`;
-
-    if ((await countTokensAsync(combined)) <= maxChunkSize) {
-      return combined;
-    }
-    if ((await countTokensAsync(funcText)) <= maxChunkSize) {
-      return funcText;
-    }
-    const firstLine = signature.split("\n")[0] ?? "";
-    const minimal = `${firstLine} ${collapsedBody}`;
-    if ((await countTokensAsync(minimal)) <= maxChunkSize) {
-      return minimal;
-    }
-    return collapsedBody;
+    ["class_definition", "impl_item"].includes(node.parent.parent.type)
+  ) {
+    // If inside a class, include the class header
+    const classNode = node.parent.parent;
+    const classBlock = node.parent;
+    return `${code.slice(
+      classNode.startIndex,
+      classBlock.startIndex,
+    )}...\n\n${" ".repeat(node.startPosition.column)}${funcText}`;
   }
-
-  if ((await countTokensAsync(funcText)) <= maxChunkSize) {
-    return funcText;
-  }
-  const firstLine = signature.split("\n")[0] ?? "";
-  const minimal = `${firstLine} ${collapsedBody}`;
-  if ((await countTokensAsync(minimal)) <= maxChunkSize) {
-    return minimal;
-  }
-  return collapsedBody;
+  return funcText;
 }
 
 const collapsedNodeConstructors: {

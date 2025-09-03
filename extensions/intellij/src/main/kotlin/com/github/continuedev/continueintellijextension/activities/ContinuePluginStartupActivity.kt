@@ -4,7 +4,6 @@ import com.intellij.openapi.fileEditor.FileEditorManagerListener
 import com.github.continuedev.continueintellijextension.auth.AuthListener
 import com.github.continuedev.continueintellijextension.auth.ContinueAuthService
 import com.github.continuedev.continueintellijextension.auth.ControlPlaneSessionInfo
-import com.github.continuedev.continueintellijextension.browser.ContinueBrowserService.Companion.getBrowser
 import com.github.continuedev.continueintellijextension.constants.getContinueGlobalPath
 import com.github.continuedev.continueintellijextension.`continue`.*
 import com.github.continuedev.continueintellijextension.listeners.ContinuePluginSelectionListener
@@ -213,8 +212,11 @@ class ContinuePluginStartupActivity : StartupActivity, DumbAware {
 
             // Listen for theme changes
             connection.subscribe(LafManagerListener.TOPIC, LafManagerListener {
-                val colors = GetTheme().getTheme()
-                project.getBrowser()?.sendToWebview("jetbrains/setColors", colors)
+                val colors = GetTheme().getTheme();
+                continuePluginService.sendToWebview(
+                    "jetbrains/setColors",
+                    colors
+                )
             })
 
             // Listen for clicking settings button to start the auth flow
@@ -266,7 +268,8 @@ class ContinuePluginStartupActivity : StartupActivity, DumbAware {
                 project.service<ContinuePluginDisposable>()
             )
 
-            continuePluginService.coreMessenger = CoreMessenger(project, ideProtocolClient, coroutineScope)
+            val coreMessengerManager = CoreMessengerManager(project, ideProtocolClient, coroutineScope)
+            continuePluginService.coreMessengerManager = coreMessengerManager
         }
     }
 }

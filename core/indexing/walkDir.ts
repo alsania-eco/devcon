@@ -3,8 +3,11 @@ import ignore, { Ignore } from "ignore";
 import type { FileType, IDE } from "..";
 
 import { joinPathsToUri } from "../util/uri";
-import { getGlobalContinueIgArray } from "./continueignore";
-import { defaultIgnoreFileAndDir, gitIgArrayFromFile } from "./ignore";
+import {
+  defaultIgnoreFileAndDir,
+  getGlobalContinueIgArray,
+  gitIgArrayFromFile,
+} from "./ignore";
 
 export interface WalkerOptions {
   include?: "dirs" | "files" | "both";

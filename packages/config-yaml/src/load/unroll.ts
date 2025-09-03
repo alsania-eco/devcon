@@ -6,12 +6,8 @@ import {
   decodeFQSN,
   decodePackageIdentifier,
   encodeFQSN,
-  encodePackageIdentifier,
-  encodePackageSlug,
   FQSN,
   PackageIdentifier,
-  PackageSlug,
-  packageSlugsEqual,
 } from "../interfaces/slugs.js";
 import { markdownToRule } from "../markdown/index.js";
 import {
@@ -24,7 +20,6 @@ import {
   Rule,
 } from "../schemas/index.js";
 import { ConfigResult, ConfigValidationError } from "../validation.js";
-import { BlockDuplicationDetector } from "./blockDuplicationDetector.js";
 import {
   packageIdentifierToShorthandSlug,
   useProxyForUnrenderedSecrets,
@@ -49,12 +44,12 @@ export function parseConfigYaml(configYaml: string): ConfigYaml {
       "cause" in e &&
       e.cause === "result.success was false"
     ) {
-      throw new Error(`Failed to parse agent: ${e.message}`);
+      throw new Error(`Failed to parse assistant: ${e.message}`);
     } else if (e instanceof ZodError) {
-      throw new Error(`Failed to parse agent: ${formatZodError(e)}`);
+      throw new Error(`Failed to parse assistant: ${formatZodError(e)}`);
     } else {
       throw new Error(
-        `Failed to parse agent: ${e instanceof Error ? e.message : e}`,
+        `Failed to parse assistant: ${e instanceof Error ? e.message : e}`,
       );
     }
   }
@@ -69,7 +64,7 @@ export function parseAssistantUnrolled(configYaml: string): AssistantUnrolled {
     console.error(
       `Failed to parse unrolled assistant: ${e.message}\n\n${configYaml}`,
     );
-    throw new Error(`Failed to parse agent: ${formatZodError(e)}`);
+    throw new Error(`Failed to parse unrolled assistant: ${formatZodError(e)}`);
   }
 }
 
@@ -201,8 +196,6 @@ async function extractRenderedSecretsMap(
 export interface BaseUnrollAssistantOptions {
   renderSecrets: boolean;
   injectBlocks?: PackageIdentifier[];
-  allowlistedBlocks?: PackageSlug[];
-  blocklistedBlocks?: PackageSlug[];
 }
 
 export interface DoNotRenderSecretsUnrollAssistantOptions
@@ -268,13 +261,7 @@ export async function unrollAssistantFromContent(
     config: unrolledAssistant,
     configLoadInterrupted,
     errors,
-  } = await unrollBlocks(
-    parsedYaml,
-    registry,
-    options.injectBlocks,
-    options.allowlistedBlocks,
-    options.blocklistedBlocks,
-  );
+  } = await unrollBlocks(parsedYaml, registry, options.injectBlocks);
 
   // Back to a string so we can fill in template variables
   const rawUnrolledYaml = YAML.stringify(unrolledAssistant);
@@ -312,53 +299,12 @@ export async function unrollAssistantFromContent(
   return { config: finalConfig, errors, configLoadInterrupted };
 }
 
-function isPackageAllowed(
-  pkgId: PackageIdentifier,
-  allowlistedBlocks?: PackageSlug[],
-  blocklistedBlocks?: PackageSlug[],
-): boolean {
-  // Only "slug" type blocks can be allow/block listed
-  if (pkgId.uriType !== "slug") {
-    return true;
-  }
-
-  const packageSlug = {
-    ownerSlug: pkgId.fullSlug.ownerSlug,
-    packageSlug: pkgId.fullSlug.packageSlug,
-  };
-
-  if (
-    allowlistedBlocks &&
-    !allowlistedBlocks.some((block) => packageSlugsEqual(block, packageSlug))
-  ) {
-    return false;
-  }
-
-  if (
-    blocklistedBlocks &&
-    blocklistedBlocks.some((block) => packageSlugsEqual(block, packageSlug))
-  ) {
-    return false;
-  }
-
-  return true;
-}
-
 export async function unrollBlocks(
   assistant: ConfigYaml,
   registry: Registry,
   injectBlocks: PackageIdentifier[] | undefined,
-  allowlistedBlocks?: PackageSlug[],
-  blocklistedBlocks?: PackageSlug[],
 ): Promise<ConfigResult<AssistantUnrolled>> {
   const errors: ConfigValidationError[] = [];
-
-  function injectDuplicationError(errorMsg: string) {
-    errors.push({
-      fatal: false,
-      message: errorMsg,
-    });
-  }
 
   const unrolledAssistant: AssistantUnrolled = {
     name: assistant.name,
@@ -367,7 +313,7 @@ export async function unrollBlocks(
 
   const sections: (keyof Omit<
     ConfigYaml,
-    "name" | "version" | "rules" | "schema" | "metadata" | "env"
+    "name" | "version" | "rules" | "schema" | "metadata"
   >)[] = ["models", "context", "data", "mcpServers", "prompts", "docs"];
 
   // Process all sections in parallel
@@ -382,29 +328,8 @@ export async function unrollBlocks(
         // "uses/with" block
         if ("uses" in unrolledBlock) {
           try {
-            const blockIdentifier = decodePackageIdentifier(unrolledBlock.uses);
-
-            if (
-              !isPackageAllowed(
-                blockIdentifier,
-                allowlistedBlocks,
-                blocklistedBlocks,
-              )
-            ) {
-              throw new Error(
-                `${
-                  blockIdentifier.uriType === "slug"
-                    ? encodePackageSlug({
-                        ownerSlug: blockIdentifier.fullSlug.ownerSlug,
-                        packageSlug: blockIdentifier.fullSlug.packageSlug,
-                      })
-                    : encodePackageIdentifier(blockIdentifier)
-                } is block listed and can not be used.`,
-              );
-            }
-
             const blockConfigYaml = await resolveBlock(
-              blockIdentifier,
+              decodePackageIdentifier(unrolledBlock.uses),
               unrolledBlock.with,
               registry,
             );
@@ -532,14 +457,14 @@ export async function unrollBlocks(
               resolvedBlock,
               source:
                 injectBlock.uriType === "file"
-                  ? injectBlock.fileUri
+                  ? injectBlock.filePath
                   : undefined,
               error: null,
             };
           } catch (err) {
             let msg = "";
             if (injectBlock.uriType === "file") {
-              msg = `${(err as Error).message}.\n> ${injectBlock.fileUri}`;
+              msg = `${(err as Error).message}.\n> ${injectBlock.filePath}`;
             } else {
               msg = `${(err as Error).message}.\n> ${injectBlock.fullSlug}`;
             }
@@ -559,7 +484,7 @@ export async function unrollBlocks(
         const injectedResults = await Promise.all(injectedBlockPromises);
         const injectedErrors: ConfigValidationError[] = [];
         const injectedBlocks: {
-          blockType: BlockType;
+          blockType: string;
           resolvedBlock: any;
           source?: string;
         }[] = [];
@@ -596,27 +521,16 @@ export async function unrollBlocks(
   errors.push(...rulesResult.errors);
   errors.push(...injectedResult.errors);
 
-  const detector = new BlockDuplicationDetector();
-
   // Assign section results
   for (const sectionResult of sectionResults) {
     if (sectionResult.blocks) {
-      unrolledAssistant[sectionResult.section] = sectionResult.blocks.filter(
-        (block) =>
-          !detector.isDuplicated(
-            block,
-            sectionResult.section,
-            injectDuplicationError,
-          ),
-      );
+      unrolledAssistant[sectionResult.section] = sectionResult.blocks;
     }
   }
 
   // Assign rules result
   if (rulesResult.rules) {
-    unrolledAssistant.rules = rulesResult.rules.filter(
-      (rule) => !detector.isDuplicated(rule, "rules", injectDuplicationError),
-    );
+    unrolledAssistant.rules = rulesResult.rules;
   }
 
   // Add injected blocks
@@ -625,20 +539,16 @@ export async function unrollBlocks(
     resolvedBlock,
     source,
   } of injectedResult.injectedBlocks) {
-    const key = blockType;
+    const key = blockType as BlockType;
     if (!unrolledAssistant[key]) {
       unrolledAssistant[key] = [];
     }
-
-    const filteredBlocks = injectLocalSourceFile(
+    const blocksWithSourceFiles = injectLocalSourceFile(
       key,
       resolvedBlock,
       source,
-    ).filter(
-      (block: any) =>
-        !detector.isDuplicated(block, blockType, injectDuplicationError),
     );
-    unrolledAssistant[key]?.push(...filteredBlocks);
+    unrolledAssistant[key]?.push(...blocksWithSourceFiles);
   }
 
   const configResult: ConfigResult<AssistantUnrolled> = {
@@ -736,7 +646,7 @@ function parseYamlOrMarkdownRule<T>(
   } catch (yamlError) {
     if (
       id.uriType === "file" &&
-      [".yaml", ".yml"].some((ext) => id.fileUri.endsWith(ext))
+      [".yaml", ".yml"].some((ext) => id.filePath.endsWith(ext))
     ) {
       throw yamlError;
     }

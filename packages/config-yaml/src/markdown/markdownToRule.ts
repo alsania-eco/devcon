@@ -77,10 +77,7 @@ function getGlobPattern(
   if (id.uriType !== "file") {
     return globs;
   }
-  let dir = path.dirname(id.fileUri);
-
-  // TODO: This is likely causing bugs for Windows users.
-  // We can't access `core/util/uri.ts` from this package though.
+  let dir = path.dirname(id.filePath);
   if (dir.includes(".continue")) {
     return globs;
   }
@@ -115,6 +112,6 @@ export function markdownToRule(
     regex: frontmatter.regex,
     description: frontmatter.description,
     alwaysApply: frontmatter.alwaysApply,
-    sourceFile: id.uriType === "file" ? id.fileUri : undefined,
+    sourceFile: id.uriType === "file" ? id.filePath : undefined,
   };
 }

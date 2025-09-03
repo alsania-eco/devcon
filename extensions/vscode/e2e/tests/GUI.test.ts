@@ -7,7 +7,7 @@ import {
   WebDriver,
   WebElement,
   WebView,
-  until
+  until,
 } from "vscode-extension-tester";
 
 import { GlobalActions } from "../actions/Global.actions";
@@ -21,12 +21,11 @@ describe("GUI Test", () => {
   let driver: WebDriver;
 
   before(async function () {
-    this.timeout(DEFAULT_TIMEOUT.XL + DEFAULT_TIMEOUT.MD + DEFAULT_TIMEOUT.MD);
+    this.timeout(DEFAULT_TIMEOUT.XL);
     // Uncomment this line for faster testing
     await GUIActions.moveContinueToSidebar(VSBrowser.instance.driver);
     await GlobalActions.openTestWorkspace();
     await GlobalActions.clearAllNotifications();
-    await GlobalActions.disableNextEdit();
   });
 
   beforeEach(async function () {
@@ -54,7 +53,7 @@ describe("GUI Test", () => {
       const description = await GUISelectors.getDescription(view);
 
       expect(await description.getText()).has.string(
-        "Log in to quickly build your first custom AI code agent",
+        "Log in to quickly build your first custom AI code assistant",
       );
     }).timeout(DEFAULT_TIMEOUT.XL);
 
@@ -282,7 +281,7 @@ describe("GUI Test", () => {
 
       // Verify the rule content
       const ruleItemText = await ruleItem.getText();
-      expect(ruleItemText).to.include("Agent rule");
+      expect(ruleItemText).to.include("Assistant rule");
       expect(ruleItemText).to.include("Always applied");
       expect(ruleItemText).to.include("TEST_SYS_MSG");
     }).timeout(DEFAULT_TIMEOUT.MD);

@@ -19,6 +19,7 @@ import {
   ContinueRcJson,
   CustomContextProvider,
   EmbeddingsProviderDescription,
+  IContextProvider,
   IDE,
   IdeInfo,
   IdeSettings,
@@ -35,6 +36,10 @@ import { getLegacyBuiltInSlashCommandFromDescription } from "../commands/slash/b
 import { convertCustomCommandToSlashCommand } from "../commands/slash/customSlashCommand";
 import { slashCommandFromPromptFile } from "../commands/slash/promptFileSlashCommand";
 import { MCPManagerSingleton } from "../context/mcp/MCPManagerSingleton";
+import ContinueProxyContextProvider from "../context/providers/ContinueProxyContextProvider";
+import CustomContextProviderClass from "../context/providers/CustomContextProvider";
+import FileContextProvider from "../context/providers/FileContextProvider";
+import { contextProviderClassFromName } from "../context/providers/index";
 import { useHub } from "../control-plane/env";
 import { BaseLLM } from "../llm";
 import { LLMClasses, llmFromDescription } from "../llm/llms";
@@ -57,11 +62,9 @@ import {
 } from "../util/paths";
 import { localPathToUri } from "../util/pathToUri";
 
-import CustomContextProviderClass from "../context/providers/CustomContextProvider";
-import { getBaseToolDefinitions } from "../tools";
+import { getToolsForIde } from "../tools";
 import { resolveRelativePathInDir } from "../util/ideUtils";
 import { getWorkspaceRcConfigs } from "./json/loadRcConfigs";
-import { loadConfigContextProviders } from "./loadContextProviders";
 import { modifyAnyConfigWithSharedConfig } from "./sharedConfig";
 import {
   getModelByRole,
@@ -226,7 +229,7 @@ function applyRequestOptionsToModels(
 export function isContextProviderWithParams(
   contextProvider: CustomContextProvider | ContextProviderWithParams,
 ): contextProvider is ContextProviderWithParams {
-  return "name" in contextProvider && !!contextProvider.name;
+  return (contextProvider as ContextProviderWithParams).name !== undefined;
 }
 
 /** Only difference between intermediate and final configs is the `models` array */
@@ -282,7 +285,6 @@ async function intermediateToFinalConfig({
                     ...desc,
                     model: modelName,
                     title: modelName,
-                    isFromAutoDetect: true,
                   },
                   ide.readFile.bind(ide),
                   getUriFromPath,
@@ -320,7 +322,6 @@ async function intermediateToFinalConfig({
                     ...desc.options,
                     model: modelName,
                     logger: llmLogger,
-                    isFromAutoDetect: true,
                   },
                 }),
             );
@@ -385,25 +386,50 @@ async function intermediateToFinalConfig({
 
   applyRequestOptionsToModels(tabAutocompleteModels, config);
 
-  // Load context providers
-  const { providers: contextProviders, errors: contextErrors } =
-    loadConfigContextProviders(
-      config.contextProviders
-        ?.filter((cp) => isContextProviderWithParams(cp))
-        .map((cp) => ({
-          provider: (cp as ContextProviderWithParams).name,
-          params: (cp as ContextProviderWithParams).params,
-        })),
-      !!config.docs?.length,
-      ideInfo.ideType,
-    );
+  // These context providers are always included, regardless of what, if anything,
+  // the user has configured in config.json
 
-  for (const cp of config.contextProviders ?? []) {
-    if (!isContextProviderWithParams(cp)) {
-      contextProviders.push(new CustomContextProviderClass(cp));
+  const codebaseContextParams =
+    (
+      (config.contextProviders || [])
+        .filter(isContextProviderWithParams)
+        .find((cp) => cp.name === "codebase") as
+        | ContextProviderWithParams
+        | undefined
+    )?.params || {};
+
+  const DEFAULT_CONTEXT_PROVIDERS = [new FileContextProvider({})];
+
+  const DEFAULT_CONTEXT_PROVIDERS_TITLES = DEFAULT_CONTEXT_PROVIDERS.map(
+    ({ description: { title } }) => title,
+  );
+
+  // Context providers
+  const contextProviders: IContextProvider[] = DEFAULT_CONTEXT_PROVIDERS;
+
+  for (const provider of config.contextProviders || []) {
+    if (isContextProviderWithParams(provider)) {
+      const cls = contextProviderClassFromName(provider.name) as any;
+      if (!cls) {
+        if (!DEFAULT_CONTEXT_PROVIDERS_TITLES.includes(provider.name)) {
+          console.warn(`Unknown context provider ${provider.name}`);
+        }
+
+        continue;
+      }
+      const instance: IContextProvider = new cls(provider.params);
+
+      // Handle continue-proxy
+      if (instance.description.title === "continue-proxy") {
+        (instance as ContinueProxyContextProvider).workOsAccessToken =
+          workOsAccessToken;
+      }
+
+      contextProviders.push(instance);
+    } else {
+      contextProviders.push(new CustomContextProviderClass(provider));
     }
   }
-  errors.push(...contextErrors);
 
   // Embeddings Provider
   function getEmbeddingsILLM(
@@ -500,7 +526,7 @@ async function intermediateToFinalConfig({
   const continueConfig: ContinueConfig = {
     ...config,
     contextProviders,
-    tools: getBaseToolDefinitions(),
+    tools: await getToolsForIde(ide),
     mcpServerStatuses: [],
     slashCommands: [],
     modelsByRole: {
@@ -628,7 +654,6 @@ function llmToSerializedModelDescription(llm: ILLM): ModelDescription {
     apiKeyLocation: llm.apiKeyLocation,
     envSecretLocations: llm.envSecretLocations,
     sourceFile: llm.sourceFile,
-    isFromAutoDetect: llm.isFromAutoDetect,
   };
 }
 

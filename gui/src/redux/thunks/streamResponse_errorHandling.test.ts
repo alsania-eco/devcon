@@ -392,21 +392,13 @@ describe("streamResponseThunk", () => {
         returnToMode: "chat",
       },
       indexing: {
-        indexing: {
-          statuses: {},
-          hiddenChatPeekTypes: {
-            docs: false,
-          },
-        },
+        indexingState: "disabled",
       },
       tabs: {
         tabsItems: [],
       },
       profiles: {
-        organizations: [],
-        selectedProfileId: null,
-        selectedOrganizationId: null,
-        preferencesByProfileId: {},
+        profiles: [],
       },
     });
   });
@@ -783,21 +775,13 @@ describe("streamResponseThunk", () => {
         returnToMode: "chat",
       },
       indexing: {
-        indexing: {
-          statuses: {},
-          hiddenChatPeekTypes: {
-            docs: false,
-          },
-        },
+        indexingState: "disabled",
       },
       tabs: {
         tabsItems: [],
       },
       profiles: {
-        organizations: [],
-        selectedProfileId: null,
-        selectedOrganizationId: null,
-        preferencesByProfileId: {},
+        profiles: [],
       },
     });
   });
@@ -1104,21 +1088,13 @@ describe("streamResponseThunk", () => {
         returnToMode: "chat",
       },
       indexing: {
-        indexing: {
-          statuses: {},
-          hiddenChatPeekTypes: {
-            docs: false,
-          },
-        },
+        indexingState: "disabled",
       },
       tabs: {
         tabsItems: [],
       },
       profiles: {
-        organizations: [],
-        selectedProfileId: null,
-        selectedOrganizationId: null,
-        preferencesByProfileId: {},
+        profiles: [],
       },
     });
   });

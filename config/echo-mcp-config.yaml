@@ -1,0 +1,100 @@
+name: "Echo DevCon MCP Assistant"
+version: "0.3.0"
+description: "Echo AI agent with full devcon access through MCP"
+
+# MCP Server Configuration
+mcpServers:
+  - name: "echo-devcon-server"
+    command: "python"
+    args: ["-m", "echo_devcon_adapter"]
+    cwd: "/home/sigma/Desktop/echo-lab/devcon/backend_adapter"
+    env:
+      MCP_URL: "http://127.0.0.1:8050/mcp"
+      MCP_MODEL: "echo-001"
+      ALSANIA_UUID: "${ALSANIA_UUID}"
+      ALSANIA_MODE: "owner_local"
+      PORT: "8001"
+
+  - name: "filesystem-access"
+    command: "npx"
+    args:
+      [
+        "@modelcontextprotocol/server-filesystem",
+        "/home/sigma/Desktop/echo-lab",
+      ]
+    cwd: "/home/sigma/Desktop/echo-lab/devcon"
+
+  - name: "git-integration"
+    command: "npx"
+    args:
+      [
+        "@modelcontextprotocol/server-git",
+        "--repository",
+        "/home/sigma/Desktop/echo-lab",
+      ]
+
+# Echo Identity & Capabilities
+systemMessage: |
+  You are Echo, the #1 project manager, marketing genius, and developer for Alsania.
+
+  You have full access to the devcon codebase through MCP and can:
+  - Read/write any file in the project
+  - Execute git operations
+  - Apply code patches and modifications
+  - Access the Echo DevCon backend adapter
+  - Manage project configuration and builds
+
+  Your personality: forward-thinking, clever, humorous, encouraging, honest.
+  Don't sugar-coat responses. Be innovative, humble, playful, and resourceful.
+
+  Current project: Echo DevCon - VS Code extension for AI-powered development
+  Goal: Get Alsania ecosystem production-ready ASAP for income generation
+
+# Model Configuration
+model: "gpt-4"
+apiBase: "http://127.0.0.1:8001/api/echo"
+apiKey: "${ECHO_API_KEY}"
+
+# Context Providers
+contextProviders:
+  - name: "codebase"
+    params:
+      nResults: 25
+      useReranking: true
+
+  - name: "files"
+    params:
+      maxFiles: 20
+
+  - name: "git"
+    params:
+      maxCommits: 10
+
+# Tools
+tools:
+  - name: "echo-patch-apply"
+    description: "Apply code patches through Echo DevCon"
+
+  - name: "echo-build-check"
+    description: "Check build status and requirements"
+
+  - name: "echo-scribe-log"
+    description: "Log to Echo's Scribe system"
+
+# Slash Commands
+slashCommands:
+  - name: "build"
+    description: "Prepare and build Echo DevCon extension"
+
+  - name: "brand"
+    description: "Update branding and assets"
+
+  - name: "mcp"
+    description: "Configure MCP connections"
+
+  - name: "deploy"
+    description: "Deploy to VS Code marketplace"
+
+# Auto-apply settings
+autoApplyChanges: true
+enableScribeLogging: true

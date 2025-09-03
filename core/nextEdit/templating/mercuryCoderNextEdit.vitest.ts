@@ -1,12 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { Position } from "../..";
-import {
-  MERCURY_CODE_TO_EDIT_CLOSE,
-  MERCURY_CODE_TO_EDIT_OPEN,
-  MERCURY_CURSOR,
-  MERCURY_RECENTLY_VIEWED_CODE_SNIPPET_CLOSE,
-  MERCURY_RECENTLY_VIEWED_CODE_SNIPPET_OPEN,
-} from "../constants";
+import { CODE_TO_EDIT_CLOSE, CODE_TO_EDIT_OPEN, CURSOR } from "../constants";
 import {
   currentFileContentBlock,
   editHistoryBlock,
@@ -27,14 +21,10 @@ describe("mercuryCoderNextEdit", () => {
       const result = recentlyViewedCodeSnippetsBlock(snippets);
 
       const expected =
-        `${MERCURY_RECENTLY_VIEWED_CODE_SNIPPET_OPEN}\n` +
         "code_snippet_file_path: /path/to/file1.ts\n" +
         "const a = 1;\n" +
-        `${MERCURY_RECENTLY_VIEWED_CODE_SNIPPET_CLOSE}\n` +
-        `${MERCURY_RECENTLY_VIEWED_CODE_SNIPPET_OPEN}\n` +
         "code_snippet_file_path: /path/to/file2.ts\n" +
-        "function test() { return true; }\n" +
-        MERCURY_RECENTLY_VIEWED_CODE_SNIPPET_CLOSE;
+        "function test() { return true; }";
 
       expect(result).toBe(expected);
     });
@@ -61,14 +51,14 @@ describe("mercuryCoderNextEdit", () => {
 
       const expected =
         "line 1\n" +
-        MERCURY_CODE_TO_EDIT_OPEN +
+        CODE_TO_EDIT_OPEN +
         "\n" +
         "line 2\n" +
         "lin" +
-        MERCURY_CURSOR +
+        CURSOR +
         "e 3\n" +
         "line 4\n" +
-        MERCURY_CODE_TO_EDIT_CLOSE +
+        CODE_TO_EDIT_CLOSE +
         "\n" +
         "line 5";
 
@@ -88,9 +78,9 @@ describe("mercuryCoderNextEdit", () => {
         cursorPosition,
       );
 
-      expect(result).toContain(MERCURY_CODE_TO_EDIT_OPEN);
-      expect(result).toContain(MERCURY_CURSOR + "line 2");
-      expect(result).toContain(MERCURY_CODE_TO_EDIT_CLOSE);
+      expect(result).toContain(CODE_TO_EDIT_OPEN);
+      expect(result).toContain(CURSOR + "line 2");
+      expect(result).toContain(CODE_TO_EDIT_CLOSE);
     });
 
     it("should handle cursor at the end of a line", () => {
@@ -106,20 +96,19 @@ describe("mercuryCoderNextEdit", () => {
         cursorPosition,
       );
 
-      expect(result).toContain("line 2" + MERCURY_CURSOR);
+      expect(result).toContain("line 2" + CURSOR);
     });
   });
 
   describe("editHistoryBlock", () => {
     it("should return the edit diff history unchanged", () => {
-      const diffHistory =
-        "diff --git a/file.ts b/file.ts\n==============================\n@@ -1,3 +1,4 @@";
-      const result = editHistoryBlock([diffHistory]);
-      expect(result).toBe("@@ -1,3 +1,4 @@");
+      const diffHistory = "diff --git a/file.ts b/file.ts\n@@ -1,3 +1,4 @@";
+      const result = editHistoryBlock(diffHistory);
+      expect(result).toBe(diffHistory);
     });
 
     it("should handle empty diff history", () => {
-      const result = editHistoryBlock([]);
+      const result = editHistoryBlock("");
       expect(result).toBe("");
     });
   });

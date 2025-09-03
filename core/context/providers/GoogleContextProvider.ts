@@ -20,10 +20,6 @@ class GoogleContextProvider extends BaseContextProvider {
     this._serperApiKey = options.serperApiKey;
   }
 
-  get deprecationMessage() {
-    return "The Google context provider is now deprecated and will be removed in a later version. Please consider using github.com/jae-jae/g-search-mcp instead.";
-  }
-
   async getContextItems(
     query: string,
     extras: ContextProviderExtras,

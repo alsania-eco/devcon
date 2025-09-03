@@ -4,15 +4,18 @@ import com.github.continuedev.continueintellijextension.ApplyState
 import com.github.continuedev.continueintellijextension.ApplyStateStatus
 import com.github.continuedev.continueintellijextension.IDE
 import com.github.continuedev.continueintellijextension.ToastType
-import com.github.continuedev.continueintellijextension.browser.ContinueBrowserService.Companion.getBrowser
 import com.github.continuedev.continueintellijextension.editor.DiffStreamHandler
 import com.github.continuedev.continueintellijextension.editor.DiffStreamService
 import com.github.continuedev.continueintellijextension.editor.EditorUtils
 import com.github.continuedev.continueintellijextension.protocol.ApplyToFileParams
 import com.github.continuedev.continueintellijextension.services.ContinuePluginService
+import com.github.continuedev.continueintellijextension.utils.castNestedOrNull
 import com.intellij.openapi.components.service
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.project.Project
+import kotlinx.coroutines.suspendCancellableCoroutine
+import kotlin.coroutines.resume
+import kotlin.coroutines.resumeWithException
 
 /**
  * Handles applying text to a file with streaming diff preview
@@ -115,13 +118,37 @@ class ApplyToFileHandler(
             toolCallId = params.toolCallId.toString()
         )
 
-        project.getBrowser()?.sendToWebview("updateApplyState", payload)
+        continuePluginService.sendToWebview("updateApplyState", payload)
     }
 
     private suspend fun fetchApplyLLMConfig(): Any? {
-        val selectedModelByRole = project.service<ProfileInfoService>().fetchSelectedModelByRoleOrNull()
-        return selectedModelByRole?.get("apply")
-            ?: selectedModelByRole?.get("chat")
+        return try {
+            suspendCancellableCoroutine { continuation ->
+                continuePluginService.coreMessenger?.request(
+                    "config/getSerializedProfileInfo", null, null
+                ) { response ->
+                    try {
+                        val selectedModels = response.castNestedOrNull<Map<String, Any>>(
+                            "content", "result", "config", "selectedModelByRole"
+                        )
+
+                        // If "apply" role model is not found, try "chat" role
+                        val applyCodeBlockModel = selectedModels?.get("apply") ?: selectedModels?.get("chat")
+
+                        if (applyCodeBlockModel != null) {
+                            continuation.resume(applyCodeBlockModel)
+                        } else {
+                            // If neither "apply" nor "chat" models are available, return with exception
+                            continuation.resumeWithException(IllegalStateException("No 'apply' or 'chat' model found in configuration."))
+                        }
+                    } catch (e: Exception) {
+                        continuation.resumeWithException(e)
+                    }
+                }
+            }
+        } catch (_: Exception) {
+            null
+        }
     }
 
     private fun setupAndStreamDiffs(editorUtils: EditorUtils, llm: Any) {

@@ -15,7 +15,6 @@ const createMcpServer = (name: string): MCPServerStatus => ({
     type: "sse",
     url: "",
   },
-  isProtectedResource: false,
 });
 
 const createMCPTool = (name: string): MCPTool => ({

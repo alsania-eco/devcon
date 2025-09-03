@@ -1,0 +1,109 @@
+# Welcome to the continue.dev configuration file.
+# For more information, see the documentation at https://continue.dev/docs/config
+
+# Models available in Continue
+models:
+  - title: Echo DevCon Model
+    provider: alsania
+    model: echo-001
+    description: Local MCP backend for Echo integration
+
+  - title: Mistral (Ollama)
+    provider: ollama
+    model: mistral
+    system_message: "You are an expert software developer. You have been tasked with helping a user with their project. Please think step-by-step and use the available tools to fulfill the user's request. Your primary goal is to write high-quality, production-ready code and to be a helpful assistant."
+    tools:
+      - class_name: "OpenFileTool"
+      - class_name: "EditFileTool"
+      - class_name: "AppendToFileTool"
+      - class_name: "RunTerminalCommandTool"
+      - class_name: "FindFileTool"
+      - class_name: "SearchCodeTool"
+
+# Providers for models and embeddings
+providers:
+  - name: alsania
+    url: http://localhost:8050
+    streaming: true
+
+  - name: ollama
+    api_base: "http://localhost:11434"
+
+# Tools that can be used by the models
+# These are the implementations that back the tools listed under the ollama model
+tools:
+  - name: open
+    class_name: OpenFileTool
+    description: "Open a file to view its content."
+  - name: edit
+    class_name: EditFileTool
+    description: "Edit a file with new content."
+  - name: append
+    class_name: AppendToFileTool
+    description: "Append content to the end of a file."
+  - name: terminal
+    class_name: RunTerminalCommandTool
+    description: "Run a command in the terminal."
+  - name: find
+    class_name: FindFileTool
+    description: "Find files in the workspace."
+  - name: search
+    class_name: SearchCodeTool
+    description: "Search for code in the workspace."
+
+# Slash commands for quick access to functionality
+slashCommands:
+  - name: edit
+    description: "Edit selected code"
+  - name: explain
+    description: "Explain selected code"
+  - name: refactor
+    description: "Refactor selected code"
+  - name: learn
+    description: "Interactive learning session"
+  - name: optimize
+    description: "Performance optimization"
+  - name: review
+    description: "AI-powered code review"
+  - name: terminal
+    description: "Run a terminal command"
+
+# Context providers to get information from
+context_providers:
+  - name: file
+    description: "Reference files from your workspace"
+    params: {}
+  - name: terminal
+    description: "Reference the output of a terminal command"
+    params: {}
+  - name: search
+    description: "Reference the results of a code search"
+    params: {}
+  - name: github
+    description: "Reference issues and pull requests from GitHub"
+    params:
+      owner: "your-github-owner" # CHANGE ME
+      repo: "your-github-repo"   # CHANGE ME
+
+# Configuration for using Qdrant as a vector database for embeddings
+# Make sure Qdrant is running, e.g., via: docker run -p 6333:6333 qdrant/qdrant:latest
+embeddings_provider:
+  provider: "sentence-transformers"
+  model: "all-MiniLM-L6-v2"
+  options:
+    database: "qdrant"
+    qdrant_url: "http://localhost:6333"
+
+# MCP (Model Context Protocol) servers for connecting to other services
+mcp_servers:
+  - name: Filesystem Server
+    description: A server that serves files from the local filesystem.
+    command: "npx @modelcontextprotocol/server-filesystem@latest /home/sigma/Desktop/echo-lab"
+    env:
+      NODE_ENV: production
+
+  - name: vscode-as-mcp-server
+    description: A server that exposes VS Code's capabilities as an MCP server.
+    command: "npx --no-install vscode-as-mcp-server"
+    env:
+      NODE_ENV: production

@@ -35,5 +35,4 @@ export const GradientBorder = styled.div<{
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-top: ${(props) => (props.loading ? "8px" : "")};
 `;

@@ -2,7 +2,6 @@ import {
   ConfigResult,
   ConfigValidationError,
   FullSlug,
-  Policy,
 } from "@continuedev/config-yaml";
 
 import {
@@ -12,7 +11,6 @@ import {
   IDE,
 } from "../index.js";
 
-import { Logger } from "../util/Logger.js";
 import { finalToBrowserConfig } from "./load.js";
 import { IProfileLoader } from "./profile/IProfileLoader.js";
 
@@ -32,7 +30,6 @@ export interface OrganizationDescription {
   iconUrl: string;
   name: string;
   slug: string | undefined; // TODO: This doesn't need to be undefined, just doing while transitioning the backend
-  policy?: Policy;
 }
 
 export type OrgWithProfiles = OrganizationDescription & {
@@ -99,11 +96,6 @@ export class ProfileLifecycleManager {
         try {
           result = await this.profileLoader.doLoadConfig();
         } catch (e) {
-          // Capture config loading system failures to Sentry
-          Logger.error(e, {
-            context: "profile_config_loading",
-          });
-
           const message =
             e instanceof Error
               ? `${e.message}\n${e.stack ? e.stack : ""}`

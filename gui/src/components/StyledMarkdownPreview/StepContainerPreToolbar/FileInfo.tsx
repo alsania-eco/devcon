@@ -1,11 +1,10 @@
 import { getLastNPathParts } from "core/util/uri";
-import { MouseEventHandler } from "react";
 import FileIcon from "../../FileIcon";
 import { ToolTip } from "../../gui/Tooltip";
 
 export interface FileInfoProps {
   filepath: string;
-  onClick?: MouseEventHandler<HTMLDivElement>;
+  onClick?: () => void;
   range?: string;
 }
 

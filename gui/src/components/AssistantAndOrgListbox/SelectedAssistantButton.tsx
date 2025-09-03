@@ -26,7 +26,7 @@ export function SelectedAssistantButton({
     >
       <div className="flex flex-row items-center gap-1.5">
         {selectedProfile === null ? (
-          "Create your first agent"
+          "Create your first assistant"
         ) : configLoading ? (
           <span className="text-description flex flex-row items-center">
             <ArrowPathIcon

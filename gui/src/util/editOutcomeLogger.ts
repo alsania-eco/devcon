@@ -1,23 +1,17 @@
-import {
-  ApplyState,
-  BrowserSerializedContinueConfig,
-  ToolCallState,
-} from "core";
+import { ApplyState, ToolCallState } from "core";
 import { IIdeMessenger } from "../context/IdeMessenger";
-import { ChatHistoryItemWithMessageId } from "../redux/slices/sessionSlice";
+import { store } from "../redux/store";
 
 /**
  * Extract model information from tool call state
  */
-function extractModelInfo(
-  history: ChatHistoryItemWithMessageId[],
-  config: BrowserSerializedContinueConfig,
-  toolCallState: ToolCallState,
-): {
+function extractModelInfo(toolCallState: ToolCallState): {
   modelProvider: string;
-  modelName: string;
   modelTitle: string;
 } {
+  // Get the conversation history to find the model info
+  const history = store.getState().session.history;
+
   // Find the assistant message that contains this tool call
   const assistantMessage = history.find(
     (item) =>
@@ -34,17 +28,16 @@ function extractModelInfo(
     const modelParts = String(assistantMessage.message.model).split("::");
     return {
       modelProvider: modelParts[0] || "unknown",
-      modelName: modelParts[1] || String(assistantMessage.message.model),
       modelTitle: modelParts[1] || String(assistantMessage.message.model),
     };
   }
 
   // Fallback to config if not found in message
+  const config = store.getState().config.config;
   const chatModel = config?.selectedModelByRole?.chat;
 
   return {
     modelProvider: chatModel?.provider || "unknown",
-    modelName: chatModel?.model || "unknown",
     modelTitle: chatModel?.model || "unknown",
   };
 }
@@ -52,13 +45,12 @@ function extractModelInfo(
 /**
  * Extract prompt and completion from tool call state
  */
-function extractPromptAndCompletion(
-  history: ChatHistoryItemWithMessageId[],
-  toolCallState: ToolCallState,
-): {
+function extractPromptAndCompletion(toolCallState: ToolCallState): {
   prompt: string;
   completion: string;
 } {
+  const history = store.getState().session.history;
+
   // Find the assistant message with this tool call
   const assistantMessageIndex = history.findIndex(
     (item) =>
@@ -149,25 +141,19 @@ function extractCodeChanges(applyState: ApplyState): {
  * Assemble complete edit outcome data from tool call and apply state
  */
 export function assembleEditOutcomeData(
-  history: ChatHistoryItemWithMessageId[],
-  config: BrowserSerializedContinueConfig,
   toolCallState: ToolCallState,
   applyState: ApplyState,
   accepted: boolean,
 ) {
-  const modelInfo = extractModelInfo(history, config, toolCallState);
-  const promptAndCompletion = extractPromptAndCompletion(
-    history,
-    toolCallState,
-  );
+  const modelInfo = extractModelInfo(toolCallState);
+  const promptAndCompletion = extractPromptAndCompletion(toolCallState);
   const codeChanges = extractCodeChanges(applyState);
 
   return {
     streamId: applyState.streamId,
     timestamp: new Date().toISOString(),
     modelProvider: modelInfo.modelProvider,
-    modelName: modelInfo.modelName,
-    modelTitle: modelInfo.modelName,
+    modelTitle: modelInfo.modelTitle,
     prompt: promptAndCompletion.prompt,
     completion: promptAndCompletion.completion,
     previousCode: codeChanges.previousCode,
@@ -184,8 +170,6 @@ export function assembleEditOutcomeData(
  * Log Agent Mode edit outcome to editOutcome.jsonl
  */
 export async function logAgentModeEditOutcome(
-  history: ChatHistoryItemWithMessageId[],
-  config: BrowserSerializedContinueConfig,
   toolCallState: ToolCallState,
   applyState: ApplyState,
   accepted: boolean,
@@ -194,8 +178,6 @@ export async function logAgentModeEditOutcome(
   // Use the original file content stored in applyState, captured before edits were applied
 
   const editOutcomeData = assembleEditOutcomeData(
-    history,
-    config,
     toolCallState,
     applyState,
     accepted,

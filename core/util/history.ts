@@ -30,13 +30,10 @@ export class HistoryManager {
     const content = fs.readFileSync(filepath, "utf8");
 
     let sessions = safeParseArray<SessionMetadata>(content) ?? [];
-    sessions = sessions
-      .filter((session: any) => {
-        // Filter out old format
-        return typeof session.session_id !== "string";
-        // Reverse to show newest first; sessions.json is chronological by creation
-      })
-      .reverse();
+    sessions = sessions.filter((session: any) => {
+      // Filter out old format
+      return typeof session.session_id !== "string";
+    });
 
     // Apply limit and offset
     if (options.limit) {

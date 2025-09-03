@@ -1,4 +1,4 @@
-import { AnimatedEllipsis } from "../../../AnimatedEllipsis";
+import { AnimatedEllipsis } from "../../..";
 
 export function GeneratingIndicator({
   text = "Generating",

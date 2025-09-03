@@ -117,7 +117,7 @@ describe("PackageIdentifier", () => {
   it("should encode/decode file-based package identifier with relative path", () => {
     const testIdentifier = {
       uriType: "file" as const,
-      fileUri: "./path/to/package.yaml",
+      filePath: "./path/to/package.yaml",
     };
     const encoded = encodePackageIdentifier(testIdentifier);
     expect(encoded).toBe("./path/to/package.yaml");
@@ -129,7 +129,7 @@ describe("PackageIdentifier", () => {
   it("should encode/decode file-based package identifier with absolute path", () => {
     const testIdentifier = {
       uriType: "file" as const,
-      fileUri: "/absolute/path/to/package.yaml",
+      filePath: "/absolute/path/to/package.yaml",
     };
     const encoded = encodePackageIdentifier(testIdentifier);
     expect(encoded).toBe("/absolute/path/to/package.yaml");
@@ -144,7 +144,7 @@ describe("PackageIdentifier", () => {
 
     expect(decoded).toEqual({
       uriType: "file" as const,
-      fileUri: "/path/to/package.yaml",
+      filePath: "/path/to/package.yaml",
     });
   });
 
