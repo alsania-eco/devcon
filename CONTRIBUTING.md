@@ -11,10 +11,17 @@ of [good first issues](https://github.com/SigmaSauer07/echo-dev/issues?q=is:issu
 
 If you find a bug, please [create an issue](https://github.com/SigmaSauer07/echo-dev/issues) to report it! A great bugnts
 
+<<<<<<< HEAD
 - [Contributing to Echo DevCon](#contributing-to-echo-devcon)
   - [Table of Contents](#table-of-contents)
 - [❤️ Ways to Contribute](#️-ways-to-contribute)
   - [👋 Echo DevCon Contribution Ideas](#-echo-devcon-contribution-ideas)
+=======
+- [Contributing to Echo DevCon](#contributing-to-devcon)
+  - [Table of Contents](#table-of-contents)
+- [❤️ Ways to Contribute](#️-ways-to-contribute)
+  - [👋 Echo DevCon Contribution Ideas](#-devcon-contribution-ideas)
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
   - [🐛 Report Bugs](#-report-bugs)
   - [✨ Suggest Enhancements](#-suggest-enhancements)
   - [📖 Updating / Improving Documentation](#-updating--improving-documentation)
@@ -24,7 +31,11 @@ If you find a bug, please [create an issue](https://github.com/SigmaSauer07/echo
   - [🧑‍💻 Contributing Code](#-contributing-code)
     - [Environment Setup](#environment-setup)
       - [Pre-requisites](#pre-requisites)
+<<<<<<< HEAD
       - [Fork the Echo DevCon Repository](#fork-the-echo-devcon-repository)
+=======
+      - [Fork the Echo DevCon Repository](#fork-the-devcon-repository)
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
       - [VS Code](#vs-code)
         - [Debugging](#debugging)
       - [JetBrains](#jetbrains)

@@ -1,11 +1,20 @@
 #!/bin/bash
 
+<<<<<<< HEAD
 # EchoMCP + Echo-DevCon Setup Script
 # This script sets up the echo-devcon extension with the echomcp backend
 
 set -e
 
 echo "🚀 Setting up EchoMCP + Echo-DevCon..."
+=======
+# AlsaniaMCP + DevCon Setup Script
+# This script sets up the devcon extension with the alsaniamcp backend
+
+set -e
+
+echo "🚀 Setting up AlsaniaMCP + DevCon..."
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
 
 # Colors for output
 RED='\033[0;31m'
@@ -33,11 +42,19 @@ print_error() {
 
 # Check if we're in the right directory
 if [ ! -f "package.json" ]; then
+<<<<<<< HEAD
     print_error "Please run this script from the echo-devcon root directory"
     exit 1
 fi
 
 print_status "Building Echo-DevCon extension..."
+=======
+    print_error "Please run this script from the devcon root directory"
+    exit 1
+fi
+
+print_status "Building DevCon extension..."
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
 
 # Build the extension
 cd extensions/vscode
@@ -64,9 +81,15 @@ cat > ~/.continue/config.json << 'EOF'
 {
   "models": [
     {
+<<<<<<< HEAD
       "title": "EchoMCP",
       "provider": "openai",
       "model": "echo-mcp",
+=======
+      "title": "AlsaniaMCP",
+      "provider": "openai",
+      "model": "alsaniamcp",
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
       "apiBase": "http://localhost:8000/v1",
       "requestOptions": {
         "headers": {
@@ -76,15 +99,25 @@ cat > ~/.continue/config.json << 'EOF'
       }
     }
   ],
+<<<<<<< HEAD
   "defaultModel": "EchoMCP",
+=======
+  "defaultModel": "AlsaniaMCP",
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
   "contextProviders": [
     {
       "name": "http",
       "params": {
         "url": "http://localhost:8000/chat",
+<<<<<<< HEAD
         "title": "EchoMCP Context",
         "description": "Get context from EchoMCP backend",
         "displayTitle": "EchoMCP"
+=======
+        "title": "AlsaniaMCP Context",
+        "description": "Get context from AlsaniaMCP backend",
+        "displayTitle": "AlsaniaMCP"
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
       }
     },
     {
@@ -98,10 +131,17 @@ cat > ~/.continue/config.json << 'EOF'
     }
   ],
   "rules": [
+<<<<<<< HEAD
     "You are EchoMCP, a helpful AI assistant connected to the EchoMCP backend.",
     "Always provide clear and concise responses.",
     "When asked about your capabilities, mention that you're connected to the EchoMCP backend running on localhost:8000.",
     "Use the EchoMCP backend for all chat interactions and context retrieval."
+=======
+    "You are AlsaniaMCP, a helpful AI assistant connected to the AlsaniaMCP backend.",
+    "Always provide clear and concise responses.",
+    "When asked about your capabilities, mention that you're connected to the AlsaniaMCP backend running on localhost:8000.",
+    "Use the AlsaniaMCP backend for all chat interactions and context retrieval."
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
   ],
   "ui": {
     "displayRawMarkdown": false
@@ -111,10 +151,17 @@ EOF
 
 print_success "Configuration created at ~/.continue/config.json"
 
+<<<<<<< HEAD
 # Setup EchoMCP backend
 print_status "Setting up EchoMCP backend..."
 
 cd ../../../echomcp
+=======
+# Setup AlsaniaMCP backend
+print_status "Setting up AlsaniaMCP backend..."
+
+cd ../../../alsaniamcp
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
 
 # Create virtual environment if it doesn't exist
 if [ ! -d "venv" ]; then
@@ -127,10 +174,17 @@ print_status "Installing Python dependencies..."
 source venv/bin/activate
 pip install fastapi uvicorn
 
+<<<<<<< HEAD
 print_success "EchoMCP backend dependencies installed!"
 
 # Create startup script for the backend
 cat > start-echomcp.sh << 'EOF'
+=======
+print_success "AlsaniaMCP backend dependencies installed!"
+
+# Create startup script for the backend
+cat > start-alsaniamcp.sh << 'EOF'
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
 #!/bin/bash
 cd "$(dirname "$0")"
 source venv/bin/activate
@@ -138,14 +192,24 @@ export PYTHONPATH="$(pwd)"
 python3 -m uvicorn backend.core.main:app --host 0.0.0.0 --port 8000 --reload
 EOF
 
+<<<<<<< HEAD
 chmod +x start-echomcp.sh
 
 print_success "EchoMCP startup script created!"
+=======
+chmod +x start-alsaniamcp.sh
+
+print_success "AlsaniaMCP startup script created!"
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
 
 # Create installation script for the extension
 cat > install-extension.sh << 'EOF'
 #!/bin/bash
+<<<<<<< HEAD
 cd "$(dirname "$0")/../echo-devcon/extensions/vscode"
+=======
+cd "$(dirname "$0")/../devcon/extensions/vscode"
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
 code --install-extension build/continue-1.1.72.vsix
 EOF
 
@@ -154,6 +218,7 @@ chmod +x install-extension.sh
 print_success "Extension installation script created!"
 
 # Create a comprehensive README
+<<<<<<< HEAD
 cat > README-ECHO-DEVCON.md << 'EOF'
 # EchoMCP + Echo-DevCon Setup
 
@@ -171,6 +236,25 @@ This setup provides a seamless integration between the Echo-DevCon VSCode extens
 ```bash
 cd echomcp
 ./start-echomcp.sh
+=======
+cat > README-DEVCON.md << 'EOF'
+# AlsaniaMCP + DevCon Setup
+
+This setup provides a seamless integration between the DevCon VSCode extension and the AlsaniaMCP backend.
+
+## Components
+
+1. **DevCon Extension**: A fork of Continue.dev that connects to the AlsaniaMCP backend
+2. **AlsaniaMCP Backend**: A FastAPI-based backend that provides OpenAI-compatible endpoints
+
+## Quick Start
+
+### 1. Start the AlsaniaMCP Backend
+
+```bash
+cd alsaniamcp
+./start-alsaniamcp.sh
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
 ```
 
 The backend will be available at `http://localhost:8000`
@@ -178,22 +262,38 @@ The backend will be available at `http://localhost:8000`
 ### 2. Install the Extension
 
 ```bash
+<<<<<<< HEAD
 cd echomcp
+=======
+cd alsaniamcp
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
 ./install-extension.sh
 ```
 
 Or manually install the VSIX file:
 ```bash
+<<<<<<< HEAD
 code --install-extension echo-devcon/extensions/vscode/build/continue-1.1.72.vsix
+=======
+code --install-extension devcon/extensions/vscode/build/continue-1.1.72.vsix
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
 ```
 
 ### 3. Configure VSCode
 
+<<<<<<< HEAD
 The extension is configured to connect to the EchoMCP backend automatically. The configuration is stored in `~/.continue/config.json`.
 
 ## Features
 
 - **OpenAI-Compatible API**: The EchoMCP backend provides OpenAI-compatible endpoints
+=======
+The extension is configured to connect to the AlsaniaMCP backend automatically. The configuration is stored in `~/.continue/config.json`.
+
+## Features
+
+- **OpenAI-Compatible API**: The AlsaniaMCP backend provides OpenAI-compatible endpoints
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
 - **Real-time Chat**: Connect to the backend for chat interactions
 - **Context Providers**: Access file, codebase, and diff context
 - **Streaming Responses**: Real-time streaming of responses from the backend
@@ -210,7 +310,11 @@ The extension is configured to connect to the EchoMCP backend automatically. The
 ## Configuration
 
 The extension is configured to use:
+<<<<<<< HEAD
 - **Model**: EchoMCP (echo-mcp)
+=======
+- **Model**: AlsaniaMCP (alsaniamcp)
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
 - **API Base**: http://localhost:8000/v1
 - **Context Providers**: HTTP, File, Codebase, Diff
 
@@ -223,17 +327,29 @@ The extension is configured to use:
 ## Development
 
 To modify the backend:
+<<<<<<< HEAD
 1. Edit files in `echomcp/backend/`
 2. Restart the backend with `./start-echomcp.sh`
 
 To modify the extension:
 1. Edit files in `echo-devcon/extensions/vscode/src/`
+=======
+1. Edit files in `alsaniamcp/backend/`
+2. Restart the backend with `./start-alsaniamcp.sh`
+
+To modify the extension:
+1. Edit files in `devcon/extensions/vscode/src/`
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
 2. Run `npm run esbuild` to rebuild
 3. Run `npm run package` to create a new VSIX
 
 ## License
 
+<<<<<<< HEAD
 This is a fork of Continue.dev with custom EchoMCP integration.
+=======
+This is a fork of Continue.dev with custom AlsaniaMCP integration.
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
 EOF
 
 print_success "Documentation created!"
@@ -241,8 +357,16 @@ print_success "Documentation created!"
 print_success "🎉 Setup complete!"
 echo ""
 echo "Next steps:"
+<<<<<<< HEAD
 echo "1. Start the EchoMCP backend: cd echomcp && ./start-echomcp.sh"
 echo "2. Install the extension: cd echomcp && ./install-extension.sh"
 echo "3. Open VSCode and start using Echo-DevCon!"
 echo ""
 echo "For more information, see README-ECHO-DEVCON.md" 
+=======
+echo "1. Start the AlsaniaMCP backend: cd alsaniamcp && ./start-alsaniamcp.sh"
+echo "2. Install the extension: cd alsaniamcp && ./install-extension.sh"
+echo "3. Open VSCode and start using DevCon!"
+echo ""
+echo "For more information, see README-DEVCON.md" 
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
