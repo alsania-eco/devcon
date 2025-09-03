@@ -237,13 +237,6 @@ export const TabBar = React.forwardRef<HTMLDivElement>((_, ref) => {
           key={tab.id}
           isActive={tab.isActive}
           onClick={() => handleTabClick(tab.id)}
-          onAuxClick={(e) => {
-            // Middle mouse button
-            if (e.button === 1) {
-              e.preventDefault();
-              handleTabClose(tab.id);
-            }
-          }}
         >
           <TabTitle>{tab.title}</TabTitle>
           <CloseButton

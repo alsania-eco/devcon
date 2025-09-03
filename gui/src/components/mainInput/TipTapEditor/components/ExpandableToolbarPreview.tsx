@@ -4,7 +4,7 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import { EyeIcon } from "@heroicons/react/24/solid";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import styled from "styled-components";
 import {
   defaultBorderRadius,
@@ -122,9 +122,7 @@ export function ExpandableToolbarPreview(props: ExpandableToolbarPreviewProps) {
   const [hidden, setHidden] = useState(calculatedInitiallyHidden);
   const [isExpanded, setIsExpanded] = useState(false);
 
-  const [contentElement, setContentElement] = useState<HTMLDivElement | null>(
-    null,
-  );
+  const contentRef = useRef<HTMLDivElement>(null);
   const [contentDims, setContentDims] = useState({ width: 0, height: 0 });
 
   useEffect(() => {
@@ -135,21 +133,21 @@ export function ExpandableToolbarPreview(props: ExpandableToolbarPreviewProps) {
   }, [calculatedInitiallyHidden, props.initiallyHidden]);
 
   useEffect(() => {
-    if (!contentElement) return;
-
     const resizeObserver = new ResizeObserver(() => {
-      setContentDims({
-        width: contentElement.scrollWidth,
-        height: contentElement.scrollHeight,
-      });
+      setContentDims((prevValue) => ({
+        width: contentRef.current?.scrollWidth ?? prevValue.width,
+        height: contentRef.current?.scrollHeight ?? prevValue.height,
+      }));
     });
 
-    resizeObserver.observe(contentElement);
+    if (contentRef.current) {
+      resizeObserver.observe(contentRef.current);
+    }
 
     return () => {
       resizeObserver.disconnect();
     };
-  }, [contentElement]);
+  }, [contentRef]);
 
   return (
     <PreviewDiv
@@ -207,7 +205,7 @@ export function ExpandableToolbarPreview(props: ExpandableToolbarPreviewProps) {
       {!hidden && !!props.children && (
         <ContentContainer expanded={isExpanded}>
           <ScrollableContent
-            ref={setContentElement}
+            ref={contentRef}
             shouldShowChevron={contentDims.height > MAX_PREVIEW_HEIGHT}
           >
             {props.children}

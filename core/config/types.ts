@@ -387,7 +387,6 @@ declare global {
   
   export interface PromptLog {
     modelTitle: string;
-    modelProvider: string;
     completionOptions: CompletionOptions;
     prompt: string;
     completion: string;

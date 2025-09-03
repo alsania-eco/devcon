@@ -33,7 +33,7 @@ export default class LocalProfileLoader implements IProfileLoader {
       iconUrl: "",
       title: overrideAssistantFile?.path
         ? getUriPathBasename(overrideAssistantFile.path)
-        : "Local Agent",
+        : "Local Assistant",
       errors: undefined,
       uri:
         overrideAssistantFile?.path ??
@@ -48,7 +48,7 @@ export default class LocalProfileLoader implements IProfileLoader {
         );
         this.description.title = parsedAssistant.name;
       } catch (e) {
-        console.error("Failed to parse agent file: ", e);
+        console.error("Failed to parse assistant file: ", e);
       }
     }
   }
@@ -65,7 +65,8 @@ export default class LocalProfileLoader implements IProfileLoader {
       orgScopeId: null,
       packageIdentifier: {
         uriType: "file",
-        fileUri: this.overrideAssistantFile?.path ?? getPrimaryConfigFilePath(),
+        filePath:
+          this.overrideAssistantFile?.path ?? getPrimaryConfigFilePath(),
       },
     });
 

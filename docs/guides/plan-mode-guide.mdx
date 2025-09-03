@@ -33,7 +33,7 @@ Plan Mode prevents unintentional file modifications, letting you think through s
 </Columns>
   </Accordion>
 
-## What Are the Use Cases for Plan Mode
+## Use Cases
 
 Plan Mode excels in four key scenarios where understanding before acting prevents expensive mistakes:
 
@@ -65,14 +65,14 @@ Plan Mode excels in four key scenarios where understanding before acting prevent
   </Card>
 </Columns>
 
-## What Are the Best Practices for Plan Mode?
+## Best Practices
 
-### How to Plan Faster
+### For Faster Planning
 
 1. **Scope your requests**: `Focus analysis on the user authentication module only, ignore the admin features`
 2. **Use targeted context**: `Analyze @Files and its direct imports for security issues`
 
-### How to Create Higher Quality Plans
+### For Higher Quality Plans
 
 1. **Provide business context**: `This feature needs to handle Black Friday traffic (10x normal load). Plan accordingly.`
 2. **Share technical constraints**: `We're on AWS with strict security requirements. Plan a file upload system that meets SOC2 compliance.`
@@ -85,7 +85,7 @@ You can switch to `Plan` in the mode selector below the chat input box.
 
 ![How to select plan mode](../images/plan-mode-selector.png)
 
-## What Tools Are Available in Plan Mode?
+## Available Tools in Plan Mode
 
 | Tool                              | Available | Description                                          |
 | :-------------------------------- | :-------- | :--------------------------------------------------- |
@@ -104,7 +104,7 @@ You can switch to `Plan` in the mode selector below the chat input box.
 | **Git commits/pushes**            | ❌        | Making changes to version control                    |
 | **Database modifications**        | ❌        | Altering database data or structure                  |
 
-## How Context Integration Works in Plan Mode
+## Context Integration in Plan Mode
 
 Context is the foundation of effective planning. Without proper context, AI models fall back on generic patterns, leading to plans that don't fit your specific system. Continue's [context system](/features/chat/context-selection) transforms broad suggestions into actionable strategies:
 
@@ -113,6 +113,9 @@ Context is the foundation of effective planning. Without proper context, AI mode
 | **Highlighted Code** | `cmd/ctrl + L` (VS Code) or `cmd/ctrl + J` (JetBrains) | Component-specific analysis   |
 | **Active File**      | `opt/alt + enter` when sending request                 | Current file context          |
 | **@Files**           | `@Files package.json tsconfig.json`                    | Specific file analysis        |
+| **@Folder**          | `@Folder src/auth`                                     | Directory-wide planning       |
+| **@Codebase**        | `@Codebase`                                            | Comprehensive system analysis |
+| **@Docs**            | `@Docs React Router`                                   | Standards-compliant planning  |
 | **@Terminal**        | `@Terminal`                                            | Debugging with output         |
 | **@Git Diff**        | `@Git Diff`                                            | Change impact analysis        |
 
@@ -253,7 +256,7 @@ Context is the foundation of effective planning. Without proper context, AI mode
   </Accordion>
 </AccordionGroup>
 
-## How to Transition From Plan to Execution
+## From Plan to Execution
 
 ### When to Transition to Agent Mode
 
@@ -272,6 +275,7 @@ The three-mode system—Chat for learning, Plan for strategy, and Agent for exec
 **Remember:**
 
 - Choose the right mode for each task
+- Leverage context providers (@Codebase, @Files, @Docs, etc.) for better planning
 - Start broad, then focus your planning sessions for better results
 - Transition to Agent mode with clear execution steps
 

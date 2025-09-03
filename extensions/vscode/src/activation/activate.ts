@@ -1,3 +1,5 @@
+import * as path from "path";
+
 import { getContinueRcPath, getTsConfigPath } from "core/util/paths";
 import { Telemetry } from "core/util/posthog";
 import * as vscode from "vscode";
@@ -6,21 +8,15 @@ import { VsCodeExtension } from "../extension/VsCodeExtension";
 import registerQuickFixProvider from "../lang-server/codeActions";
 import { getExtensionVersion, isUnsupportedPlatform } from "../util/util";
 
-import { GlobalContext } from "core/util/GlobalContext";
 import { VsCodeContinueApi } from "./api";
 import setupInlineTips from "./InlineTipManager";
 
 export async function activateExtension(context: vscode.ExtensionContext) {
   const platformCheck = isUnsupportedPlatform();
-  const globalContext = new GlobalContext();
-  const hasShownUnsupportedPlatformWarning = globalContext.get(
-    "hasShownUnsupportedPlatformWarning",
-  );
-
-  if (platformCheck.isUnsupported && !hasShownUnsupportedPlatformWarning) {
+  if (platformCheck.isUnsupported) {
+    // const platformTarget = `${getPlatform()}-${getArchitecture()}`;
     const platformTarget = "windows-arm64";
 
-    globalContext.update("hasShownUnsupportedPlatformWarning", true);
     void vscode.window.showInformationMessage(
       `Continue detected that you are using ${platformTarget}. Due to native dependencies, Continue may not be able to start`,
     );
@@ -62,10 +58,10 @@ export async function activateExtension(context: vscode.ExtensionContext) {
   const yamlMatcher = ".continue/**/*.yaml";
   const yamlConfig = vscode.workspace.getConfiguration("yaml");
 
-  const newPath = vscode.Uri.joinPath(
-    context.extension.extensionUri,
+  const newPath = path.join(
+    context.extension.extensionUri.fsPath,
     "config-yaml-schema.json",
-  ).toString();
+  );
 
   try {
     await yamlConfig.update(

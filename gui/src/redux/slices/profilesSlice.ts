@@ -28,7 +28,7 @@ const initialState: ProfilesState = {
       id: "personal",
       profiles: [
         {
-          title: "Local Agent",
+          title: "Local Assistant",
           id: "local",
           errors: [],
           profileType: "local",

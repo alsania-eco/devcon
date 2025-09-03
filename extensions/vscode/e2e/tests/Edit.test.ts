@@ -24,7 +24,6 @@ describe("Edit Test", () => {
     await GUIActions.moveContinueToSidebar(VSBrowser.instance.driver);
     await GlobalActions.openTestWorkspace();
     ({ editor } = await GlobalActions.createAndOpenNewTextFile());
-    await GlobalActions.disableNextEdit();
   });
 
   beforeEach(async function () {

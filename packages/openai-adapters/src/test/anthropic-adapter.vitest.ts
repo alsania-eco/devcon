@@ -1,4 +1,4 @@
-import { afterEach, describe, expect, test, vi } from "vitest";
+import { describe, test, vi, expect, afterEach } from "vitest";
 import { runAdapterTest } from "./adapter-test-utils.js";
 
 // Mock the fetch package
@@ -53,7 +53,7 @@ describe("Anthropic Adapter Tests", () => {
           messages: [{ role: "user", content: "hello" }],
           system: undefined,
           model: "claude-3-5-sonnet-20241022",
-          max_tokens: 32000,
+          max_tokens: 4096,
           stream: undefined,
         },
       },
@@ -107,7 +107,7 @@ describe("Anthropic Adapter Tests", () => {
           messages: [{ role: "user", content: "hello" }],
           system: undefined,
           model: "claude-3-5-sonnet-20241022",
-          max_tokens: 32000,
+          max_tokens: 4096,
           stream: true,
         },
       },
@@ -168,7 +168,7 @@ describe("Anthropic Adapter Tests", () => {
             },
           ],
           model: "claude-3-5-sonnet-20241022",
-          max_tokens: 32000,
+          max_tokens: 4096,
           stream: true,
         },
       },

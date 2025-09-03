@@ -19,11 +19,6 @@ export enum LLMConfigurationStatuses {
   MISSING_ENV_SECRET = "missing-env-secret",
 }
 
-export enum NEXT_EDIT_MODELS {
-  MERCURY_CODER = "mercury-coder",
-  INSTINCT = "instinct",
-}
-
 export {
   DEFAULT_ARGS,
   DEFAULT_CONTEXT_LENGTH,

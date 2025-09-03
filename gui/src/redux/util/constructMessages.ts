@@ -15,7 +15,6 @@ import {
   NO_TOOL_CALL_OUTPUT_MESSAGE,
 } from "core/tools/constants";
 import { convertToolCallStatesToSystemCallsAndOutput } from "core/tools/systemMessageTools/convertSystemTools";
-import { SystemMessageToolsFramework } from "core/tools/systemMessageTools/types";
 import { findLast, findLastIndex } from "core/util/findLast";
 import {
   normalizeToMessageParts,
@@ -31,7 +30,7 @@ export function constructMessages(
   baseSystemMessage: string | undefined,
   availableRules: RuleWithSource[],
   rulePolicies: RulePolicies,
-  useSystemToolsFramework?: SystemMessageToolsFramework,
+  useSystemMessageTools?: boolean,
 ): {
   messages: ChatMessage[];
   appliedRules: RuleWithSource[];
@@ -96,12 +95,11 @@ export function constructMessages(
       });
     } else if (item.message.role === "assistant") {
       // When using system message tools, convert tool calls/states to text content
-      if (item.toolCallStates?.length && useSystemToolsFramework) {
+      if (item.toolCallStates?.length && useSystemMessageTools) {
         const { userMessage, assistantMessage } =
           convertToolCallStatesToSystemCallsAndOutput(
             item.message,
             item.toolCallStates ?? [],
-            useSystemToolsFramework,
           );
         msgs.push({
           message: assistantMessage,

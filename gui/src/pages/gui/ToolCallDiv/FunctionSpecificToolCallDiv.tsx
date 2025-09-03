@@ -1,9 +1,7 @@
 import { ToolCallState } from "core";
 import { BuiltInToolNames } from "core/tools/builtIn";
-import { EditOperation } from "core/tools/definitions/multiEdit";
 import { CreateFile } from "./CreateFile";
 import { EditFile } from "./EditFile";
-import { FindAndReplaceDisplay } from "./FindAndReplace";
 import { RunTerminalCommand } from "./RunTerminalCommand";
 
 function FunctionSpecificToolCallDiv({
@@ -34,31 +32,16 @@ function FunctionSpecificToolCallDiv({
           historyIndex={historyIndex}
         />
       );
-    case BuiltInToolNames.SingleFindAndReplace:
-      const edits: EditOperation[] = [
-        {
-          old_string: args?.old_string ?? "",
-          new_string: args?.new_string ?? "",
-          replace_all: args?.replace_all,
-        },
-      ];
+    case BuiltInToolNames.SearchAndReplaceInFile:
+      const changes = args.diffs
+        ? Array.isArray(args.diffs)
+          ? args.diffs.join("\n\n---\n\n")
+          : args.diffs
+        : "";
       return (
-        <FindAndReplaceDisplay
-          editingFileContents={args?.editingFileContents}
-          fileUri={args?.fileUri}
+        <EditFile
           relativeFilePath={args?.filepath ?? ""}
-          edits={edits}
-          toolCallId={toolCall.id}
-          historyIndex={historyIndex}
-        />
-      );
-    case BuiltInToolNames.MultiEdit:
-      return (
-        <FindAndReplaceDisplay
-          editingFileContents={args?.editingFileContents}
-          relativeFilePath={args?.filepath ?? ""}
-          fileUri={args?.fileUri}
-          edits={args?.edits ?? []}
+          changes={changes}
           toolCallId={toolCall.id}
           historyIndex={historyIndex}
         />

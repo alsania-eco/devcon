@@ -1,37 +1,35 @@
 ---
-title: "How to Configure OpenAI Models with Continue"
+title: OpenAI
 slug: ../openai
-sidebarTitle: "OpenAI"
 ---
 
-<Tip>
-  **Discover OpenAI models [here](https://hub.continue.dev/openai)**
-</Tip>
-
 <Info>
-  Get an API key from the [OpenAI Console](https://platform.openai.com/account/api-keys)
+  You can get an API key from the [OpenAI
+  console](https://platform.openai.com/account/api-keys)
 </Info>
 
-## Configuration
+## Chat model
+
+We recommend configuring **GPT-4o** as your chat model.
 
 <Tabs>
   <Tab title="YAML">
   ```yaml title="config.yaml"
   models:
-    - name: <MODEL_NAME>
+    - name: GPT-4o
       provider: openai
-      model: <MODEL_ID>
+      model: gpt-4o
       apiKey: <YOUR_OPENAI_API_KEY>
   ```
   </Tab>
-  <Tab title="JSON (Deprecated)">
+  <Tab title="JSON">
   ```json title="config.json"
   {
     "models": [
       {
-        "title": "<MODEL_NAME>",
+        "title": "GPT-4o",
         "provider": "openai", 
-        "model": "<MODEL_ID>",
+        "model": "gpt-4o",
         "apiKey": "<YOUR_OPENAI_API_KEY>"
       }
     ]
@@ -40,13 +38,50 @@ sidebarTitle: "OpenAI"
   </Tab>
 </Tabs>
 
-<Info>
-  **Check out a more advanced configuration [here](https://hub.continue.dev/openai/gpt-5?view=config)**
-</Info>
+## Autocomplete model
 
-## OpenAI API compatible providers
+OpenAI currently does not offer any autocomplete models.
 
-OpenAI API compatible providers include
+[Click here](../../model-roles/autocomplete.md) to see a list of autocomplete model providers.
+
+## Embeddings model
+
+We recommend configuring **text-embedding-3-large** as your embeddings model.
+
+<Tabs>
+  <Tab title="YAML">
+  ```yaml title="config.yaml"
+  models:
+    - name: OpenAI Embeddings
+      provider: openai
+      model: text-embedding-3-large
+      apiKey: <YOUR_OPENAI_API_KEY>
+      roles:
+        - embed
+  ```
+  </Tab>
+  <Tab title="JSON">
+  ```json title="config.json"
+  {
+    "embeddingsProvider": {
+      "provider": "openai",
+      "model": "text-embedding-3-large", 
+      "apiKey": "<YOUR_OPENAI_API_KEY>"
+    }
+  }
+  ```
+  </Tab>
+</Tabs>
+
+## Reranking model
+
+OpenAI currently does not offer any reranking models.
+
+[Click here](../../model-roles/reranking.mdx) to see a list of reranking model providers.
+
+## OpenAI compatible servers / APIs
+
+OpenAI compatible servers
 
 - [KoboldCpp](https://github.com/lostruins/koboldcpp)
 - [text-gen-webui](https://github.com/oobabooga/text-generation-webui/tree/main/extensions/openai#setup--installation)
@@ -57,27 +92,32 @@ OpenAI API compatible providers include
 - [vLLM](https://docs.vllm.ai/en/latest/serving/openai_compatible_server.html)
 - [BerriAI/litellm](https://github.com/BerriAI/litellm)
 
-If you are using an OpenAI API compatible providers, you can change the `apiBase` like this:
+OpenAI compatible APIs
+
+- [Anyscale Endpoints](https://github.com/continuedev/deploy-os-code-llm#others)
+- [Anyscale Private Endpoints](https://github.com/continuedev/deploy-os-code-llm#anyscale-private-endpoints)
+
+If you are using an OpenAI compatible server / API, you can change the `apiBase` like this:
 
 <Tabs>
   <Tab title="YAML">
   ```yaml title="config.yaml"
   models:
-    - name: <OPENAI_API_COMPATIBLE_PROVIDER_MODEL>
+    - name: OpenAI-compatible server / API
       provider: openai
-      model: <MODEL_NAME>
+      model: MODEL_NAME 
       apiBase: http://localhost:8000/v1
       apiKey: <YOUR_CUSTOM_API_KEY>
   ```
   </Tab>
-  <Tab title="JSON (Deprecated)">
+  <Tab title="JSON">
   ```json title="config.json"
   {
     "models": [
       {
-        "title": "<OPENAI_API_COMPATIBLE_PROVIDER_MODEL>", 
+        "title": "OpenAI-compatible server / API", 
         "provider": "openai",
-        "model": "<MODEL_NAME>",
+        "model": "MODEL_NAME",
         "apiKey": "<YOUR_CUSTOM_API_KEY>",
         "apiBase": "http://localhost:8000/v1"
       }
@@ -87,29 +127,27 @@ If you are using an OpenAI API compatible providers, you can change the `apiBase
   </Tab>
 </Tabs>
 
-### How to Force Legacy Completions Endpoint Usage
-
 To force usage of `chat/completions` instead of `completions` endpoint you can set:
 
 <Tabs>
   <Tab title="YAML">
   ```yaml title="config.yaml"
   models:
-    - name: <OPENAI_API_COMPATIBLE_PROVIDER_MODEL>
+    - name: OpenAI-compatible server / API
       provider: openai
-      model: <MODEL_NAME>>
+      model: MODEL_NAME 
       apiBase: http://localhost:8000/v1
       useLegacyCompletionsEndpoint: true
   ```
   </Tab>
-  <Tab title="JSON (Deprecated)">
+  <Tab title="JSON">
   ```json title="config.json"
   {
     "models": [
       {
-        "title": "<OPENAI_API_COMPATIBLE_PROVIDER_MODEL>",
+        "title": "OpenAI-compatible server / API",
         "provider": "openai",
-        "model": "<MODEL_NAME>",
+        "model": "MODEL_NAME",
         "apiBase": "http://localhost:8000/v1", 
         "useLegacyCompletionsEndpoint": true
       }

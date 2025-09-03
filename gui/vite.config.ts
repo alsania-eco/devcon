@@ -1,4 +1,3 @@
-import { sentryVitePlugin } from "@sentry/vite-plugin";
 import react from "@vitejs/plugin-react-swc";
 import { resolve } from "path";
 import tailwindcss from "tailwindcss";
@@ -6,17 +5,8 @@ import { defineConfig } from "vitest/config";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [
-    react(),
-    tailwindcss(),
-    sentryVitePlugin({
-      org: "continue-xd",
-      project: "continue",
-    }),
-  ],
+  plugins: [react(), tailwindcss()],
   build: {
-    sourcemap: true,
-
     // Change the output .js filename to not include a hash
     rollupOptions: {
       input: {

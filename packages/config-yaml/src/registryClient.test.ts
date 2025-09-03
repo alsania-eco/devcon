@@ -95,7 +95,7 @@ describe("RegistryClient", () => {
 
       const id: PackageIdentifier = {
         uriType: "file",
-        fileUri: testFilePath,
+        filePath: testFilePath,
       };
 
       const result = await client.getContent(id);

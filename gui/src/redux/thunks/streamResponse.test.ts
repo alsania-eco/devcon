@@ -461,7 +461,6 @@ describe("streamResponseThunk", () => {
         prompt: "Hello",
         completion: "Hi there!",
         modelProvider: "anthropic",
-        modelName: "Claude 3.5 Sonnet",
         modelTitle: "Claude 3.5 Sonnet",
         sessionId: "session-123",
       },
@@ -567,21 +566,13 @@ describe("streamResponseThunk", () => {
         returnToMode: "chat",
       },
       indexing: {
-        indexing: {
-          statuses: {},
-          hiddenChatPeekTypes: {
-            docs: false,
-          },
-        },
+        indexingState: "disabled",
       },
       tabs: {
         tabsItems: [],
       },
       profiles: {
-        organizations: [],
-        selectedProfileId: null,
-        selectedOrganizationId: null,
-        preferencesByProfileId: {},
+        profiles: [],
       },
     });
   });
@@ -1095,21 +1086,13 @@ describe("streamResponseThunk", () => {
         returnToMode: "chat",
       },
       indexing: {
-        indexing: {
-          statuses: {},
-          hiddenChatPeekTypes: {
-            docs: false,
-          },
-        },
+        indexingState: "disabled",
       },
       tabs: {
         tabsItems: [],
       },
       profiles: {
-        organizations: [],
-        selectedProfileId: null,
-        selectedOrganizationId: null,
-        preferencesByProfileId: {},
+        profiles: [],
       },
     });
   });
@@ -1648,21 +1631,13 @@ describe("streamResponseThunk", () => {
         returnToMode: "chat",
       },
       indexing: {
-        indexing: {
-          statuses: {},
-          hiddenChatPeekTypes: {
-            docs: false,
-          },
-        },
+        indexingState: "disabled",
       },
       tabs: {
         tabsItems: [],
       },
       profiles: {
-        organizations: [],
-        selectedProfileId: null,
-        selectedOrganizationId: null,
-        preferencesByProfileId: {},
+        profiles: [],
       },
     });
   });

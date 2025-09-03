@@ -1,0 +1,48 @@
+mcpServers:
+  filesystem:
+    command: "npx"
+    args:
+      [
+        "@modelcontextprotocol/server-filesystem@latest",
+        "/home/sigma/Desktop/echo-lab",
+      ]
+    env:
+      NODE_ENV: "production"
+
+  github:
+    command: "npx"
+    args: ["@modelcontextprotocol/server-github@latest"]
+    env:
+      NODE_ENV: "production"
+      GITHUB_PERSONAL_ACCESS_TOKEN: "${GITHUB_TOKEN}"
+
+  sqlite:
+    command: "npx"
+    args:
+      [
+        "@modelcontextprotocol/server-sqlite@latest",
+        "--db-path",
+        "./alsania.db",
+      ]
+    env:
+      NODE_ENV: "production"
+
+  postgres:
+    command: "npx"
+    args: ["@modelcontextprotocol/server-postgres@latest"]
+    env:
+      NODE_ENV: "production"
+      POSTGRES_CONNECTION_STRING: "${DATABASE_URL}"
+
+  brave-search:
+    command: "npx"
+    args: ["@modelcontextprotocol/server-brave-search@latest"]
+    env:
+      NODE_ENV: "production"
+      BRAVE_API_KEY: "${BRAVE_API_KEY}"
+
+  puppeteer:
+    command: "npx"
+    args: ["@modelcontextprotocol/server-puppeteer@latest"]
+    env:
+      NODE_ENV: "production"

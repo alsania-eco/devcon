@@ -42,8 +42,7 @@
     "extensions/vscode/e2e/_output": true,
     "extensions/vscode/e2e/storage": true,
     "extensions/vscode/e2e/vsix": true,
-    "extensions/.continue-debug": true,
-    "extensions/cli/dist/**": true
+    "extensions/.continue-debug": true
     // "sync/**": true
   },
   "editor.formatOnSave": true,
@@ -54,5 +53,18 @@
   "conventionalCommits.promptFooter": false,
   "conventionalCommits.promptScopes": true,
   "conventionalCommits.scopes": ["reg"],
+  "java.configuration.updateBuildConfiguration": "interactive",
+  "mcpServer.port": 3006,
+  "mcpServer.confirmationUI": "quickPick",
+  "chat.mcp.assisted.nuget.enabled": true,
+  "chat.mcp.discovery.enabled": {
+    "cursor-workspace": true,
+    "windsurf": true,
+    "cursor-global": true,
+    "claude-desktop": true
+  },
+  "mcp-client.serversConfigurationFileType": "custom",
+  "github.copilot.chat.newWorkspace.useContext7": true
+=======
   "java.configuration.updateBuildConfiguration": "interactive"
 }

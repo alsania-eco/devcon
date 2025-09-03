@@ -10,20 +10,10 @@ export const fileGlobSearchImpl: ToolImpl = async (args, extras) => {
     pattern,
     MAX_AGENT_GLOB_RESULTS,
   );
-
-  if (results.length === 0) {
-    return [
-      {
-        name: "File results",
-        description: "glob search",
-        content: "The glob search returned no results.",
-      },
-    ];
-  }
   const contextItems: ContextItem[] = [
     {
       name: "File results",
-      description: "glob search",
+      description: "Results from file glob search",
       content: results.join("\n"),
     },
   ];
@@ -32,7 +22,7 @@ export const fileGlobSearchImpl: ToolImpl = async (args, extras) => {
   if (results.length === MAX_AGENT_GLOB_RESULTS) {
     contextItems.push({
       name: "Truncation warning",
-      description: "",
+      description: "Inform the model that results were truncated",
       content: `Warning: the results above were truncated to the first ${MAX_AGENT_GLOB_RESULTS} files. If the results are not satisfactory, refine your search pattern`,
     });
   }

@@ -1,8 +1,11 @@
 import ignore from "ignore";
 
 import type { FileType, IDE, SlashCommand } from "../../..";
-import { getGlobalContinueIgArray } from "../../../indexing/continueignore";
-import { DEFAULT_IGNORE, gitIgArrayFromFile } from "../../../indexing/ignore";
+import {
+  DEFAULT_IGNORE,
+  getGlobalContinueIgArray,
+  gitIgArrayFromFile,
+} from "../../../indexing/ignore";
 import { renderChatMessage } from "../../../util/messageContent";
 import {
   findUriInDirs,

@@ -1,6 +1,7 @@
 import { Client } from "@modelcontextprotocol/sdk/client/index.js";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import MCPConnection from "./MCPConnection";
+import { StdioOptions } from "../../index.d.js";
 
 // Mock the shell path utility
 vi.mock("../../util/shellPath", () => ({
@@ -142,7 +143,6 @@ describe("MCPConnection", () => {
       expect(status).toEqual({
         ...options,
         errors: [],
-        isProtectedResource: false,
         prompts: [],
         resources: [],
         resourceTemplates: [],

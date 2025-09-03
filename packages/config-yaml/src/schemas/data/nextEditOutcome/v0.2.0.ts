@@ -26,7 +26,6 @@ export const nextEditOutcomeEventSchema_0_2_0 =
     completion: true,
     cursorPosition: true,
     accepted: true,
-    aborted: true,
     modelProvider: true,
     modelName: true,
   });
