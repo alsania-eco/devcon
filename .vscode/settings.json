@@ -65,4 +65,6 @@
   },
   "mcp-client.serversConfigurationFileType": "custom",
   "github.copilot.chat.newWorkspace.useContext7": true
+=======
+  "java.configuration.updateBuildConfiguration": "interactive"
 }
