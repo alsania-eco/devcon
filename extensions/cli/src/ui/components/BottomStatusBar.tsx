@@ -18,7 +18,10 @@ interface BottomStatusBarProps {
   navigateTo: (screen: NavigationScreen, data?: any) => void;
   closeCurrentScreen: () => void;
   contextPercentage?: number;
+<<<<<<< HEAD
   hasImageInClipboard?: boolean;
+=======
+>>>>>>> alsania-eco-echo
 }
 
 export const BottomStatusBar: React.FC<BottomStatusBarProps> = ({
@@ -30,12 +33,16 @@ export const BottomStatusBar: React.FC<BottomStatusBarProps> = ({
   navigateTo,
   closeCurrentScreen,
   contextPercentage,
+<<<<<<< HEAD
   hasImageInClipboard,
+=======
+>>>>>>> alsania-eco-echo
 }) => (
   <Box flexDirection="row" justifyContent="space-between" alignItems="center">
     <Box marginLeft={2} flexDirection="row" alignItems="center">
       {currentMode === "normal" && (
         <React.Fragment>
+<<<<<<< HEAD
           {hasImageInClipboard ? (
             <Text key="image-paste-hint" color="cyan" wrap="truncate-start">
               Press Ctrl+V to paste image
@@ -45,6 +52,11 @@ export const BottomStatusBar: React.FC<BottomStatusBarProps> = ({
               {repoURLText}
             </Text>
           )}
+=======
+          <Text key="repo-url" color="dim" wrap="truncate-start">
+            {repoURLText}
+          </Text>
+>>>>>>> alsania-eco-echo
           <Text key="repo-separator"> </Text>
         </React.Fragment>
       )}

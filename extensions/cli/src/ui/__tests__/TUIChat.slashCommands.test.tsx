@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import { renderInMode, testBothModes } from "./TUIChat.dualModeHelper.js";
+=======
+import { testBothModes, renderInMode } from "./TUIChat.dualModeHelper.js";
+>>>>>>> alsania-eco-echo
 
 describe("TUIChat - Slash Commands Tests", () => {
   testBothModes("shows slash when user types /", async (mode) => {
@@ -8,7 +12,11 @@ describe("TUIChat - Slash Commands Tests", () => {
     stdin.write("/");
 
     // Wait a bit for the UI to update
+<<<<<<< HEAD
     await new Promise((resolve) => setTimeout(resolve, 200));
+=======
+    await new Promise((resolve) => setTimeout(resolve, 50));
+>>>>>>> alsania-eco-echo
 
     const frame = lastFrame();
 
@@ -27,16 +35,30 @@ describe("TUIChat - Slash Commands Tests", () => {
   testBothModes("filters slash commands when typing /log", async (mode) => {
     const { lastFrame, stdin } = renderInMode(mode);
 
+<<<<<<< HEAD
     // Type /exi to trigger slash command filtering
     stdin.write("/exi");
 
     // Wait a bit for the UI to update (allow extra time in both modes)
     await new Promise((resolve) => setTimeout(resolve, 600));
+=======
+    // Type /log to trigger slash command filtering
+    stdin.write("/log");
+
+    // Wait a bit for the UI to update (allow extra time in both modes)
+    await new Promise((resolve) =>
+      setTimeout(resolve, mode === "remote" ? 200 : 150),
+    );
+>>>>>>> alsania-eco-echo
 
     const frame = lastFrame();
 
     // Should show the typed command
+<<<<<<< HEAD
     expect(frame).toContain("/exi");
+=======
+    expect(frame).toContain("/log");
+>>>>>>> alsania-eco-echo
 
     // Mode-specific UI elements
     if (mode === "remote") {
@@ -50,6 +72,7 @@ describe("TUIChat - Slash Commands Tests", () => {
   testBothModes("handles tab key after slash command", async (mode) => {
     const { lastFrame, stdin } = renderInMode(mode);
 
+<<<<<<< HEAD
     // Type /exi and then tab
     stdin.write("/exi");
 
@@ -58,6 +81,16 @@ describe("TUIChat - Slash Commands Tests", () => {
     stdin.write("\t");
 
     await new Promise((resolve) => setTimeout(resolve, 200));
+=======
+    // Type /log and then tab
+    stdin.write("/log");
+
+    await new Promise((resolve) => setTimeout(resolve, 50));
+
+    stdin.write("\t");
+
+    await new Promise((resolve) => setTimeout(resolve, 50));
+>>>>>>> alsania-eco-echo
 
     const frameAfterTab = lastFrame();
 
@@ -81,13 +114,20 @@ describe("TUIChat - Slash Commands Tests", () => {
     // Type just /
     stdin.write("/");
 
+<<<<<<< HEAD
     await new Promise((resolve) => setTimeout(resolve, 600));
+=======
+    await new Promise((resolve) =>
+      setTimeout(resolve, mode === "remote" ? 120 : 50),
+    );
+>>>>>>> alsania-eco-echo
 
     const frame = lastFrame();
 
     // Should show the slash
     expect(frame).toContain("/");
 
+<<<<<<< HEAD
     // In remote mode, slash command menu should show
     if (mode === "remote") {
       // More lenient check - just verify we're in remote mode and have a slash
@@ -96,6 +136,12 @@ describe("TUIChat - Slash Commands Tests", () => {
       // Just check that we have slash somewhere
       const hasSlash = frame ? frame.includes("/") : false;
       expect(hasSlash).toBe(true);
+=======
+    // In remote mode, slash command menu shows immediately
+    if (mode === "remote") {
+      expect(frame).toContain("/exit");
+      expect(frame).toContain("Remote Mode");
+>>>>>>> alsania-eco-echo
     } else {
       // In local mode, the / is shown in the input
       expect(frame).toContain("Continue CLI");

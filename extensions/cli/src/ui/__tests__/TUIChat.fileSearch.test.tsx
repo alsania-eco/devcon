@@ -1,17 +1,29 @@
+<<<<<<< HEAD
 import { renderInMode, testSingleMode } from "./TUIChat.dualModeHelper.js";
+=======
+import { testSingleMode, renderInMode } from "./TUIChat.dualModeHelper.js";
+>>>>>>> alsania-eco-echo
 
 describe("TUIChat - @ File Search Tests", () => {
   testSingleMode("shows @ character when user types @", "local", async () => {
     const { lastFrame, stdin } = renderInMode("local");
 
     // Wait a bit for initial render
+<<<<<<< HEAD
     await new Promise((resolve) => setTimeout(resolve, 100));
+=======
+    await new Promise((resolve) => setTimeout(resolve, 50));
+>>>>>>> alsania-eco-echo
 
     // Type the @ character to trigger file search
     stdin.write("@");
 
     // Wait longer for file search to initialize and display files
+<<<<<<< HEAD
     await new Promise((resolve) => setTimeout(resolve, 400));
+=======
+    await new Promise((resolve) => setTimeout(resolve, 200));
+>>>>>>> alsania-eco-echo
 
     const frame = lastFrame()!;
 
@@ -34,7 +46,11 @@ describe("TUIChat - @ File Search Tests", () => {
       stdin.write("@READ");
 
       // Wait for file search to filter and display results
+<<<<<<< HEAD
       await new Promise((resolve) => setTimeout(resolve, 500));
+=======
+      await new Promise((resolve) => setTimeout(resolve, 100));
+>>>>>>> alsania-eco-echo
 
       const frame = lastFrame()!;
 
@@ -58,7 +74,11 @@ describe("TUIChat - @ File Search Tests", () => {
     stdin.write("@@test");
 
     // Wait for UI update
+<<<<<<< HEAD
     await new Promise((resolve) => setTimeout(resolve, 500));
+=======
+    await new Promise((resolve) => setTimeout(resolve, 100));
+>>>>>>> alsania-eco-echo
 
     const frame = lastFrame();
 
@@ -80,7 +100,11 @@ describe("TUIChat - @ File Search Tests", () => {
       stdin.write("@");
 
       // Wait for potential async operations
+<<<<<<< HEAD
       await new Promise((resolve) => setTimeout(resolve, 200));
+=======
+      await new Promise((resolve) => setTimeout(resolve, 50));
+>>>>>>> alsania-eco-echo
 
       const frame = lastFrame()!;
 

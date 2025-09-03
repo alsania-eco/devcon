@@ -12,7 +12,10 @@ import { modeService } from "../services/ModeService.js";
 import { InputHistory } from "../util/inputHistory.js";
 
 import { FileSearchUI } from "./FileSearchUI.js";
+<<<<<<< HEAD
 import { useClipboardMonitor } from "./hooks/useClipboardMonitor.js";
+=======
+>>>>>>> alsania-eco-echo
 import {
   handleControlKeys,
   updateTextBufferState,
@@ -32,7 +35,10 @@ interface UserInputProps {
   placeholder?: string;
   hideNormalUI?: boolean;
   isRemoteMode?: boolean;
+<<<<<<< HEAD
   onImageInClipboardChange?: (hasImage: boolean) => void;
+=======
+>>>>>>> alsania-eco-echo
 }
 
 const UserInput: React.FC<UserInputProps> = ({
@@ -47,7 +53,10 @@ const UserInput: React.FC<UserInputProps> = ({
   placeholder,
   hideNormalUI = false,
   isRemoteMode = false,
+<<<<<<< HEAD
   onImageInClipboardChange,
+=======
+>>>>>>> alsania-eco-echo
 }) => {
   const [textBuffer] = useState(() => new TextBuffer());
   const [inputHistory] = useState(() => new InputHistory());
@@ -499,6 +508,7 @@ const UserInput: React.FC<UserInputProps> = ({
     inputHistory.resetNavigation();
   };
 
+<<<<<<< HEAD
   // State for showing image paste hint
   const [_hasImageInClipboard, _setHasImageInClipboard] = useState(false);
 
@@ -515,6 +525,8 @@ const UserInput: React.FC<UserInputProps> = ({
     pollInterval: 2000,
   });
 
+=======
+>>>>>>> alsania-eco-echo
   useInput((input, key) => {
     // Don't handle any input when disabled
     if (disabled) {

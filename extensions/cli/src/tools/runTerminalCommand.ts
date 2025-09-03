@@ -8,6 +8,7 @@ import {
 
 import { Tool } from "./types.js";
 
+<<<<<<< HEAD
 // Helper function to use login shell on Unix/macOS and PowerShell on Windows
 function getShellCommand(command: string): { shell: string; args: string[] } {
   if (process.platform === "win32") {
@@ -23,6 +24,8 @@ function getShellCommand(command: string): { shell: string; args: string[] } {
   }
 }
 
+=======
+>>>>>>> alsania-eco-echo
 export const runTerminalCommandTool: Tool = {
   name: "Bash",
   displayName: "Bash",
@@ -58,9 +61,13 @@ The command will be executed from the current working directory: ${process.cwd()
   },
   run: async ({ command }: { command: string }): Promise<string> => {
     return new Promise((resolve, reject) => {
+<<<<<<< HEAD
       // Use same shell logic as core implementation
       const { shell, args } = getShellCommand(command);
       const child = spawn(shell, args);
+=======
+      const child = spawn("sh", ["-c", command]);
+>>>>>>> alsania-eco-echo
       let stdout = "";
       let stderr = "";
       let timeoutId: NodeJS.Timeout;

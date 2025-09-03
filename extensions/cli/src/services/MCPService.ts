@@ -1,9 +1,13 @@
 import { type AssistantConfig } from "@continuedev/sdk";
 import { Client } from "@modelcontextprotocol/sdk/client/index.js";
+<<<<<<< HEAD
 import { SSEClientTransport } from "@modelcontextprotocol/sdk/client/sse.js";
 import { StdioClientTransport } from "@modelcontextprotocol/sdk/client/stdio.js";
 import { StreamableHTTPClientTransport } from "@modelcontextprotocol/sdk/client/streamableHttp.js";
 import { Transport } from "@modelcontextprotocol/sdk/shared/transport.js";
+=======
+import { StdioClientTransport } from "@modelcontextprotocol/sdk/client/stdio.js";
+>>>>>>> alsania-eco-echo
 
 import { getErrorString } from "../util/error.js";
 import { logger } from "../util/logger.js";
@@ -12,9 +16,15 @@ import { BaseService, ServiceWithDependencies } from "./BaseService.js";
 import { serviceContainer } from "./ServiceContainer.js";
 import {
   MCPConnectionInfo,
+<<<<<<< HEAD
   MCPServerConfig,
   MCPServiceState,
   SERVICE_NAMES,
+=======
+  MCPServiceState,
+  SERVICE_NAMES,
+  MCPServerConfig,
+>>>>>>> alsania-eco-echo
 } from "./types.js";
 
 interface ServerConnection extends MCPConnectionInfo {
@@ -217,12 +227,38 @@ export class MCPService
     this.updateState();
 
     try {
+<<<<<<< HEAD
+=======
+      if (serverConfig.type && serverConfig.type !== "stdio") {
+        throw new Error(
+          `${serverConfig.type} MCP servers are not yet supported in the Continue CLI`,
+        );
+      }
+      if (!serverConfig.command) {
+        throw new Error("MCP server command is not specified");
+      }
+
+>>>>>>> alsania-eco-echo
       const client = new Client(
         { name: "continue-cli-client", version: "1.0.0" },
         { capabilities: {} },
       );
 
+<<<<<<< HEAD
       const transport = await this.constructTransport(serverConfig);
+=======
+      const env: Record<string, string> = serverConfig.env || {};
+      if (process.env.PATH !== undefined) {
+        env.PATH = process.env.PATH;
+      }
+
+      const transport = new StdioClientTransport({
+        command: serverConfig.command,
+        args: serverConfig.args,
+        env,
+        stderr: "ignore",
+      });
+>>>>>>> alsania-eco-echo
 
       logger.debug("Connecting to MCP server", {
         name: serverName,
@@ -347,6 +383,7 @@ export class MCPService
     logger.debug("Shutting down MCPService");
     await this.shutdownConnections();
   }
+<<<<<<< HEAD
 
   /**
    * Construct transport based on server configuration
@@ -411,4 +448,6 @@ export class MCPService
         throw new Error(`Unsupported transport type: ${transportType}`);
     }
   }
+=======
+>>>>>>> alsania-eco-echo
 }

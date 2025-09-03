@@ -1,6 +1,9 @@
+<<<<<<< HEAD
 import * as os from "node:os";
 import * as path from "node:path";
 
+=======
+>>>>>>> alsania-eco-echo
 import { AssistantUnrolled, ModelConfig } from "@continuedev/config-yaml";
 import { Box, Text } from "ink";
 import React, { useMemo } from "react";
@@ -10,11 +13,14 @@ import { MCPService } from "../services/MCPService.js";
 import { isModelCapable } from "../utils/modelCapability.js";
 
 import { ModelCapabilityWarning } from "./ModelCapabilityWarning.js";
+<<<<<<< HEAD
 import { TipsDisplay, shouldShowTip } from "./TipsDisplay.js";
 
 // Export the warning message for testing
 export const HOME_DIRECTORY_WARNING =
   "Run cn in a project directory for the best experience (currently in home directory)";
+=======
+>>>>>>> alsania-eco-echo
 
 interface IntroMessageProps {
   config?: AssistantUnrolled;
@@ -22,6 +28,7 @@ interface IntroMessageProps {
   mcpService?: MCPService;
 }
 
+<<<<<<< HEAD
 // Helper function to extract rule names
 const extractRuleNames = (rules: any[] = []): string[] => {
   return rules.map((rule: any) =>
@@ -29,6 +36,8 @@ const extractRuleNames = (rules: any[] = []): string[] => {
   );
 };
 
+=======
+>>>>>>> alsania-eco-echo
 const IntroMessage: React.FC<IntroMessageProps> = ({
   config,
   model,
@@ -37,6 +46,7 @@ const IntroMessage: React.FC<IntroMessageProps> = ({
   // Get MCP prompts directly (not memoized since they can change after first render)
   const mcpPrompts = mcpService?.getState().prompts ?? [];
 
+<<<<<<< HEAD
   // Determine if we should show a tip (1 in 5 chance) - computed once on mount
   const showTip = useMemo(() => shouldShowTip(), []);
 
@@ -55,6 +65,17 @@ const IntroMessage: React.FC<IntroMessageProps> = ({
   // Memoize expensive operations to avoid running on every resize
   const { allRules, modelCapable } = useMemo(() => {
     const allRules = extractRuleNames(config?.rules);
+=======
+  // Memoize expensive operations to avoid running on every resize
+  const { allRules, modelCapable } = useMemo(() => {
+    // Show all rules from config (command-line rules are already merged into config)
+    const configRules =
+      config?.rules?.map((rule: any) =>
+        typeof rule === "string" ? rule : rule?.name || "Unknown",
+      ) || [];
+
+    const allRules = configRules;
+>>>>>>> alsania-eco-echo
 
     // Check if model is capable - now checking both name and model properties
     const modelCapable = model
@@ -64,6 +85,7 @@ const IntroMessage: React.FC<IntroMessageProps> = ({
     return { allRules, modelCapable };
   }, [config?.rules, model?.provider, model?.name, model?.model]);
 
+<<<<<<< HEAD
   // Render helper components
   const renderMcpPrompts = () =>
     mcpPrompts.length > 0 ? (
@@ -108,15 +130,20 @@ const IntroMessage: React.FC<IntroMessageProps> = ({
       </>
     ) : null;
 
+=======
+>>>>>>> alsania-eco-echo
   return (
     <Box flexDirection="column" paddingX={1} paddingY={1}>
       {/* ASCII Art */}
       <Text>{getDisplayableAsciiArt()}</Text>
       <Text> </Text>
 
+<<<<<<< HEAD
       {/* Tips Display - shown randomly 1 in 5 times */}
       {showTip && <TipsDisplay />}
 
+=======
+>>>>>>> alsania-eco-echo
       {/* Agent name */}
       {config && (
         <Text color="blue">
@@ -148,6 +175,7 @@ const IntroMessage: React.FC<IntroMessageProps> = ({
         </>
       )}
 
+<<<<<<< HEAD
       {renderMcpPrompts()}
       {renderRules()}
       {renderMcpServers()}
@@ -156,6 +184,47 @@ const IntroMessage: React.FC<IntroMessageProps> = ({
       {isInHomeDirectory && (
         <>
           <Text color="yellow">{HOME_DIRECTORY_WARNING}</Text>
+=======
+      {/* MCP prompts */}
+      {mcpPrompts.length > 0 && (
+        <>
+          {mcpPrompts.map((prompt, index) => (
+            <Text key={`mcp-${index}`}>
+              - <Text color="white">/{prompt.name}</Text>:{" "}
+              <Text color="gray">{prompt.description}</Text>
+            </Text>
+          ))}
+          <Text> </Text>
+        </>
+      )}
+
+      {/* Rules */}
+      {allRules.length > 0 && (
+        <>
+          <Text bold color="blue">
+            Rules:
+          </Text>
+          {allRules.map((rule, index) => (
+            <Text key={index}>
+              - <Text color="white">{rule}</Text>
+            </Text>
+          ))}
+          <Text> </Text>
+        </>
+      )}
+
+      {/* MCP Servers */}
+      {(config?.mcpServers?.length ?? 0) > 0 && (
+        <>
+          <Text bold color="blue">
+            MCP Servers:
+          </Text>
+          {config?.mcpServers?.map((server: any, index: number) => (
+            <Text key={index}>
+              - <Text color="white">{server?.name}</Text>
+            </Text>
+          ))}
+>>>>>>> alsania-eco-echo
           <Text> </Text>
         </>
       )}

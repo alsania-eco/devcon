@@ -1,5 +1,9 @@
 import { AssistantConfig } from "@continuedev/sdk";
+<<<<<<< HEAD
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+=======
+import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
+>>>>>>> alsania-eco-echo
 
 import { MCPService } from "./MCPService.js";
 
@@ -21,6 +25,7 @@ vi.mock("@modelcontextprotocol/sdk/client/stdio.js", () => ({
   StdioClientTransport: vi.fn(),
 }));
 
+<<<<<<< HEAD
 vi.mock("@modelcontextprotocol/sdk/client/sse.js", () => ({
   SSEClientTransport: vi.fn(),
 }));
@@ -29,6 +34,8 @@ vi.mock("@modelcontextprotocol/sdk/client/streamableHttp.js", () => ({
   StreamableHTTPClientTransport: vi.fn(),
 }));
 
+=======
+>>>>>>> alsania-eco-echo
 describe("MCPService", () => {
   let mcpService: MCPService;
   let mockAssistant: AssistantConfig;
@@ -160,6 +167,7 @@ describe("MCPService", () => {
       await expect(mcpService.cleanup()).resolves.not.toThrow();
     });
   });
+<<<<<<< HEAD
 
   describe("transport types", () => {
     it("should support SSE transport", async () => {
@@ -212,4 +220,6 @@ describe("MCPService", () => {
       ).resolves.not.toThrow();
     });
   });
+=======
+>>>>>>> alsania-eco-echo
 });

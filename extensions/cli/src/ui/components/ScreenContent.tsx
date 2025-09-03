@@ -38,7 +38,10 @@ interface ScreenContentProps {
   isInputDisabled: boolean;
   wasInterrupted?: boolean;
   isRemoteMode: boolean;
+<<<<<<< HEAD
   onImageInClipboardChange?: (hasImage: boolean) => void;
+=======
+>>>>>>> alsania-eco-echo
 }
 
 export const ScreenContent: React.FC<ScreenContentProps> = ({
@@ -61,7 +64,10 @@ export const ScreenContent: React.FC<ScreenContentProps> = ({
   isInputDisabled,
   wasInterrupted = false,
   isRemoteMode,
+<<<<<<< HEAD
   onImageInClipboardChange,
+=======
+>>>>>>> alsania-eco-echo
 }) => {
   // Login prompt
   if (isScreenActive("login") && navState.screenData) {
@@ -155,7 +161,10 @@ export const ScreenContent: React.FC<ScreenContentProps> = ({
         onFileAttached={handleFileAttached}
         disabled={isInputDisabled}
         isRemoteMode={isRemoteMode}
+<<<<<<< HEAD
         onImageInClipboardChange={onImageInClipboardChange}
+=======
+>>>>>>> alsania-eco-echo
       />
     );
   }
