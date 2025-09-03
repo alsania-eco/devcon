@@ -1,6 +1,6 @@
 {
   "name": "devcon",
-  "displayName": "Echo DevCon",
+  "displayName": "DevCon",
   "description": "Sigma’s Echo inside VS Code. Local-first chat + code patches via alsaniamcp.",
   "version": "0.1.4",
   "publisher": "alsania",
@@ -23,29 +23,25 @@
     "theme": "dark"
   },
   "activationEvents": [
-    "onStartupFinished",
-    "onCommand:devcon.open",
-    "onCommand:devcon.ask",
-    "onCommand:devcon.applyPatch",
-    "onCommand:devcon.openScribeToday"
+    "onStartupFinished"
   ],
   "contributes": {
     "commands": [
       {
         "command": "devcon.open",
-        "title": "Echo DevCon: Open Chat"
+        "title": "DevCon: Open Chat"
       },
       {
         "command": "devcon.ask",
-        "title": "Echo DevCon: Ask About Selection"
+        "title": "DevCon: Ask About Selection"
       },
       {
         "command": "devcon.applyPatch",
-        "title": "Echo DevCon: Apply Suggested Patch"
+        "title": "DevCon: Apply Suggested Patch"
       },
       {
         "command": "devcon.openScribeToday",
-        "title": "Echo DevCon: Open Scribe (Today)"
+        "title": "DevCon: Open Scribe (Today)"
       }
     ]
   },
