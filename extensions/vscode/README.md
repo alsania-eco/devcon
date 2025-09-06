@@ -40,15 +40,37 @@
 
 ## Echo Edit
 
+<<<<<<< HEAD
 [Echo Edit](https://alsania.com/devcon/docs/edit) is a convenient way to modify code without leaving your current file using Echo's intelligent suggestions
+=======
+[Agent](https://docs.continue.dev/features/agent/quick-start) to work on development tasks together with AI
+>>>>>>> upstream/sigmasauer07
 
 ![edit](./media/edit.gif)
 
 ## Echo Autocomplete
 
+<<<<<<< HEAD
 [Echo Autocomplete](https://alsania.com/devcon/docs/autocomplete) provides intelligent inline code suggestions as you type, powered by Alsania's AI
 
 ![autocomplete](./media/autocomplete.gif)
+=======
+[Chat](https://docs.continue.dev/features/chat/quick-start) to ask general questions and clarify code sections
+
+![chat](docs/images/chat.gif)
+
+## Edit
+
+[Edit](https://docs.continue.dev/features/edit/quick-start) to modify a code section without leaving your current file
+
+![edit](docs/images/edit.gif)
+
+## Autocomplete
+
+[Autocomplete](https://docs.continue.dev/features/autocomplete/quick-start) to receive inline code suggestions as you type
+
+![autocomplete](docs/images/autocomplete.gif)
+>>>>>>> upstream/sigmasauer07
 
 </div>
 

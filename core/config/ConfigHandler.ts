@@ -175,6 +175,7 @@ export class ConfigHandler {
   private async getOrgs(): Promise<OrgWithProfiles[]> {
     const isSignedIn = await this.controlPlaneClient.isSignedIn();
     if (isSignedIn) {
+<<<<<<< HEAD
       const orgDescs = await this.controlPlaneClient.listOrganizations();
       const orgs = await Promise.all([
         this.getPersonalHubOrg(),
@@ -183,6 +184,55 @@ export class ConfigHandler {
       return orgs;
     } else {
       return [await this.getLocalOrg()];
+=======
+      try {
+        // TODO use policy returned with org, not policy endpoint
+        const policyResponse = await this.controlPlaneClient.getPolicy();
+        PolicySingleton.getInstance().policy = policyResponse;
+        const orgDescriptions =
+          await this.controlPlaneClient.listOrganizations();
+        const orgsWithPolicy = orgDescriptions.map((d) => ({
+          ...d,
+          policy: policyResponse?.policy,
+        }));
+
+        if (policyResponse?.policy?.allowOtherOrgs === false) {
+          if (orgsWithPolicy.length === 0) {
+            return { orgs: [] };
+          } else {
+            const firstOrg = await this.getNonPersonalHubOrg(orgsWithPolicy[0]);
+            return { orgs: [firstOrg] };
+          }
+        }
+        const orgs = await Promise.all([
+          this.getPersonalHubOrg(),
+          ...orgsWithPolicy.map((org) => this.getNonPersonalHubOrg(org)),
+        ]);
+        // TODO make try/catch more granular here, to catch specific org errors
+        return { orgs };
+      } catch (e) {
+        errors.push({
+          fatal: false,
+          message: `Error loading Continue Hub assistants${e instanceof Error ? ":\n" + e.message : ""}`,
+        });
+      }
+    } else {
+      PolicySingleton.getInstance().policy = null;
+    }
+    // Load local org if not signed in or hub orgs fail
+    try {
+      const orgs = [await this.getLocalOrg()];
+      return { orgs };
+    } catch (e) {
+      errors.push({
+        fatal: true,
+        message: `Error loading local assistants${e instanceof Error ? ":\n" + e.message : ""}`,
+      });
+      return {
+        orgs: [],
+        errors,
+      };
+>>>>>>> upstream/sigmasauer07
     }
   }
 

@@ -8,6 +8,7 @@
 
 </div>
 
+<<<<<<< HEAD
 <div align="center">
 
 ## Chat
@@ -33,6 +34,27 @@ Highlight a block of code, describe your code changes, and a diff will be stream
 [Agent](https://continue.dev/docs/agent/how-to-use-it) enables you to make more substantial changes to your codebase
 
 Agent equips the Chat model with the tools needed to handle a wide range of coding tasks, allowing the model to make decisions and save you the work of manually finding context and performing actions.
+=======
+**Ship faster with Continuous AI**
+
+**Build and run custom agents across your IDE, terminal, and CI**
+
+## Agent
+
+[Agent](https://docs.continue.dev/features/agent/quick-start) to work on development tasks together with AI
+
+## Chat
+
+[Chat](https://docs.continue.dev/features/chat/quick-start) to ask general questions and clarify code sections
+
+## Edit
+
+[Edit](https://docs.continue.dev/features/edit/quick-start) to modify a code section without leaving your current file
+
+## Autocomplete
+
+[Autocomplete](https://docs.continue.dev/features/autocomplete/quick-start) to receive inline code suggestions as you type
+>>>>>>> upstream/sigmasauer07
 
 </div>
 

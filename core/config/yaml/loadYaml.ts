@@ -35,7 +35,12 @@ import { modifyAnyConfigWithSharedConfig } from "../sharedConfig";
 import { convertPromptBlockToSlashCommand } from "../../commands/slash/promptBlockSlashCommand";
 import { slashCommandFromPromptFile } from "../../commands/slash/promptFileSlashCommand";
 import { getControlPlaneEnvSync } from "../../control-plane/env";
+<<<<<<< HEAD
 import { getToolsForIde } from "../../tools";
+=======
+import { PolicySingleton } from "../../control-plane/PolicySingleton";
+import { getBaseToolDefinitions } from "../../tools";
+>>>>>>> upstream/sigmasauer07
 import { getCleanUriPath } from "../../util/uri";
 import { getAllDotContinueDefinitionFiles } from "../loadLocalAssistants";
 import { unrollLocalYamlBlocks } from "./loadLocalYamlBlocks";
@@ -415,6 +420,7 @@ async function configYamlToContinueConfig(options: {
 
   // Trigger MCP server refreshes (Config is reloaded again once connected!)
   const mcpManager = MCPManagerSingleton.getInstance();
+<<<<<<< HEAD
   mcpManager.setConnections(
     (config.mcpServers ?? []).map((server) => ({
       id: server.name,
@@ -429,6 +435,28 @@ async function configYamlToContinueConfig(options: {
     })),
     false,
   );
+=======
+  const orgPolicy = PolicySingleton.getInstance().policy;
+  if (orgPolicy?.policy?.allowMcpServers === false) {
+    await mcpManager.shutdown();
+  } else {
+    mcpManager.setConnections(
+      (config.mcpServers ?? []).map((server) => ({
+        id: server.name,
+        name: server.name,
+        sourceFile: server.sourceFile,
+        transport: {
+          type: "stdio",
+          args: [],
+          ...(server as any), // TODO: fix the types on mcpServers in config-yaml
+        },
+        timeout: server.connectionTimeout,
+      })),
+      false,
+      { ide },
+    );
+  }
+>>>>>>> upstream/sigmasauer07
 
   return { config: continueConfig, errors: localErrors };
 }

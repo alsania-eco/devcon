@@ -33,4 +33,41 @@ A unified VS Code IDE extension for AlsaniaMCP, Nyx, and Echo Registry tools.
 
 2. Launch VS Code with DevCon enabled.
 
+<<<<<<< HEAD
 3. DevCon queries Echo Registry for tools automatically.
+=======
+## Agent
+
+[Agent](https://docs.continue.dev/features/agent/quick-start) to work on development tasks together with AI
+
+![agent](docs/images/agent.gif)
+
+## Chat
+
+[Chat](https://docs.continue.dev/features/chat/quick-start) to ask general questions and clarify code sections
+
+![chat](docs/images/chat.gif)
+
+## Edit
+
+[Edit](https://docs.continue.dev/features/edit/quick-start) to modify a code section without leaving your current file
+
+![edit](docs/images/edit.gif)
+
+## Autocomplete
+
+[Autocomplete](https://docs.continue.dev/features/autocomplete/quick-start) to receive inline code suggestions as you type
+
+![autocomplete](docs/images/autocomplete.gif)
+
+</div>
+
+## Contributing
+
+Read the [contributing guide](https://github.com/continuedev/continue/blob/main/CONTRIBUTING.md), and
+join [#contribute on Discord](https://discord.gg/vapESyrFmJ).
+
+## License
+
+[Apache 2.0 © 2023-2024 Continue Dev, Inc.](./LICENSE)
+>>>>>>> upstream/sigmasauer07

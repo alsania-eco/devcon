@@ -33,11 +33,24 @@ curl -fsSL https://ollama.ai/install.sh | sh
 
 After installing Ollama, download the models you want to use. Here are some popular options:
 
+<<<<<<< HEAD
 ```
 # Popular models for development
 ollama pull mistral
 ollama pull qwen2.5-coder:1.5b-base
 ollama pull nomic-embed-text:latest
+=======
+```bash
+# Check Ollama version - verify it's installed
+ollama --version
+
+# Start Ollama (runs in background)
+ollama serve
+
+# Verify it's running
+curl http://localhost:11434
+# Should return "Ollama is running"
+>>>>>>> upstream/sigmasauer07
 ```
 
 ## Configuration

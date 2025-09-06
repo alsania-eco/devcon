@@ -18,8 +18,12 @@ CHANGELOG.md
 **/CODEOWNERS
 core/vendor
 coverage
+<<<<<<< HEAD
 e2e
 extensions/vscode/gui
 extensions/vscode/models
 extensions/intellij/src/main/resources
+=======
+# e2e
+>>>>>>> upstream/sigmasauer07
 packages/continue-sdk

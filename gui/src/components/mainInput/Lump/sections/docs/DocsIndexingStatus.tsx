@@ -147,6 +147,61 @@ function DocsIndexingStatus({
           </div>
         </div>
       </div>
+<<<<<<< HEAD
+=======
+
+      {status && (
+        <div
+          className={`flex flex-row items-center justify-between gap-2 text-sm`}
+        >
+          <p
+            style={{
+              fontSize: fontSize(-4),
+            }}
+            className={`m-0 line-clamp-1 p-0 text-left text-gray-400 ${isComplete ? "cursor-pointer hover:underline" : ""}`}
+            onClick={() => {
+              if (isComplete) {
+                showPagesList();
+              }
+            }}
+            data-tooltip-id={`docs-tooltip-${startUrlSlug}`}
+          >
+            {isComplete
+              ? indexedPages
+                ? `${indexedPages.length} page${indexedPages.length === 1 ? "" : "s"} indexed`
+                : "Loading site info..."
+              : status.description}
+          </p>
+        </div>
+      )}
+
+      {indexedPages && (
+        <ToolTip
+          isOpen={showTooltip}
+          setIsOpen={setShowTooltip}
+          clickable
+          delayShow={0}
+          openEvents={{
+            mouseenter: false,
+            click: true,
+          }}
+          closeEvents={{
+            blur: true,
+            mouseleave: false,
+            click: true,
+          }}
+          content={
+            <IndexedPagesTooltip
+              pages={indexedPages}
+              siteTitle={docConfig.title ?? docConfig.startUrl}
+              baseUrl={docConfig.startUrl}
+            />
+          }
+        >
+          <div data-tooltip-id={`docs-tooltip-${startUrlSlug}`} />
+        </ToolTip>
+      )}
+>>>>>>> upstream/sigmasauer07
     </div>
   );
 }

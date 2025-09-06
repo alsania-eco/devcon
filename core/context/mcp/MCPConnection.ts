@@ -1,11 +1,19 @@
 import { Client } from "@modelcontextprotocol/sdk/client/index.js";
+<<<<<<< HEAD
 import { Transport } from "@modelcontextprotocol/sdk/shared/transport.js";
 
 import { SSEClientTransport } from "@modelcontextprotocol/sdk/client/sse.js";
+=======
+import {
+  SSEClientTransport,
+  SseError,
+} from "@modelcontextprotocol/sdk/client/sse.js";
+>>>>>>> upstream/sigmasauer07
 import { StdioClientTransport } from "@modelcontextprotocol/sdk/client/stdio.js";
 import { StreamableHTTPClientTransport } from "@modelcontextprotocol/sdk/client/streamableHttp.js";
 import { WebSocketClientTransport } from "@modelcontextprotocol/sdk/client/websocket.js";
-
+import { Transport } from "@modelcontextprotocol/sdk/shared/transport.js";
+import { Agent as HttpsAgent } from "https";
 import {
   MCPConnectionStatus,
   MCPOptions,
@@ -347,6 +355,11 @@ class MCPConnection {
       case "websocket":
         return new WebSocketClientTransport(new URL(options.transport.url));
       case "sse":
+        const sseAgent =
+          options.transport.requestOptions?.verifySsl === false
+            ? new HttpsAgent({ rejectUnauthorized: false })
+            : undefined;
+
         return new SSEClientTransport(new URL(options.transport.url), {
           eventSourceInit: {
             fetch: (input, init) =>
@@ -358,17 +371,27 @@ class MCPConnection {
                     | Record<string, string>
                     | undefined),
                 },
+                ...(sseAgent && { agent: sseAgent }),
               }),
           },
-          requestInit: { headers: options.transport.requestOptions?.headers },
+          requestInit: {
+            headers: options.transport.requestOptions?.headers,
+            ...(sseAgent && { agent: sseAgent }),
+          },
         });
       case "streamable-http":
-        return new StreamableHTTPClientTransport(
-          new URL(options.transport.url),
-          {
-            requestInit: { headers: options.transport.requestOptions?.headers },
+        const { url, requestOptions } = options.transport;
+        const streamableAgent =
+          requestOptions?.verifySsl === false
+            ? new HttpsAgent({ rejectUnauthorized: false })
+            : undefined;
+
+        return new StreamableHTTPClientTransport(new URL(url), {
+          requestInit: {
+            headers: requestOptions?.headers,
+            ...(streamableAgent && { agent: streamableAgent }),
           },
-        );
+        });
       default:
         throw new Error(
           `Unsupported transport type: ${(options.transport as any).type}`,

@@ -300,8 +300,25 @@ export default async function doLoadConfig(options: {
     }
   });
 
+<<<<<<< HEAD
   newConfig.allowAnonymousTelemetry =
     newConfig.allowAnonymousTelemetry && (await ide.isTelemetryEnabled());
+=======
+  if (newConfig.allowAnonymousTelemetry !== false) {
+    if ((await ide.isTelemetryEnabled()) === false) {
+      newConfig.allowAnonymousTelemetry = false;
+    }
+  }
+
+  // Org policies
+  const policy = PolicySingleton.getInstance().policy?.policy;
+  if (policy?.allowAnonymousTelemetry === false) {
+    newConfig.allowAnonymousTelemetry = false;
+  }
+  if (policy?.allowCodebaseIndexing === false) {
+    newConfig.disableIndexing = true;
+  }
+>>>>>>> upstream/sigmasauer07
 
   // Setup telemetry only after (and if) we know it is enabled
   await Telemetry.setup(

@@ -1,5 +1,7 @@
 package com.github.continuedev.continueintellijextension.`continue`.process
 
+import com.github.continuedev.continueintellijextension.error.ContinuePostHogService
+import com.github.continuedev.continueintellijextension.error.ContinueSentryService
 import com.github.continuedev.continueintellijextension.proxy.ProxySettings
 import com.github.continuedev.continueintellijextension.error.ContinueSentryService
 import com.github.continuedev.continueintellijextension.error.ContinuePostHogService
@@ -34,9 +36,13 @@ class ContinueBinaryProcess(
         }
 
         val builder = ProcessBuilder(path)
+<<<<<<< HEAD
         val proxySettings = ProxySettings.getSettings()
         if (proxySettings.enabled)
             builder.environment() += "HTTP_PROXY" to proxySettings.proxy
+=======
+        builder.environment() += ProxySettings.getSettings().toContinueEnvVars()
+>>>>>>> upstream/sigmasauer07
         return builder
             .directory(File(path).parentFile)
             .start()

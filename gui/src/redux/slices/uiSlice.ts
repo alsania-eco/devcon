@@ -1,5 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RuleWithSource, Tool } from "core";
+<<<<<<< HEAD
+=======
+import { ToolPolicy } from "@continuedev/terminal-security";
+>>>>>>> upstream/sigmasauer07
 import { BUILT_IN_GROUP_NAME, BuiltInToolNames } from "core/tools/builtIn";
 import {
   defaultOnboardingCardState,

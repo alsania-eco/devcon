@@ -1088,7 +1088,19 @@ export interface Tool {
   faviconUrl?: string;
   group: string;
   originalFunctionName?: string;
+<<<<<<< HEAD
   systemMessageDescription?: string;
+=======
+  systemMessageDescription?: {
+    prefix: string;
+    exampleArgs?: Array<[string, string | number]>;
+  };
+  defaultToolPolicy?: ToolPolicy;
+  evaluateToolCallPolicy?: (
+    basePolicy: ToolPolicy,
+    parsedArgs: Record<string, unknown>,
+  ) => ToolPolicy;
+>>>>>>> upstream/sigmasauer07
 }
 
 interface ToolChoice {

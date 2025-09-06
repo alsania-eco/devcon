@@ -52,6 +52,7 @@
   "conventionalCommits.promptBody": false,
   "conventionalCommits.promptFooter": false,
   "conventionalCommits.promptScopes": true,
+<<<<<<< HEAD
   "conventionalCommits.scopes": ["reg"],
   "java.configuration.updateBuildConfiguration": "interactive",
   "mcpServer.port": 3006,
@@ -68,4 +69,10 @@
 
   "java.configuration.updateBuildConfiguration": "interactive",
   "githubPullRequests.ignoredPullRequestBranches": ["main"]
+=======
+  "conventionalCommits.scopes": [
+    "reg"
+  ],
+  "java.compile.nullAnalysis.mode": "automatic"
+>>>>>>> upstream/sigmasauer07
 }

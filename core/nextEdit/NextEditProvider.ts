@@ -18,6 +18,11 @@ import { AutocompleteDebouncer } from "../autocomplete/util/AutocompleteDebounce
 import AutocompleteLruCache from "../autocomplete/util/AutocompleteLruCache.js";
 import { HelperVars } from "../autocomplete/util/HelperVars.js";
 import { AutocompleteInput } from "../autocomplete/util/types.js";
+<<<<<<< HEAD
+=======
+import { isSecurityConcern } from "../indexing/ignore.js";
+import { modelSupportsNextEdit } from "../llm/autodetect.js";
+>>>>>>> upstream/sigmasauer07
 import { localPathOrUriToPath } from "../util/pathToUri.js";
 import { replaceEscapedCharacters } from "../util/text.js";
 import {
@@ -55,6 +60,14 @@ const ERRORS_TO_IGNORE = [
   "operation was aborted",
 ];
 
+/**
+ * This is the next edit analogue to autocomplete's CompletionProvider.
+ * You will see a lot of similar if not identical methods to CompletionProvider methods.
+ * All logic used to live inside this class, but that became untenable quickly.
+ * I moved a lot of the model-specific logic (prompt building, pre/post processing, etc.) to the BaseNextEditProvider and the children inheriting from it.
+ * Keeping this class around might be a good idea because it handles lots of delicate logic such as abort signals, chains, logging, etc.
+ * There being a singleton also gives a lot of guarantees about the state of the next edit state machine.
+ */
 export class NextEditProvider {
   private static instance: NextEditProvider | null = null;
 
@@ -71,7 +84,13 @@ export class NextEditProvider {
   private currentEditChainId: string | null = null;
   private previousRequest: AutocompleteInput | null = null;
   private previousCompletions: NextEditOutcome[] = [];
+<<<<<<< HEAD
   private nextEditableRegionsInTheCurrentChain: RangeInFile[] = [];
+=======
+
+  // Model-specific provider instance.
+  private modelProvider: BaseNextEditModelProvider | null = null;
+>>>>>>> upstream/sigmasauer07
 
   private constructor(
     private readonly configHandler: ConfigHandler,
@@ -220,13 +239,18 @@ export class NextEditProvider {
   public async deleteChain(): Promise<void> {
     this.currentEditChainId = null;
     this.previousCompletions = [];
+<<<<<<< HEAD
     this.nextEditableRegionsInTheCurrentChain = [];
+=======
+>>>>>>> upstream/sigmasauer07
 
     if (this.previousRequest) {
       const fileContent = (
         await this.ide.readFile(this.previousRequest.filepath)
       ).toString();
+
       const ast = await getAst(this.previousRequest.filepath, fileContent);
+
       if (ast) {
         DocumentHistoryTracker.getInstance().push(
           localPathOrUriToPath(this.previousRequest.filepath),
@@ -249,6 +273,9 @@ export class NextEditProvider {
     return this.previousCompletions.length === 1;
   }
 
+  /**
+   * This is the main entry point to this class.
+   */
   public async provideInlineCompletionItems(
     input: AutocompleteInput,
     token: AbortSignal | undefined,
@@ -514,6 +541,227 @@ export class NextEditProvider {
     }
   }
 
+<<<<<<< HEAD
+=======
+  private async _initializeCompletionRequest(
+    input: AutocompleteInput,
+    token: AbortSignal | undefined,
+  ): Promise<{
+    token: AbortSignal;
+    startTime: number;
+    helper: HelperVars | undefined;
+  }> {
+    // Create abort signal if not given
+    if (!token) {
+      const controller = this.loggingService.createAbortController(
+        input.completionId,
+      );
+      token = controller.signal;
+    } else {
+      // Token was provided externally, just track the completion.
+      this.loggingService.trackPendingCompletion(input.completionId);
+    }
+
+    const startTime = Date.now();
+    const options = await this._getAutocompleteOptions();
+
+    // Debounce
+    if (await this.debouncer.delayAndShouldDebounce(options.debounceDelay)) {
+      return { token, startTime, helper: undefined };
+    }
+
+    const llm = await this._prepareLlm();
+    if (!llm) {
+      return { token, startTime, helper: undefined };
+    }
+
+    // Update pending completion with model info.
+    this.loggingService.updatePendingCompletion(input.completionId, {
+      modelName: llm.model,
+      modelProvider: llm.providerName,
+      filepath: input.filepath,
+    });
+
+    // Check model capabilities
+    if (!modelSupportsNextEdit(llm.capabilities, llm.model, llm.title)) {
+      console.error(`${llm.model} is not capable of next edit.`);
+      return { token, startTime, helper: undefined };
+    }
+
+    if (llm.promptTemplates?.autocomplete) {
+      options.template = llm.promptTemplates.autocomplete as string;
+    }
+
+    const helper = await HelperVars.create(input, options, llm.model, this.ide);
+
+    if (await shouldPrefilter(helper, this.ide)) {
+      return { token, startTime, helper: undefined };
+    }
+
+    return { token, startTime, helper };
+  }
+
+  private async _generatePrompts(
+    helper: HelperVars,
+    opts?: {
+      withChain: boolean;
+      usingFullFileDiff: boolean;
+    },
+  ): Promise<{
+    editableRegionStartLine: number;
+    editableRegionEndLine: number;
+    prompts: Prompt[];
+  }> {
+    if (!this.modelProvider) {
+      throw new Error("Model provider not initialized");
+    }
+
+    // NOTE: getAllSnippetsWithoutRace doesn't seem to incur much performance penalties when compared to getAllSnippets.
+    // Use getAllSnippets if snippet gathering becomes noticably slow.
+    const [snippetPayload, workspaceDirs] = await Promise.all([
+      getAllSnippetsWithoutRace({
+        helper,
+        ide: this.ide,
+        getDefinitionsFromLsp: this.getDefinitionsFromLsp,
+        contextRetrievalService: this.contextRetrievalService,
+      }),
+      this.ide.getWorkspaceDirs(),
+    ]);
+
+    // Calculate editable region based on model and options.
+    const { editableRegionStartLine, editableRegionEndLine } =
+      this.modelProvider.calculateEditableRegion(
+        helper,
+        opts?.usingFullFileDiff ?? false,
+      );
+
+    // Build context for model-specific prompt generation.
+    const context: ModelSpecificContext = {
+      helper,
+      snippetPayload,
+      editableRegionStartLine,
+      editableRegionEndLine,
+      diffContext: this.diffContext,
+      autocompleteContext: this.autocompleteContext,
+      historyDiff: createDiff({
+        beforeContent:
+          DocumentHistoryTracker.getInstance().getMostRecentDocumentHistory(
+            localPathOrUriToPath(helper.filepath),
+          ) ?? "",
+        afterContent: helper.fileContents,
+        filePath: helper.filepath,
+        diffType: DiffFormatType.Unified,
+        contextLines: 3,
+      }),
+    };
+
+    const prompts = await this.modelProvider.generatePrompts(context);
+
+    this.promptMetadata = this.modelProvider.buildPromptMetadata(context);
+
+    return { editableRegionStartLine, editableRegionEndLine, prompts };
+  }
+
+  private async _handleCompletion(
+    helper: HelperVars,
+    prompts: Prompt[],
+    token: AbortSignal,
+    startTime: number,
+    editableRegionStartLine: number,
+    editableRegionEndLine: number,
+    opts?: {
+      withChain: boolean;
+      usingFullFileDiff: boolean;
+    },
+  ): Promise<NextEditOutcome | undefined> {
+    if (!this.modelProvider) {
+      throw new Error("Model provider not initialized");
+    }
+
+    const llm = await this._prepareLlm();
+    if (!llm) return undefined;
+
+    // Inject unique token if needed (for Mercury models).
+    if (this.modelProvider.shouldInjectUniqueToken()) {
+      const uniqueToken = this.modelProvider.getUniqueToken();
+      if (uniqueToken) {
+        const lastPrompt = prompts[prompts.length - 1];
+        if (lastPrompt && typeof lastPrompt.content === "string") {
+          lastPrompt.content += uniqueToken;
+        }
+      }
+    }
+
+    // Send prompts to LLM (using only user prompt for fine-tuned models).
+    // prompts[1] extracts the user prompt from the system-user prompt pair.
+    // NOTE: Stream is currently set to false, but this should ideally be a per-model flag.
+    // Mercury Coder currently does not support streaming.
+    const msg: ChatMessage = await llm.chat([prompts[1]], token, {
+      stream: false,
+    });
+
+    if (typeof msg.content !== "string") {
+      return undefined;
+    }
+
+    // Extract completion using model-specific logic.
+    const nextCompletion = this.modelProvider.extractCompletion(msg.content);
+
+    let outcome: NextEditOutcome | undefined;
+
+    // Handle based on diff type.
+    if (opts?.usingFullFileDiff === false || !opts?.usingFullFileDiff) {
+      outcome = await this.modelProvider.handlePartialFileDiff(
+        helper,
+        editableRegionStartLine,
+        editableRegionEndLine,
+        startTime,
+        llm,
+        nextCompletion,
+        this.promptMetadata!,
+        this.ide,
+      );
+    } else {
+      outcome = await this.modelProvider.handleFullFileDiff(
+        helper,
+        editableRegionStartLine,
+        editableRegionEndLine,
+        startTime,
+        llm,
+        nextCompletion,
+        this.promptMetadata!,
+        this.ide,
+      );
+    }
+
+    if (outcome) {
+      // Handle NextEditProvider-specific state.
+      this.previousCompletions.push(outcome);
+
+      // Mark as displayed for JetBrains
+      await this._markDisplayedIfJetBrains(helper.input.completionId, outcome);
+    }
+
+    return outcome;
+  }
+
+  private async _markDisplayedIfJetBrains(
+    completionId: string,
+    outcome: NextEditOutcome,
+  ): Promise<void> {
+    const ideType = (await this.ide.getIdeInfo()).ideType;
+    if (ideType === "jetbrains") {
+      this.markDisplayed(completionId, outcome);
+    }
+  }
+
+  /**
+   * This is a wrapper around provideInlineCompletionItems.
+   * This is invoked when we call the model in the background using prefetch.
+   * It's not currently used anywhere (references are not used either), but I decided to keep it in case we actually need to use prefetch.
+   * You will see that calls to this method is made from NextEditPrefetchQueue.proecss(), which is wrapped in `if (!this.usingFullFileDiff)`.
+   */
+>>>>>>> upstream/sigmasauer07
   public async provideInlineCompletionItemsWithChain(
     ctx: {
       completionId: string;

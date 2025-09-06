@@ -108,12 +108,38 @@ export function AssistantAndOrgListbox() {
       <div className="relative" ref={listboxRef}>
         <SelectedAssistantButton selectedProfile={selectedProfile} />
         <Transition>
+<<<<<<< HEAD
           <ListboxOptions className="-translate-x-1.5 pb-0">
             <div className="border-border border-x-0 border-t-0 border-solid px-2 py-3">
               <div className="flex flex-col gap-2 pb-1 pl-1">
                 {session && session?.AUTH_TYPE !== AuthType.OnPrem && (
                   <span className="text-description-muted flex items-center pb-1">
                     {session?.account.id}
+=======
+          <ListboxOptions
+            className="-translate-x-1.5 pb-0"
+            style={{ zIndex: 200 }}
+          >
+            <div className="border-border border-x-0 border-t-0 border-solid px-2 py-2">
+              <div className="flex flex-col gap-2 pl-1">
+                {session ? (
+                  <span className="text-description-muted flex items-center justify-between gap-x-1">
+                    {session?.AUTH_TYPE !== AuthType.OnPrem &&
+                      session?.account.id}
+                    <ToolTip content="Logout">
+                      <ArrowRightStartOnRectangleIcon
+                        className="h-3 w-3 cursor-pointer hover:brightness-125"
+                        onClick={onLogout}
+                      />
+                    </ToolTip>
+                  </span>
+                ) : (
+                  <span
+                    className="text-description-muted flex cursor-pointer items-center justify-end gap-x-1 hover:brightness-125"
+                    onClick={() => login(false)}
+                  >
+                    Log In <ArrowRightEndOnRectangleIcon className="h-3 w-3" />
+>>>>>>> upstream/sigmasauer07
                   </span>
                 )}
                 {shouldRenderOrgInfo && (
@@ -152,9 +178,10 @@ export function AssistantAndOrgListbox() {
                 value="reload-assistant"
                 fontSizeModifier={-2}
                 className="border-border border-b px-2 py-1.5"
-                onClick={() =>
-                  refreshProfiles("Manual refresh from assistant list")
-                }
+                onClick={(e: React.MouseEvent) => {
+                  e.stopPropagation();
+                  refreshProfiles("Manual refresh from assistant list");
+                }}
               >
                 <span
                   className="text-description flex flex-row items-center"

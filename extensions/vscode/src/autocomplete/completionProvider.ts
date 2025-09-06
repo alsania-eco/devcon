@@ -129,6 +129,24 @@ export class ContinueCompletionProvider
     return config.selectedModelByRole.rerank ?? undefined;
   }
 
+<<<<<<< HEAD
+=======
+  /**
+   * Updates this class and the prefetch queue's usingFullFileDiff flag.
+   * @param usingFullFileDiff New value to set.
+   */
+  public updateUsingFullFileDiff(usingFullFileDiff: boolean) {
+    this.usingFullFileDiff = usingFullFileDiff;
+    this.prefetchQueue.initialize(this.usingFullFileDiff);
+  }
+
+  /**
+   * This is the entry point to the autocomplete and next edit logic.
+   * @param document The text document containing the current cursor position.
+   * @param position The current cursor position.
+   * @param context Contextual information about the inline completion request.
+   */
+>>>>>>> upstream/sigmasauer07
   public async provideInlineCompletionItems(
     document: vscode.TextDocument,
     position: vscode.Position,
@@ -136,6 +154,20 @@ export class ContinueCompletionProvider
     token: vscode.CancellationToken,
     //@ts-ignore
   ): ProviderResult<InlineCompletionItem[] | InlineCompletionList> {
+<<<<<<< HEAD
+=======
+    // This method is triggered on every keystroke, tab keypress, and cursor move.
+    // We need to determine why it was triggered:
+    // 1. Typing (chain doesn't exist)
+    // 2. Jumping (chain exists, jump was taken)
+    // 3. Accepting (chain exists, jump is not taken)
+
+    /* START OF CONTEXT GATHERING BOILERPLATE */
+
+    // The code in this block is meant for gathering context for autocomplete and next edit requests.
+    // e.g. filepath, cursor position, editor, notebook-ness, etc.
+
+>>>>>>> upstream/sigmasauer07
     const enableTabAutocomplete =
       getStatusBarStatus() === StatusBarStatus.Enabled;
     if (token.isCancellationRequested || !enableTabAutocomplete) {
@@ -245,6 +277,7 @@ export class ContinueCompletionProvider
         this.nextEditProvider.getNextEditableRegionsInTheCurrentChainLength(),
       );
 
+<<<<<<< HEAD
       if (this.nextEditProvider.chainExists()) {
         // The chain of edits is alive because the user has accepted the previous completion.
         // Get the next editable region and set the pos to be within that range.
@@ -263,6 +296,139 @@ export class ContinueCompletionProvider
           );
       } else {
         // If the user has rejected, then we start a new chain of edits.
+=======
+      /* END OF CONTEXT GATHERING BOILERPLATE */
+
+      /* START OF MODEL OUTCOME RECEIVING BLOCK */
+
+      // Throughout this function, we choose whether we want an autocomplete or a next edit request.
+      // The conditional logic below is pretty convoluted, so it would be a good idea to refactor.
+      // The idea was to re-use as much code as possible, but in hindsight I should've just made different functions.
+      // this.isNextEditActive is the boolean that determines whether we use autocomplete vs. next edit.
+
+      // You will also see mentions of this.usingFullFileDiff.
+      // This was initially a flag for whether we should let the model output a full file as an output (or to the best of its abilities).
+      // It ended up becoming a Mercury Coder vs. non-Mercury Coder flag, and is now used to determine whether we should prefetch next edits.
+      // This is a good place to refactor on.
+      // In the future, it will be desirable to have a map where we split models into different next edit requirements and capabilities,
+      // Then use the model's name to retrieve all of its requirements (or better yet, have a model-specific logic inside children class).
+
+      // Prefetching is also a relic of the past.
+      // Before, I envisioned that we should call the model in the background to get next next edits.
+      // Due to subpar results, lack of satisfactory next edit location suggestion algorithms and token cost/latency issues, I scratched the idea.
+
+      let outcome: AutocompleteOutcome | NextEditOutcome | undefined;
+
+      // TODO: We can probably decide here if we want to do the jumping logic.
+      // If we aren't going to jump anyways, then we should be not be using the prefetch queue or the jump manager.
+      // It would simplify the logic quite substantially.
+
+      // Here, we introduce the concept of jumping and chains.
+      // Jump and chain are next edit-specific concepts, and autocomplete has nothing to do with it.
+      // Next edit is rendered to the users in three modes:
+      // 1. Default. This is the case where the user either hasn't seen a next edit suggestion, or has rejected the previous one.
+      // We would render either a ghost text or an SVG with deletion decoration.
+
+      // 2. Jumping. This is the case where the user has just accepted a suggestion, and there are more suggestions in the chain to jump to.
+      // We would render a Jump label suggesting the user to take the jump or reject.
+
+      // 3. Jumped. This is when the user just accepted the jump.
+      // We grab the next edit suggestion from the chain and render that instead of calling the model.
+
+      // Determine why this method was triggered.
+      const isJumping = this.jumpManager.isJumpInProgress();
+      const chainExists = this.nextEditProvider.chainExists();
+      console.log("isJumping:", isJumping, "/ chainExists:", chainExists);
+      this.prefetchQueue.peekThreeProcessed();
+
+      if (isJumping && chainExists) {
+        // Case 2: Jumping (chain exists, jump was taken)
+        console.log("trigger reason: jumping");
+
+        // Reset jump state.
+        this.jumpManager.setJumpInProgress(false);
+
+        // Use the saved completion from JumpManager instead of dequeuing.
+        const savedCompletion = this.jumpManager.completionAfterJump;
+        if (savedCompletion) {
+          outcome = savedCompletion.outcome;
+          this.jumpManager.clearCompletionAfterJump();
+        } else {
+          // Fall back to prefetch queue. This technically should not happen.
+          console.error(
+            "Fell back to prefetch queue even after jump was taken",
+          );
+          outcome = this.prefetchQueue.dequeueProcessed()?.outcome;
+
+          // Fill in the spot after dequeuing.
+          if (!this.usingFullFileDiff) {
+            this.prefetchQueue.process({
+              ...ctx,
+              recentlyVisitedRanges: this.recentlyVisitedRanges.getSnippets(),
+              recentlyEditedRanges:
+                await this.recentlyEditedTracker.getRecentlyEditedRanges(),
+            });
+          }
+        }
+      } else if (chainExists) {
+        // Case 3: Accepting next edit outcome (chain exists, jump is not taken).
+        console.log("trigger reason: accepting");
+
+        // Try suggesting jump for each location.
+        let isJumpSuggested = false;
+
+        while (this.prefetchQueue.processedCount > 0 && !isJumpSuggested) {
+          const nextItemInQueue = this.prefetchQueue.dequeueProcessed();
+          if (!nextItemInQueue) continue;
+
+          // Fill in the spot after dequeuing.
+          if (!this.usingFullFileDiff) {
+            this.prefetchQueue.process({
+              ...ctx,
+              recentlyVisitedRanges: this.recentlyVisitedRanges.getSnippets(),
+              recentlyEditedRanges:
+                await this.recentlyEditedTracker.getRecentlyEditedRanges(),
+            });
+          }
+
+          const nextLocation = nextItemInQueue.location;
+          outcome = nextItemInQueue.outcome;
+
+          const jumpPosition = new vscode.Position(
+            nextLocation.range.start.line,
+            nextLocation.range.start.character,
+          );
+
+          isJumpSuggested = await this.jumpManager.suggestJump(
+            currCursorPos,
+            jumpPosition,
+            outcome.completion,
+          );
+
+          if (isJumpSuggested) {
+            // Store completion to be rendered after a jump.
+            this.jumpManager.setCompletionAfterJump({
+              completionId: completionId,
+              outcome,
+              currentPosition: jumpPosition,
+            });
+
+            // Don't display anything yet. This will be handled in Case 2.
+            // Recall from above that provideInlineCompletions runs on every cursor movement.
+            return undefined;
+          }
+        }
+
+        if (!isJumpSuggested) {
+          console.log(
+            "No suitable jump location found after trying all positions",
+          );
+          this.nextEditProvider.deleteChain();
+          return undefined;
+        }
+      } else {
+        // Case 1: Typing (chain does not exist).
+>>>>>>> upstream/sigmasauer07
         this.nextEditProvider.startChain();
 
         const input: AutocompleteInput = {
@@ -288,6 +454,7 @@ export class ContinueCompletionProvider
             { withChain: false },
           );
 
+<<<<<<< HEAD
           if (!outcome || !outcome.completion) {
             // Hitting this condition means that the model could not predict a next edit action.
             // That happens when the user's recent edit is good enough, or if the model is totally lost.
@@ -310,6 +477,26 @@ export class ContinueCompletionProvider
                 },
                 signal,
               );
+=======
+          // Start prefetching next edits if not using full file diff.
+          // NOTE: this is better off not awaited. fire and forget.
+          if (!this.usingFullFileDiff) {
+            this.prefetchQueue.process(ctx);
+          }
+
+          // If initial outcome is null, suggest a jump instead.
+          // Calling this method again will call it with chain active but jump not suggested yet.
+          if (
+            !outcome ||
+            (!outcome.completion && outcome.diffLines.length === 0)
+          ) {
+            return this.provideInlineCompletionItems(
+              document,
+              position,
+              context,
+              token,
+            );
+>>>>>>> upstream/sigmasauer07
           }
         } else {
           // Handle autocomplete request.
@@ -353,8 +540,8 @@ export class ContinueCompletionProvider
         return null;
       }
 
-      // Marking the outcome as displayed saves the current outcome
-      // as a value of the key completionId.
+      // Marking the outcome as displayed saves the current outcome as a value of the key completionId.
+      // NOTE: It seems like autocomplete relies on this to be considered accepted.
       if (this.isNextEditActive) {
         this.nextEditProvider.markDisplayed(
           completionId,
@@ -367,6 +554,15 @@ export class ContinueCompletionProvider
         );
       }
       this._lastShownCompletion = outcome;
+
+      /* END OF MODEL OUTCOME RECEIVING BLOCK */
+
+      /* START OF RENDERING BLOCK */
+
+      // Here we determine how to render the outcome received in the previous block.
+      // We check whether the outcome is a FIM completion or not.
+      // If FIM, we render a ghost text, and an SVG + deletion decoration if not.
+      // If we are using autocomplete instead of next edit, we just render a ghost text.
 
       // Construct the range/text to show
       const startPos = selectedCompletionInfo?.range.start ?? position;
@@ -415,8 +611,33 @@ export class ContinueCompletionProvider
 
       (autocompleteCompletionItem as any).completeBracketPairs = true;
 
+<<<<<<< HEAD
       const editor = vscode.window.activeTextEditor;
       if (!editor) {
+=======
+      // Handle autocomplete request.
+      if (!this.isNextEditActive) {
+        return [autocompleteCompletionItem];
+      }
+
+      // Check the diff between old and new editable region.
+      const newEditRangeSlice = completionText;
+
+      // Get the contents of the old (current) editable region.
+      const editableRegionStartLine = (outcome as NextEditOutcome)
+        .editableRegionStartLine;
+      const editableRegionEndLine = (outcome as NextEditOutcome)
+        .editableRegionEndLine;
+      const oldEditRangeSlice = editor.document
+        .getText()
+        .split("\n")
+        .slice(editableRegionStartLine, editableRegionEndLine + 1)
+        .join("\n");
+
+      // We don't need to show the next edit window if the predicted edits are identical to the previous version.
+      if (oldEditRangeSlice === newEditRangeSlice) {
+        this.nextEditLoggingService.cancelRejectionTimeout(completionId);
+>>>>>>> upstream/sigmasauer07
         return undefined;
       }
 
@@ -498,10 +719,21 @@ export class ContinueCompletionProvider
           return undefined;
         }
 
+<<<<<<< HEAD
         // Get the contents of the old (current) editable region.
         const editableRegionStartLine = Math.max(
           currCursorPos.line - NEXT_EDIT_EDITABLE_REGION_TOP_MARGIN,
           0,
+=======
+        // Track this ghost text for acceptance detection.
+        // Ghost text acceptance can *technically* be acted upon in the command handler for "continue.logNextEditOutcomeAccept".
+        // However, there is a substantial delay between accepting and logging, which introduces a lot of race conditions with different event handlers.
+        // Plus, separating these concerns seems to make sense logically as well.
+        GhostTextAcceptanceTracker.getInstance().setExpectedGhostTextAcceptance(
+          document,
+          fimText,
+          new vscode.Position(currCursorPos.line, currCursorPos.character),
+>>>>>>> upstream/sigmasauer07
         );
         const editableRegionEndLine = Math.min(
           currCursorPos.line + NEXT_EDIT_EDITABLE_REGION_BOTTOM_MARGIN,
@@ -598,6 +830,8 @@ export class ContinueCompletionProvider
     } finally {
       stopStatusBarLoading();
     }
+
+    /* END OF RENDERING BLOCK */
   }
 
   willDisplay(

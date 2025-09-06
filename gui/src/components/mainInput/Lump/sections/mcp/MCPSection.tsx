@@ -12,6 +12,7 @@ import { useAuth } from "../../../../../context/Auth";
 import { IdeMessengerContext } from "../../../../../context/IdeMessenger";
 import { useAppDispatch, useAppSelector } from "../../../../../redux/hooks";
 import { updateConfig } from "../../../../../redux/slices/configSlice";
+import { selectCurrentOrg } from "../../../../../redux/slices/profilesSlice";
 import { fontSize } from "../../../../../util";
 import { ToolTip } from "../../../../gui/Tooltip";
 import EditBlockButton from "../../EditBlockButton";
@@ -25,10 +26,13 @@ function MCPServerPreview({ server, serverFromYaml }: MCPServerStatusProps) {
   const ideMessenger = useContext(IdeMessengerContext);
   const config = useAppSelector((store) => store.config.config);
   const dispatch = useAppDispatch();
+<<<<<<< HEAD
   const toolsTooltipId = `${server.id}-tools`;
   const promptsTooltipId = `${server.id}-prompts`;
   const resourcesTooltipId = `${server.id}-resources`;
   const errorsTooltipId = `${server.id}-errors`;
+=======
+>>>>>>> upstream/sigmasauer07
 
   async function onRefresh() {
     // optimistic config update
@@ -63,75 +67,137 @@ function MCPServerPreview({ server, serverFromYaml }: MCPServerStatusProps) {
 
         {/* Error indicator if any */}
         {server.errors.length ? (
-          <>
+          <ToolTip
+            clickable
+            delayHide={
+              server.errors.some((error) => error.length > 150) ? 1500 : 0
+            }
+            className="flex flex-col gap-0.5"
+            content={server.errors.map((error, idx) => (
+              <Fragment key={idx}>
+                <div>
+                  {error.length > 150 ? error.substring(0, 150) + "..." : error}
+                </div>
+                {error.length > 150 && (
+                  <Button
+                    className="my-0"
+                    size="sm"
+                    variant="ghost"
+                    onClick={() =>
+                      void ideMessenger.ide.showVirtualFile(server.name, error)
+                    }
+                  >
+                    View full error
+                  </Button>
+                )}
+              </Fragment>
+            ))}
+          >
             <InformationCircleIcon
               className={`h-3 w-3 ${server.status === "error" ? "text-red-500" : "text-yellow-500"}`}
-              data-tooltip-id={errorsTooltipId}
             />
+<<<<<<< HEAD
             <ToolTip id={errorsTooltipId} className="flex flex-col gap-0.5">
               {server.errors.map((error, idx) => (
                 <code key={idx}>{error}</code>
               ))}
             </ToolTip>
           </>
+=======
+          </ToolTip>
+>>>>>>> upstream/sigmasauer07
         ) : null}
 
         {/* Tools, Prompts, Resources with counts */}
         <div className="flex flex-row items-center gap-3">
-          <div
-            className="flex cursor-zoom-in items-center gap-1 hover:opacity-80"
-            data-tooltip-id={toolsTooltipId}
+          <ToolTip
+            className="flex flex-col gap-0.5"
+            content={
+              <>
+                {server.tools.map((tool, idx) => (
+                  <code key={idx}>{tool.name}</code>
+                ))}
+                {server.tools.length === 0 && (
+                  <span className="text-lightgray">No tools</span>
+                )}
+              </>
+            }
           >
-            <WrenchScrewdriverIcon className="h-3 w-3" />
-            <span className="text-xs">{server.tools.length}</span>
-            <ToolTip id={toolsTooltipId} className="flex flex-col gap-0.5">
-              {server.tools.map((tool, idx) => (
-                <code key={idx}>{tool.name}</code>
-              ))}
-              {server.tools.length === 0 && (
-                <span className="text-lightgray">No tools</span>
-              )}
-            </ToolTip>
-          </div>
-          <div
-            className="flex cursor-zoom-in items-center gap-1 hover:opacity-80"
-            data-tooltip-id={promptsTooltipId}
+            <div className="flex cursor-zoom-in items-center gap-1 hover:opacity-80">
+              <WrenchScrewdriverIcon className="h-3 w-3" />
+              <span className="text-xs">{server.tools.length}</span>
+            </div>
+          </ToolTip>
+
+          <ToolTip
+            className="flex flex-col gap-0.5"
+            content={
+              <>
+                {server.prompts.map((prompt, idx) => (
+                  <code key={idx}>{prompt.name}</code>
+                ))}
+                {server.prompts.length === 0 && (
+                  <span className="text-lightgray">No prompts</span>
+                )}
+              </>
+            }
           >
-            <CommandLineIcon className="h-3 w-3" />
-            <span className="text-xs">{server.prompts.length}</span>
-            <ToolTip id={promptsTooltipId} className="flex flex-col gap-0.5">
-              {server.prompts.map((prompt, idx) => (
-                <code key={idx}>{prompt.name}</code>
-              ))}
-              {server.prompts.length === 0 && (
-                <span className="text-lightgray">No prompts</span>
-              )}
-            </ToolTip>
-          </div>
-          <div
-            className="flex cursor-zoom-in items-center gap-1 hover:opacity-80"
-            data-tooltip-id={resourcesTooltipId}
+            <div className="flex cursor-zoom-in items-center gap-1 hover:opacity-80">
+              <CommandLineIcon className="h-3 w-3" />
+              <span className="text-xs">{server.prompts.length}</span>
+            </div>
+          </ToolTip>
+
+          <ToolTip
+            className="flex flex-col gap-0.5"
+            content={
+              <>
+                {[...server.resources, ...server.resourceTemplates].map(
+                  (resource, idx) => (
+                    <code key={idx}>{resource.name}</code>
+                  ),
+                )}
+                {server.resources.length === 0 && (
+                  <span className="text-lightgray">No resources</span>
+                )}
+              </>
+            }
           >
-            <CircleStackIcon className="h-3 w-3" />
-            <span className="text-xs">
-              {server.resources.length + server.resourceTemplates.length}
-            </span>
-            <ToolTip id={resourcesTooltipId} className="flex flex-col gap-0.5">
-              {[...server.resources, ...server.resourceTemplates].map(
-                (resource, idx) => (
-                  <code key={idx}>{resource.name}</code>
-                ),
-              )}
-              {server.resources.length === 0 && (
-                <span className="text-lightgray">No resources</span>
-              )}
-            </ToolTip>
-          </div>
+            <div className="flex cursor-zoom-in items-center gap-1 hover:opacity-80">
+              <CircleStackIcon className="h-3 w-3" />
+              <span className="text-xs">
+                {server.resources.length + server.resourceTemplates.length}
+              </span>
+            </div>
+          </ToolTip>
         </div>
       </div>
 
       {/* Refresh button */}
       <div className="flex items-center gap-2">
+<<<<<<< HEAD
+=======
+        {server.isProtectedResource && (
+          <ToolTip
+            place="left"
+            hidden={server.status === "authenticating"}
+            content={server.status === "error" ? "Authenticate" : "Logout"}
+          >
+            <div className="text-lightgray flex cursor-pointer items-center hover:text-white hover:opacity-80">
+              {server.status === "error" ? (
+                <ShieldExclamationIcon
+                  className="h-3 w-3"
+                  onClick={onAuthenticate}
+                />
+              ) : server.status === "authenticating" ? (
+                <GlobeAltIcon className="animate-spin-slow h-3 w-3" />
+              ) : (
+                <ShieldCheckIcon className="h-3 w-3" onClick={onRemoveAuth} />
+              )}
+            </div>
+          </ToolTip>
+        )}
+>>>>>>> upstream/sigmasauer07
         <EditBlockButton
           blockType={"mcpServers"}
           block={serverFromYaml}
@@ -163,10 +229,12 @@ function MCPServerPreview({ server, serverFromYaml }: MCPServerStatusProps) {
 }
 
 function MCPSection() {
+  const currentOrg = useAppSelector(selectCurrentOrg);
   const servers = useAppSelector(
     (store) => store.config.config.mcpServerStatuses,
   );
   const { selectedProfile } = useAuth();
+  const disableMcp = currentOrg?.policy?.allowMcpServers === false;
 
   const mergedBlocks = useMemo(() => {
     const parsed = selectedProfile?.rawYaml
@@ -177,6 +245,16 @@ function MCPSection() {
       blockFromYaml: parsed?.mcpServers?.[index],
     }));
   }, [servers, selectedProfile]);
+
+  if (disableMcp) {
+    return (
+      <div className="flex flex-col items-center justify-center p-2">
+        <span className="text-description">
+          MCP servers are disabled in your organization
+        </span>
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col gap-1">

@@ -241,10 +241,15 @@
               "guides/overview",
               "guides/understanding-assistants",
               "guides/cli",
+              "guides/continuous-ai",
               "guides/plan-mode-guide",
               "guides/ollama-guide",
+<<<<<<< HEAD
               "guides/llama3.1",
               "guides/set-up-codestral",
+=======
+              "guides/instinct",
+>>>>>>> upstream/sigmasauer07
               "guides/running-continue-without-internet",
               "guides/custom-code-rag",
               "guides/build-your-own-context-provider",

@@ -43,10 +43,21 @@ class ContinueProcessHandler(
         }
         scope.launch(Dispatchers.IO) {
             for (message in pendingWrites) {
+<<<<<<< HEAD
                 log.debug("Write: $message")
                 writer.write(message)
                 writer.write("\r\n")
                 writer.flush()
+=======
+                try {
+                    log.debug("Write: $message")
+                    writer.write(message)
+                    writer.write("\r\n")
+                    writer.flush()
+                } catch (e: IOException) {
+                    log.warn(e)
+                }
+>>>>>>> upstream/sigmasauer07
             }
         }
     }

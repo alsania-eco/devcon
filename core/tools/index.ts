@@ -18,6 +18,7 @@ import { viewRepoMapTool } from "./definitions/viewRepoMap";
 import { viewSubdirectoryTool } from "./definitions/viewSubdirectory";
 
 // I'm writing these as functions because we've messed up 3 TIMES by pushing to const, causing duplicate tool definitions on subsequent config loads.
+<<<<<<< HEAD
 
 // missing support for remote os calls: https://github.com/microsoft/vscode/issues/252269
 const getLocalOnlyToolDefinitions = () => [grepSearchTool];
@@ -33,6 +34,20 @@ const getBaseToolDefinitions = () => [
   lsTool,
   createRuleBlock,
   fetchUrlContentTool,
+=======
+export const getBaseToolDefinitions = () => [
+  toolDefinitions.readFileTool,
+
+  toolDefinitions.createNewFileTool,
+  toolDefinitions.runTerminalCommandTool,
+  toolDefinitions.globSearchTool,
+  toolDefinitions.viewDiffTool,
+  toolDefinitions.readCurrentlyOpenFileTool,
+  toolDefinitions.lsTool,
+  toolDefinitions.createRuleBlock,
+  toolDefinitions.fetchUrlContentTool,
+  toolDefinitions.singleFindAndReplaceTool,
+>>>>>>> upstream/sigmasauer07
 ];
 
 export const getConfigDependentToolDefinitions = (
@@ -48,7 +63,39 @@ export const getConfigDependentToolDefinitions = (
     : []),
 ];
 
+<<<<<<< HEAD
 export const getToolsForIde = async (ide: IDE): Promise<Tool[]> =>
   (await ide.isWorkspaceRemote())
     ? getBaseToolDefinitions()
     : [...getBaseToolDefinitions(), ...getLocalOnlyToolDefinitions()];
+=======
+  tools.push(toolDefinitions.requestRuleTool(params));
+
+  if (isSignedIn) {
+    // Web search is only available for signed-in users
+    tools.push(toolDefinitions.searchWebTool);
+  }
+
+  if (enableExperimentalTools) {
+    tools.push(
+      toolDefinitions.viewRepoMapTool,
+      toolDefinitions.viewSubdirectoryTool,
+      toolDefinitions.codebaseTool,
+      toolDefinitions.readFileRangeTool,
+    );
+  }
+
+  if (modelName?.includes("claude") || modelName?.includes("gpt-5")) {
+    tools.push(toolDefinitions.multiEditTool);
+  } else {
+    tools.push(toolDefinitions.editFileTool);
+  }
+
+  // missing support for remote os calls: https://github.com/microsoft/vscode/issues/252269
+  if (!isRemote) {
+    tools.push(toolDefinitions.grepSearchTool);
+  }
+
+  return tools;
+};
+>>>>>>> upstream/sigmasauer07

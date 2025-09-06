@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+import { ToolPolicy } from "@continuedev/terminal-security";
+>>>>>>> upstream/sigmasauer07
 import { BuiltInToolNames } from "core/tools/builtIn";
 import {
   clearToolPolicy,

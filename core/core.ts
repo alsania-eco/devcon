@@ -590,6 +590,67 @@ export class Core {
     on("nextEdit/reject", async (msg) => {
       this.nextEditProvider.reject(msg.data.completionId);
     });
+<<<<<<< HEAD
+=======
+    on("nextEdit/startChain", async (msg) => {
+      console.log("nextEdit/startChain");
+      NextEditProvider.getInstance().startChain();
+      return;
+    });
+
+    on("nextEdit/deleteChain", async (msg) => {
+      console.log("nextEdit/deleteChain");
+      await NextEditProvider.getInstance().deleteChain();
+      return;
+    });
+
+    on("nextEdit/isChainAlive", async (msg) => {
+      console.log("nextEdit/isChainAlive");
+      return NextEditProvider.getInstance().chainExists();
+    });
+
+    on("nextEdit/queue/getProcessedCount", async (msg) => {
+      console.log("nextEdit/queue/getProcessedCount");
+      const queue = PrefetchQueue.getInstance();
+      console.log(queue.processedCount);
+      return queue.processedCount;
+    });
+
+    on("nextEdit/queue/dequeueProcessed", async (msg) => {
+      console.log("nextEdit/queue/dequeueProcessed");
+      const queue = PrefetchQueue.getInstance();
+      return queue.dequeueProcessed() || null;
+    });
+
+    // NOTE: This is not used unless prefetch is used.
+    // At this point this is not used because I opted to rely on the model to return multiple diffs than to use prefetching.
+    on("nextEdit/queue/processOne", async (msg) => {
+      console.log("nextEdit/queue/processOne");
+      const { ctx, recentlyVisitedRanges, recentlyEditedRanges } = msg.data;
+      const queue = PrefetchQueue.getInstance();
+
+      await queue.process({
+        ...ctx,
+        recentlyVisitedRanges,
+        recentlyEditedRanges,
+      });
+      return;
+    });
+
+    on("nextEdit/queue/clear", async (msg) => {
+      console.log("nextEdit/queue/clear");
+      const queue = PrefetchQueue.getInstance();
+      queue.clear();
+      return;
+    });
+
+    on("nextEdit/queue/abort", async (msg) => {
+      console.log("nextEdit/queue/abort");
+      const queue = PrefetchQueue.getInstance();
+      queue.abort();
+      return;
+    });
+>>>>>>> upstream/sigmasauer07
 
     on("streamDiffLines", async (msg) => {
       const { config } = await this.configHandler.loadConfig();
@@ -897,6 +958,37 @@ export class Core {
 
     on("tools/call", async ({ data: { toolCall } }) =>
       this.handleToolCall(toolCall),
+    );
+
+    on(
+      "tools/evaluatePolicy",
+      async ({ data: { toolName, basePolicy, args } }) => {
+        const { config } = await this.configHandler.loadConfig();
+        if (!config) {
+          throw new Error("Config not loaded");
+        }
+
+        const tool = config.tools.find((t) => t.function.name === toolName);
+        if (!tool) {
+          // Tool not found, return base policy
+          return { policy: basePolicy };
+        }
+
+        // Extract display value for specific tools
+        let displayValue: string | undefined;
+        if (toolName === "runTerminalCommand" && args.command) {
+          displayValue = args.command as string;
+        }
+
+        // If tool has evaluateToolCallPolicy function, use it
+        if (tool.evaluateToolCallPolicy) {
+          const evaluatedPolicy = tool.evaluateToolCallPolicy(basePolicy, args);
+          return { policy: evaluatedPolicy, displayValue };
+        }
+
+        // Otherwise return base policy unchanged
+        return { policy: basePolicy, displayValue };
+      },
     );
 
     on("isItemTooBig", async ({ data: { item } }) => {

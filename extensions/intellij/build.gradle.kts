@@ -57,10 +57,29 @@ intellijPlatform {
             sinceBuild = pluginSinceBuild
         }
     }
+    publishing {
+        token = environment("PUBLISH_TOKEN")
+        hidden = true
+        val channel = if (isEap) "eap" else "default"
+        channels = listOf(channel)
+    }
+    signing {
+        certificateChain = environment("CERTIFICATE_CHAIN")
+        privateKey = environment("PRIVATE_KEY")
+        password = environment("PRIVATE_KEY_PASSWORD")
+    }
     pluginVerification {
         ides {
+<<<<<<< HEAD
             ide("IC", "2025.1.4")
             ide("IC", "2022.3.3")
+=======
+            create("IC", "2025.2")
+            create("IC", "2025.1")
+            create("IC", "2024.3")
+            create("IC", "2024.2")
+            create("IC", "2024.1")
+>>>>>>> upstream/sigmasauer07
         }
     }
 }
@@ -123,19 +142,6 @@ tasks {
             .substringBefore("<!-- Plugin description end -->")
             .let(::markdownToHTML)
         check(pluginDescription.get().isNotEmpty()) { "Plugin description section not found in README.md" }
-    }
-
-    signPlugin {
-        certificateChain = environment("CERTIFICATE_CHAIN")
-        privateKey = environment("PRIVATE_KEY")
-        password = environment("PRIVATE_KEY_PASSWORD")
-    }
-
-    publishPlugin {
-        token = environment("PUBLISH_TOKEN")
-
-        val channel = if (isEap) "eap" else "default"
-        channels = listOf(channel)
     }
 
     runIde {

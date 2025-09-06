@@ -196,6 +196,7 @@ class IntelliJIDE(
         return getContinueGlobalPath()
     }
 
+<<<<<<< HEAD
     override suspend fun openFile(path: String) {
         // Convert URI path to absolute file path
         val filePath = UriUtils.uriToFile(path).absolutePath
@@ -210,6 +211,12 @@ class IntelliJIDE(
             }
         }
     }
+=======
+    override suspend fun openFile(path: String) =
+        withContext(Dispatchers.EDT) {
+            fileUtils.openFile(path)
+        }
+>>>>>>> upstream/sigmasauer07
 
     override suspend fun openUrl(url: String) {
         withContext(Dispatchers.IO) {

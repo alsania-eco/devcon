@@ -5,7 +5,6 @@ import { Telemetry } from "core/util/posthog";
 import * as vscode from "vscode";
 
 import { VsCodeExtension } from "../extension/VsCodeExtension";
-import registerQuickFixProvider from "../lang-server/codeActions";
 import { getExtensionVersion, isUnsupportedPlatform } from "../util/util";
 
 import { VsCodeContinueApi } from "./api";
@@ -37,7 +36,6 @@ export async function activateExtension(context: vscode.ExtensionContext) {
   getContinueRcPath();
 
   // Register commands and providers
-  registerQuickFixProvider();
   setupInlineTips(context);
 
   const vscodeExtension = new VsCodeExtension(context);
