@@ -301,6 +301,7 @@ export default async function doLoadConfig(options: {
   });
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   newConfig.allowAnonymousTelemetry =
     newConfig.allowAnonymousTelemetry && (await ide.isTelemetryEnabled());
 =======
@@ -319,6 +320,10 @@ export default async function doLoadConfig(options: {
     newConfig.disableIndexing = true;
   }
 >>>>>>> upstream/sigmasauer07
+=======
+  newConfig.allowAnonymousTelemetry =
+    newConfig.allowAnonymousTelemetry && (await ide.isTelemetryEnabled());
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
 
   // Setup telemetry only after (and if) we know it is enabled
   await Telemetry.setup(

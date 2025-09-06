@@ -176,6 +176,9 @@ export class ConfigHandler {
     const isSignedIn = await this.controlPlaneClient.isSignedIn();
     if (isSignedIn) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
       const orgDescs = await this.controlPlaneClient.listOrganizations();
       const orgs = await Promise.all([
         this.getPersonalHubOrg(),
@@ -184,6 +187,7 @@ export class ConfigHandler {
       return orgs;
     } else {
       return [await this.getLocalOrg()];
+<<<<<<< HEAD
 =======
       try {
         // TODO use policy returned with org, not policy endpoint
@@ -233,6 +237,8 @@ export class ConfigHandler {
         errors,
       };
 >>>>>>> upstream/sigmasauer07
+=======
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
     }
   }
 

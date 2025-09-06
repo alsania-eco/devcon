@@ -83,6 +83,7 @@ export class GlobalActions {
     }
   }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
   static async setNextEditEnabled(enabled: boolean) {
@@ -154,4 +155,6 @@ export class GlobalActions {
     await this.setNextEditEnabled(false);
   }
 >>>>>>> upstream/sigmasauer07
+=======
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
 }

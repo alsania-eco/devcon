@@ -306,6 +306,7 @@ export function StepContainerPreToolbar({
 
   return (
 <<<<<<< HEAD
+<<<<<<< HEAD
     <div className="outline-command-border -outline-offset-0.5 rounded-default bg-editor mb-2 mt-2 flex min-w-0 flex-col outline outline-1">
 =======
     <div className="outline-command-border -outline-offset-0.5 rounded-default bg-editor !my-2 flex min-w-0 flex-col outline outline-1">
@@ -319,6 +320,9 @@ export function StepContainerPreToolbar({
         </div>
       )}
 >>>>>>> upstream/sigmasauer07
+=======
+    <div className="outline-command-border -outline-offset-0.5 rounded-default bg-editor mb-2 mt-2 flex min-w-0 flex-col outline outline-1">
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
       <div
         className={`find-widget-skip bg-editor sticky -top-2 z-10 m-0 flex items-center justify-between gap-3 px-1.5 py-1 ${isExpanded ? "rounded-t-default border-command-border border-b" : "rounded-default"}`}
         style={{ fontSize: `${getFontSize() - 2}px` }}

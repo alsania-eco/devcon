@@ -1089,6 +1089,7 @@ export interface Tool {
   group: string;
   originalFunctionName?: string;
 <<<<<<< HEAD
+<<<<<<< HEAD
   systemMessageDescription?: string;
 =======
   systemMessageDescription?: {
@@ -1101,6 +1102,9 @@ export interface Tool {
     parsedArgs: Record<string, unknown>,
   ) => ToolPolicy;
 >>>>>>> upstream/sigmasauer07
+=======
+  systemMessageDescription?: string;
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
 }
 
 interface ToolChoice {

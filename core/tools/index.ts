@@ -19,6 +19,9 @@ import { viewSubdirectoryTool } from "./definitions/viewSubdirectory";
 
 // I'm writing these as functions because we've messed up 3 TIMES by pushing to const, causing duplicate tool definitions on subsequent config loads.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
 
 // missing support for remote os calls: https://github.com/microsoft/vscode/issues/252269
 const getLocalOnlyToolDefinitions = () => [grepSearchTool];
@@ -34,6 +37,7 @@ const getBaseToolDefinitions = () => [
   lsTool,
   createRuleBlock,
   fetchUrlContentTool,
+<<<<<<< HEAD
 =======
 export const getBaseToolDefinitions = () => [
   toolDefinitions.readFileTool,
@@ -48,6 +52,8 @@ export const getBaseToolDefinitions = () => [
   toolDefinitions.fetchUrlContentTool,
   toolDefinitions.singleFindAndReplaceTool,
 >>>>>>> upstream/sigmasauer07
+=======
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
 ];
 
 export const getConfigDependentToolDefinitions = (
@@ -64,10 +70,14 @@ export const getConfigDependentToolDefinitions = (
 ];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
 export const getToolsForIde = async (ide: IDE): Promise<Tool[]> =>
   (await ide.isWorkspaceRemote())
     ? getBaseToolDefinitions()
     : [...getBaseToolDefinitions(), ...getLocalOnlyToolDefinitions()];
+<<<<<<< HEAD
 =======
   tools.push(toolDefinitions.requestRuleTool(params));
 
@@ -99,3 +109,5 @@ export const getToolsForIde = async (ide: IDE): Promise<Tool[]> =>
   return tools;
 };
 >>>>>>> upstream/sigmasauer07
+=======
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92

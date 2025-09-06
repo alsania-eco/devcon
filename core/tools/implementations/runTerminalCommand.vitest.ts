@@ -361,6 +361,7 @@ describe("runTerminalCommandImpl", () => {
     expect(result[0].content).toBe("Command is running in the background...");
     expect(result[0].status).toBe("Command is running in the background...");
   });
+<<<<<<< HEAD:core/tools/implementations/runTerminalCommand.vitest.ts
 <<<<<<< HEAD:core/tools/implementations/runTerminalCommand.test.ts
 =======
 
@@ -605,4 +606,6 @@ describe("runTerminalCommandTool.evaluateToolCallPolicy", () => {
 
     expect(result).toBe("allowedWithPermission");
   });
+=======
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92:core/tools/implementations/runTerminalCommand.test.ts
 });

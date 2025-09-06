@@ -591,6 +591,7 @@ export class Core {
       this.nextEditProvider.reject(msg.data.completionId);
     });
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     on("nextEdit/startChain", async (msg) => {
       console.log("nextEdit/startChain");
@@ -651,6 +652,8 @@ export class Core {
       return;
     });
 >>>>>>> upstream/sigmasauer07
+=======
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
 
     on("streamDiffLines", async (msg) => {
       const { config } = await this.configHandler.loadConfig();

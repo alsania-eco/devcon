@@ -148,6 +148,7 @@ function DocsIndexingStatus({
         </div>
       </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
       {status && (
@@ -202,6 +203,8 @@ function DocsIndexingStatus({
         </ToolTip>
       )}
 >>>>>>> upstream/sigmasauer07
+=======
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
     </div>
   );
 }

@@ -1,7 +1,10 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 import { ToolPolicy } from "@continuedev/terminal-security";
 >>>>>>> upstream/sigmasauer07
+=======
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
 import { BuiltInToolNames } from "core/tools/builtIn";
 import {
   clearToolPolicy,

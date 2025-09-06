@@ -48,6 +48,7 @@ export class MCPManagerSingleton {
     this.connections.delete(id);
   }
 
+<<<<<<< HEAD
   async shutdown() {
     if (this.connections.size > 0) {
       await Promise.allSettled(
@@ -63,6 +64,8 @@ export class MCPManagerSingleton {
     }
   }
 
+=======
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
   setConnections(servers: MCPOptions[], forceRefresh: boolean) {
     let refresh = false;
 

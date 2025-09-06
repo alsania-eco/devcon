@@ -43,6 +43,9 @@ function StatusIcon({ status }: StatusIconProps) {
 
 export function RunTerminalCommand(props: RunTerminalCommandToolCallProps) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
   const dispatch = useAppDispatch();
 
   // Find the terminal output from context items if available

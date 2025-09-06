@@ -31,8 +31,11 @@ function MCPServerPreview({ server, serverFromYaml }: MCPServerStatusProps) {
   const promptsTooltipId = `${server.id}-prompts`;
   const resourcesTooltipId = `${server.id}-resources`;
   const errorsTooltipId = `${server.id}-errors`;
+<<<<<<< HEAD
 =======
 >>>>>>> upstream/sigmasauer07
+=======
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
 
   async function onRefresh() {
     // optimistic config update
@@ -97,6 +100,9 @@ function MCPServerPreview({ server, serverFromYaml }: MCPServerStatusProps) {
               className={`h-3 w-3 ${server.status === "error" ? "text-red-500" : "text-yellow-500"}`}
             />
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
             <ToolTip id={errorsTooltipId} className="flex flex-col gap-0.5">
               {server.errors.map((error, idx) => (
                 <code key={idx}>{error}</code>
@@ -176,6 +182,7 @@ function MCPServerPreview({ server, serverFromYaml }: MCPServerStatusProps) {
       {/* Refresh button */}
       <div className="flex items-center gap-2">
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         {server.isProtectedResource && (
           <ToolTip
@@ -198,6 +205,8 @@ function MCPServerPreview({ server, serverFromYaml }: MCPServerStatusProps) {
           </ToolTip>
         )}
 >>>>>>> upstream/sigmasauer07
+=======
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
         <EditBlockButton
           blockType={"mcpServers"}
           block={serverFromYaml}

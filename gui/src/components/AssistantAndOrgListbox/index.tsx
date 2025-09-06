@@ -109,12 +109,16 @@ export function AssistantAndOrgListbox() {
         <SelectedAssistantButton selectedProfile={selectedProfile} />
         <Transition>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
           <ListboxOptions className="-translate-x-1.5 pb-0">
             <div className="border-border border-x-0 border-t-0 border-solid px-2 py-3">
               <div className="flex flex-col gap-2 pb-1 pl-1">
                 {session && session?.AUTH_TYPE !== AuthType.OnPrem && (
                   <span className="text-description-muted flex items-center pb-1">
                     {session?.account.id}
+<<<<<<< HEAD
 =======
           <ListboxOptions
             className="-translate-x-1.5 pb-0"
@@ -140,6 +144,8 @@ export function AssistantAndOrgListbox() {
                   >
                     Log In <ArrowRightEndOnRectangleIcon className="h-3 w-3" />
 >>>>>>> upstream/sigmasauer07
+=======
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
                   </span>
                 )}
                 {shouldRenderOrgInfo && (

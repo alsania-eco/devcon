@@ -42,8 +42,13 @@
     "extensions/vscode/e2e/_output": true,
     "extensions/vscode/e2e/storage": true,
     "extensions/vscode/e2e/vsix": true,
+<<<<<<< HEAD
     "extensions/.continue-debug": true,
     "sync/**": true
+=======
+    "extensions/.continue-debug": true
+    // "sync/**": true
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
   },
   "editor.formatOnSave": true,
   "eslint.workingDirectories": ["./core"],
@@ -65,6 +70,7 @@
     "claude-desktop": true
   },
   "mcp-client.serversConfigurationFileType": "custom",
+<<<<<<< HEAD
   "github.copilot.chat.newWorkspace.useContext7": true,
 
   "java.configuration.updateBuildConfiguration": "interactive",
@@ -75,4 +81,9 @@
   ],
   "java.compile.nullAnalysis.mode": "automatic"
 >>>>>>> upstream/sigmasauer07
+=======
+  "github.copilot.chat.newWorkspace.useContext7": true
+=======
+  "java.configuration.updateBuildConfiguration": "interactive"
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
 }

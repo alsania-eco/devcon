@@ -1,5 +1,6 @@
 import { createAsyncThunk, unwrapResult } from "@reduxjs/toolkit";
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { LLMFullCompletionOptions, ModelDescription, Tool } from "core";
 =======
 import {
@@ -10,6 +11,9 @@ import {
 } from "core";
 import { ToolPolicy } from "@continuedev/terminal-security";
 >>>>>>> upstream/sigmasauer07
+=======
+import { LLMFullCompletionOptions, ModelDescription, Tool } from "core";
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
 import { getRuleId } from "core/llm/rules/getSystemMessageWithRules";
 import { ToCoreProtocol } from "core/protocol";
 import { BuiltInToolNames } from "core/tools/builtIn";
@@ -41,6 +45,7 @@ import { interceptSystemToolCalls } from "core/tools/systemMessageTools/intercep
 import { selectCurrentToolCalls } from "../selectors/selectToolCalls";
 import { getBaseSystemMessage } from "../util/getBaseSystemMessage";
 import { callToolById } from "./callToolById";
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 import { enhanceParsedArgs } from "./enhanceParsedArgs";
@@ -101,6 +106,8 @@ async function evaluateToolPolicy(
 }
 
 >>>>>>> upstream/sigmasauer07
+=======
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
 /**
  * Handles the execution of tool calls that may be automatically accepted.
  * Sets all tools as generated first, then executes auto-approved tool calls.
@@ -109,6 +116,9 @@ async function handleToolCallExecution(
   dispatch: AppThunkDispatch,
   getState: () => RootState,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
 ): Promise<void> {
 =======
   activeTools: Tool[],
@@ -136,6 +146,7 @@ async function handleToolCallExecution(
     (toolCallState) =>
       toolSettings[toolCallState.toolCall.function.name] ===
       "allowedWithoutPermission",
+<<<<<<< HEAD
 =======
   // Check if ALL tool calls are auto-approved using dynamic evaluation
   const policyResults = await Promise.all(
@@ -148,6 +159,8 @@ async function handleToolCallExecution(
       ),
     ),
 >>>>>>> upstream/sigmasauer07
+=======
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
   );
 
   // Handle disabled tool calls and set others as generated
@@ -210,6 +223,49 @@ async function handleToolCallExecution(
   }
 
   return allAutoApproved;
+}
+
+/**
+ * Filters tools based on the selected model's capabilities.
+ * Returns either the edit file tool or search and replace tool, but not both.
+ */
+function filterToolsForModel(
+  tools: Tool[],
+  selectedModel: ModelDescription,
+): Tool[] {
+  const editFileTool = tools.find(
+    (tool) => tool.function.name === BuiltInToolNames.EditExistingFile,
+  );
+  const searchAndReplaceTool = tools.find(
+    (tool) => tool.function.name === BuiltInToolNames.SearchAndReplaceInFile,
+  );
+
+  // If we don't have both tools, return tools as-is
+  if (!editFileTool || !searchAndReplaceTool) {
+    return tools;
+  }
+
+  // Determine which tool to use based on the model
+  const shouldUseFindReplace = shouldUseFindReplaceEdits(selectedModel);
+
+  // Filter out the unwanted tool
+  return tools.filter((tool) => {
+    if (tool.function.name === BuiltInToolNames.EditExistingFile) {
+      return !shouldUseFindReplace;
+    }
+    if (tool.function.name === BuiltInToolNames.SearchAndReplaceInFile) {
+      return shouldUseFindReplace;
+    }
+    return true;
+  });
+}
+
+/**
+ * Determines whether to use search and replace tool instead of edit file
+ * Right now we only know that this is reliable with Claude models
+ */
+function shouldUseFindReplaceEdits(model: ModelDescription): boolean {
+  return model.model.includes("claude");
 }
 
 /**
@@ -415,6 +471,7 @@ export const streamNormalInput = createAsyncThunk<
     const toolSettings = newState.ui.toolSettings;
     const allToolCallStates = selectCurrentToolCalls(newState);
 <<<<<<< HEAD
+<<<<<<< HEAD
     const generatingToolCalls = allToolCallStates.filter(
       (toolCallState) => toolCallState.status === "generating",
     );
@@ -465,5 +522,29 @@ export const streamNormalInput = createAsyncThunk<
       dispatch(setInactive());
     }
 >>>>>>> upstream/sigmasauer07
+=======
+    const generatingToolCalls = allToolCallStates.filter(
+      (toolCallState) => toolCallState.status === "generating",
+    );
+
+    // Check if ALL generating tool calls are auto-approved
+    const allAutoApproved =
+      generatingToolCalls.length > 0 &&
+      generatingToolCalls.every(
+        (toolCallState) =>
+          toolSettings[toolCallState.toolCall.function.name] ===
+          "allowedWithoutPermission",
+      );
+
+    // Only set inactive if:
+    // 1. There are no tool calls, OR
+    // 2. There are tool calls but they require manual approval
+    // This prevents UI flashing for auto-approved tools while still showing approval UI for others
+    if (generatingToolCalls.length === 0 || !allAutoApproved) {
+      dispatch(setInactive());
+    }
+
+    await handleToolCallExecution(dispatch, getState);
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
   },
 );

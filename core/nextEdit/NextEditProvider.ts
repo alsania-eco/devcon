@@ -19,10 +19,13 @@ import AutocompleteLruCache from "../autocomplete/util/AutocompleteLruCache.js";
 import { HelperVars } from "../autocomplete/util/HelperVars.js";
 import { AutocompleteInput } from "../autocomplete/util/types.js";
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 import { isSecurityConcern } from "../indexing/ignore.js";
 import { modelSupportsNextEdit } from "../llm/autodetect.js";
 >>>>>>> upstream/sigmasauer07
+=======
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
 import { localPathOrUriToPath } from "../util/pathToUri.js";
 import { replaceEscapedCharacters } from "../util/text.js";
 import {
@@ -85,12 +88,16 @@ export class NextEditProvider {
   private previousRequest: AutocompleteInput | null = null;
   private previousCompletions: NextEditOutcome[] = [];
 <<<<<<< HEAD
+<<<<<<< HEAD
   private nextEditableRegionsInTheCurrentChain: RangeInFile[] = [];
 =======
 
   // Model-specific provider instance.
   private modelProvider: BaseNextEditModelProvider | null = null;
 >>>>>>> upstream/sigmasauer07
+=======
+  private nextEditableRegionsInTheCurrentChain: RangeInFile[] = [];
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
 
   private constructor(
     private readonly configHandler: ConfigHandler,
@@ -240,9 +247,13 @@ export class NextEditProvider {
     this.currentEditChainId = null;
     this.previousCompletions = [];
 <<<<<<< HEAD
+<<<<<<< HEAD
     this.nextEditableRegionsInTheCurrentChain = [];
 =======
 >>>>>>> upstream/sigmasauer07
+=======
+    this.nextEditableRegionsInTheCurrentChain = [];
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
 
     if (this.previousRequest) {
       const fileContent = (
@@ -542,6 +553,7 @@ export class NextEditProvider {
   }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
   private async _initializeCompletionRequest(
     input: AutocompleteInput,
@@ -762,6 +774,8 @@ export class NextEditProvider {
    * You will see that calls to this method is made from NextEditPrefetchQueue.proecss(), which is wrapped in `if (!this.usingFullFileDiff)`.
    */
 >>>>>>> upstream/sigmasauer07
+=======
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
   public async provideInlineCompletionItemsWithChain(
     ctx: {
       completionId: string;

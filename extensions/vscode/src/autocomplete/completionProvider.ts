@@ -130,6 +130,7 @@ export class ContinueCompletionProvider
   }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
   /**
    * Updates this class and the prefetch queue's usingFullFileDiff flag.
@@ -147,6 +148,8 @@ export class ContinueCompletionProvider
    * @param context Contextual information about the inline completion request.
    */
 >>>>>>> upstream/sigmasauer07
+=======
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
   public async provideInlineCompletionItems(
     document: vscode.TextDocument,
     position: vscode.Position,
@@ -154,6 +157,7 @@ export class ContinueCompletionProvider
     token: vscode.CancellationToken,
     //@ts-ignore
   ): ProviderResult<InlineCompletionItem[] | InlineCompletionList> {
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
     // This method is triggered on every keystroke, tab keypress, and cursor move.
@@ -168,6 +172,8 @@ export class ContinueCompletionProvider
     // e.g. filepath, cursor position, editor, notebook-ness, etc.
 
 >>>>>>> upstream/sigmasauer07
+=======
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
     const enableTabAutocomplete =
       getStatusBarStatus() === StatusBarStatus.Enabled;
     if (token.isCancellationRequested || !enableTabAutocomplete) {
@@ -276,6 +282,7 @@ export class ContinueCompletionProvider
         ", next regions queue:",
         this.nextEditProvider.getNextEditableRegionsInTheCurrentChainLength(),
       );
+<<<<<<< HEAD
 
 <<<<<<< HEAD
       if (this.nextEditProvider.chainExists()) {
@@ -429,6 +436,27 @@ export class ContinueCompletionProvider
       } else {
         // Case 1: Typing (chain does not exist).
 >>>>>>> upstream/sigmasauer07
+=======
+
+      if (this.nextEditProvider.chainExists()) {
+        // The chain of edits is alive because the user has accepted the previous completion.
+        // Get the next editable region and set the pos to be within that range.
+        outcome =
+          await this.nextEditProvider.provideInlineCompletionItemsWithChain(
+            {
+              completionId,
+              manuallyPassFileContents,
+              manuallyPassPrefix,
+              selectedCompletionInfo,
+              isUntitledFile: document.isUntitled,
+              recentlyVisitedRanges,
+              recentlyEditedRanges,
+            },
+            signal,
+          );
+      } else {
+        // If the user has rejected, then we start a new chain of edits.
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
         this.nextEditProvider.startChain();
 
         const input: AutocompleteInput = {
@@ -455,6 +483,9 @@ export class ContinueCompletionProvider
           );
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
           if (!outcome || !outcome.completion) {
             // Hitting this condition means that the model could not predict a next edit action.
             // That happens when the user's recent edit is good enough, or if the model is totally lost.
@@ -463,6 +494,7 @@ export class ContinueCompletionProvider
             // We also need to use the user's edits to create a user edits section in renderPrompt.
             recentlyEditedRanges =
               await this.recentlyEditedTracker.getRecentlyEditedRanges();
+<<<<<<< HEAD
 
             outcome =
               await this.nextEditProvider.provideInlineCompletionItemsWithChain(
@@ -497,6 +529,22 @@ export class ContinueCompletionProvider
               token,
             );
 >>>>>>> upstream/sigmasauer07
+=======
+
+            outcome =
+              await this.nextEditProvider.provideInlineCompletionItemsWithChain(
+                {
+                  completionId,
+                  manuallyPassFileContents,
+                  manuallyPassPrefix,
+                  selectedCompletionInfo,
+                  isUntitledFile: document.isUntitled,
+                  recentlyVisitedRanges,
+                  recentlyEditedRanges,
+                },
+                signal,
+              );
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
           }
         } else {
           // Handle autocomplete request.
@@ -612,6 +660,7 @@ export class ContinueCompletionProvider
       (autocompleteCompletionItem as any).completeBracketPairs = true;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       const editor = vscode.window.activeTextEditor;
       if (!editor) {
 =======
@@ -638,6 +687,10 @@ export class ContinueCompletionProvider
       if (oldEditRangeSlice === newEditRangeSlice) {
         this.nextEditLoggingService.cancelRejectionTimeout(completionId);
 >>>>>>> upstream/sigmasauer07
+=======
+      const editor = vscode.window.activeTextEditor;
+      if (!editor) {
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
         return undefined;
       }
 
@@ -720,10 +773,14 @@ export class ContinueCompletionProvider
         }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
         // Get the contents of the old (current) editable region.
         const editableRegionStartLine = Math.max(
           currCursorPos.line - NEXT_EDIT_EDITABLE_REGION_TOP_MARGIN,
           0,
+<<<<<<< HEAD
 =======
         // Track this ghost text for acceptance detection.
         // Ghost text acceptance can *technically* be acted upon in the command handler for "continue.logNextEditOutcomeAccept".
@@ -734,6 +791,8 @@ export class ContinueCompletionProvider
           fimText,
           new vscode.Position(currCursorPos.line, currCursorPos.character),
 >>>>>>> upstream/sigmasauer07
+=======
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
         );
         const editableRegionEndLine = Math.min(
           currCursorPos.line + NEXT_EDIT_EDITABLE_REGION_BOTTOM_MARGIN,

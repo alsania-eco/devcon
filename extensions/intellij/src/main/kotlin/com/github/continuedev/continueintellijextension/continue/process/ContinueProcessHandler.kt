@@ -44,6 +44,9 @@ class ContinueProcessHandler(
         scope.launch(Dispatchers.IO) {
             for (message in pendingWrites) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
                 log.debug("Write: $message")
                 writer.write(message)
                 writer.write("\r\n")

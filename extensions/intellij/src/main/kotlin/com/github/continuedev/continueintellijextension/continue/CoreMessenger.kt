@@ -23,10 +23,14 @@ class CoreMessenger(
     private val responseListeners = mutableMapOf<String, (Any?) -> Unit>()
     private var process = startContinueProcess()
 <<<<<<< HEAD
+<<<<<<< HEAD
     private val log = Logger.getInstance(CoreMessenger::class.java)
 =======
     private val log = Logger.getInstance(CoreMessenger::class.java.simpleName)
 >>>>>>> upstream/sigmasauer07
+=======
+    private val log = Logger.getInstance(CoreMessenger::class.java)
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
 
     fun request(messageType: String, data: Any?, messageId: String?, onResponse: (Any?) -> Unit) {
         val id = messageId ?: uuid()

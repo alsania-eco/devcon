@@ -197,6 +197,9 @@ class IntelliJIDE(
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
     override suspend fun openFile(path: String) {
         // Convert URI path to absolute file path
         val filePath = UriUtils.uriToFile(path).absolutePath
@@ -211,12 +214,15 @@ class IntelliJIDE(
             }
         }
     }
+<<<<<<< HEAD
 =======
     override suspend fun openFile(path: String) =
         withContext(Dispatchers.EDT) {
             fileUtils.openFile(path)
         }
 >>>>>>> upstream/sigmasauer07
+=======
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
 
     override suspend fun openUrl(url: String) {
         withContext(Dispatchers.IO) {

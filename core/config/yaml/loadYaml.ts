@@ -36,11 +36,15 @@ import { convertPromptBlockToSlashCommand } from "../../commands/slash/promptBlo
 import { slashCommandFromPromptFile } from "../../commands/slash/promptFileSlashCommand";
 import { getControlPlaneEnvSync } from "../../control-plane/env";
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { getToolsForIde } from "../../tools";
 =======
 import { PolicySingleton } from "../../control-plane/PolicySingleton";
 import { getBaseToolDefinitions } from "../../tools";
 >>>>>>> upstream/sigmasauer07
+=======
+import { getToolsForIde } from "../../tools";
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
 import { getCleanUriPath } from "../../util/uri";
 import { getAllDotContinueDefinitionFiles } from "../loadLocalAssistants";
 import { unrollLocalYamlBlocks } from "./loadLocalYamlBlocks";

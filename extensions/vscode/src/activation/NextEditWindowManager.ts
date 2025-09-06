@@ -716,9 +716,12 @@ export class NextEditWindowManager {
 <<<<<<< HEAD
     // Create a position that's offset spaces to the right of the cursor.
 
+<<<<<<< HEAD
 =======
     // Place decoration at the end of the current line
 >>>>>>> upstream/sigmasauer07
+=======
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
     const line = editor.document.lineAt(position.line);
     const offsetChar = Math.min(
       position.character + SVG_CONFIG.cursorOffset,

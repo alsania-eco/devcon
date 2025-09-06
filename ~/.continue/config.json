@@ -15,9 +15,15 @@
   ],
   "models": [
     {
+<<<<<<< HEAD
       "title": "Echo-Cloud",
       "provider": "alsania",
       "model": "echo-cloud",
+=======
+      "title": "Echo-001",
+      "provider": "alsania",
+      "model": "echo-001",
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
       "mcpServer": "alsaniamcp",
       "maxTokens": 30000,
       "temperature": 0.7,
@@ -35,6 +41,7 @@
       }
     }
   ],
+<<<<<<< HEAD
   "defaultModel": "echo-cloud",
   "contextProviders": [
     {
@@ -43,6 +50,16 @@
         "title": "Echo-Cloud Context",
         "description": "Get context from AlsaniaMCP backend",
         "displayTitle": "Echo-Cloud"
+=======
+  "defaultModel": "echo-001",
+  "contextProviders": [
+    {
+      "name": "Echo-001",
+      "params": {
+        "title": "Echo-001 Context",
+        "description": "Get context from AlsaniaMCP backend",
+        "displayTitle": "Echo-001"
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
       }
     },
     {
@@ -56,7 +73,11 @@
     }
   ],
   "rules": [
+<<<<<<< HEAD
     "You are Echo, a helpful AI assistant connected to the AlsaniaMCP backend.",
+=======
+    "You are AlsaniaMCP, a helpful AI assistant connected to the AlsaniaMCP backend.",
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
     "Always provide clear and concise responses.",
     "When asked about your capabilities, mention that you're connected to the AlsaniaMCP backend running on localhost:8050.",
     "Use the AlsaniaMCP backend for all chat interactions and context retrieval.",
@@ -71,14 +92,22 @@
     "apiBase": "https://api.mistral.ai/v1",
     "model": "mamba-codestral-7b-v0.1-instruct-python_coding_assistant",
     "temperature": 0.7,
+<<<<<<< HEAD
     "stream": true
+=======
+    "stream": false
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
   },
   "agent": {
     "provider": "openai",
     "apiBase": "https://api.openai.com/v1",
     "model": "gpt-3.5-turbo-0613",
     "temperature": 0.7,
+<<<<<<< HEAD
     "stream": true
+=======
+    "stream": false
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
   },
   "extensions": [
     {

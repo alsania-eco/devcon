@@ -37,12 +37,18 @@ class ContinueBinaryProcess(
 
         val builder = ProcessBuilder(path)
 <<<<<<< HEAD
+<<<<<<< HEAD
         val proxySettings = ProxySettings.getSettings()
         if (proxySettings.enabled)
             builder.environment() += "HTTP_PROXY" to proxySettings.proxy
 =======
         builder.environment() += ProxySettings.getSettings().toContinueEnvVars()
 >>>>>>> upstream/sigmasauer07
+=======
+        val proxySettings = ProxySettings.getSettings()
+        if (proxySettings.enabled)
+            builder.environment() += "HTTP_PROXY" to proxySettings.proxy
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
         return builder
             .directory(File(path).parentFile)
             .start()

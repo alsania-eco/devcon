@@ -52,6 +52,7 @@ export class JumpManager {
   }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
   private _createSvgJumpIcon() {
     const baseTextConfig = {
@@ -112,6 +113,8 @@ export class JumpManager {
   }
 
 >>>>>>> upstream/sigmasauer07
+=======
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
   public async suggestJump(
     currentPosition: vscode.Position,
     nextJumpLocation: vscode.Position,
@@ -277,6 +280,9 @@ export class JumpManager {
 
     // Create a decoration for jump.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
     this._jumpDecoration = vscode.window.createTextEditorDecorationType({
       before: {
         contentText: "🦘 Press Tab to jump, Esc to cancel",
@@ -285,11 +291,14 @@ export class JumpManager {
         margin: `0 0 0 4px`,
       },
     });
+<<<<<<< HEAD
 =======
     if (!this._jumpDecoration) {
       this._createSvgJumpIcon(); // makes both the icon & decoration
     }
 >>>>>>> upstream/sigmasauer07
+=======
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
 
     // Apply the decoration.
     const lastIndexOfLine = editor.document.lineAt(lineToRenderOn).text.length;

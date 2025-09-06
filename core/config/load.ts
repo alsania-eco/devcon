@@ -63,12 +63,16 @@ import {
 import { localPathToUri } from "../util/pathToUri";
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { getToolsForIde } from "../tools";
 =======
 import { PolicySingleton } from "../control-plane/PolicySingleton";
 import CustomContextProviderClass from "../context/providers/CustomContextProvider";
 import { getBaseToolDefinitions } from "../tools";
 >>>>>>> upstream/sigmasauer07
+=======
+import { getToolsForIde } from "../tools";
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
 import { resolveRelativePathInDir } from "../util/ideUtils";
 import { getWorkspaceRcConfigs } from "./json/loadRcConfigs";
 import { modifyAnyConfigWithSharedConfig } from "./sharedConfig";

@@ -34,6 +34,7 @@ A unified VS Code IDE extension for AlsaniaMCP, Nyx, and Echo Registry tools.
 2. Launch VS Code with DevCon enabled.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 3. DevCon queries Echo Registry for tools automatically.
 =======
 ## Agent
@@ -71,3 +72,6 @@ join [#contribute on Discord](https://discord.gg/vapESyrFmJ).
 
 [Apache 2.0 © 2023-2024 Continue Dev, Inc.](./LICENSE)
 >>>>>>> upstream/sigmasauer07
+=======
+3. DevCon queries Echo Registry for tools automatically.
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92

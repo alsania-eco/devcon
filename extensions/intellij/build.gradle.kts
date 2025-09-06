@@ -71,6 +71,7 @@ intellijPlatform {
     pluginVerification {
         ides {
 <<<<<<< HEAD
+<<<<<<< HEAD
             ide("IC", "2025.1.4")
             ide("IC", "2022.3.3")
 =======
@@ -80,6 +81,10 @@ intellijPlatform {
             create("IC", "2024.2")
             create("IC", "2024.1")
 >>>>>>> upstream/sigmasauer07
+=======
+            ide("IC", "2025.1.4")
+            ide("IC", "2022.3.3")
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
         }
     }
 }

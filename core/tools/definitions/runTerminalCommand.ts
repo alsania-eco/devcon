@@ -2,6 +2,7 @@ import os from "os";
 import { Tool } from "../..";
 import { BUILT_IN_GROUP_NAME, BuiltInToolNames } from "../builtIn";
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { createSystemMessageExampleCall } from "../systemMessageTools/buildToolsSystemMessage";
 =======
 import {
@@ -9,6 +10,9 @@ import {
   ToolPolicy,
 } from "@continuedev/terminal-security";
 >>>>>>> upstream/sigmasauer07
+=======
+import { createSystemMessageExampleCall } from "../systemMessageTools/buildToolsSystemMessage";
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
 
 /**
  * Get the preferred shell for the current platform
@@ -64,6 +68,7 @@ export const runTerminalCommandTool: Tool = {
     },
   },
 <<<<<<< HEAD
+<<<<<<< HEAD
   systemMessageDescription: createSystemMessageExampleCall(
     BuiltInToolNames.RunTerminalCommand,
     `To run a terminal command, use the ${BuiltInToolNames.RunTerminalCommand} tool
@@ -81,6 +86,11 @@ export const runTerminalCommandTool: Tool = {
   systemMessageDescription: {
     prefix: `To run a terminal command, use the ${BuiltInToolNames.RunTerminalCommand} tool
 >>>>>>> upstream/sigmasauer07
+=======
+  systemMessageDescription: createSystemMessageExampleCall(
+    BuiltInToolNames.RunTerminalCommand,
+    `To run a terminal command, use the ${BuiltInToolNames.RunTerminalCommand} tool
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
 ${RUN_COMMAND_NOTES}
 You can also optionally include the waitForCompletion argument set to false to run the command in the background.      
 For example, to see the git log, you could respond with:`,

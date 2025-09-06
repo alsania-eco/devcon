@@ -85,6 +85,9 @@ export class VsCodeExtension {
   private lastDocumentChangeTime = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
   // Reset typing session after a delay
   resetTypingSession = () => {
     if (this.typingTimer) clearTimeout(this.typingTimer);
@@ -92,6 +95,7 @@ export class VsCodeExtension {
       this.isTypingSession = false;
     }, 2000); // Typing session considered over after 2 seconds of inactivity
   };
+<<<<<<< HEAD
 =======
   private ARBITRARY_TYPING_DELAY = 2000;
 
@@ -183,6 +187,8 @@ export class VsCodeExtension {
     }
   }
 >>>>>>> upstream/sigmasauer07
+=======
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
 
   constructor(context: vscode.ExtensionContext) {
     // Register auth provider

@@ -135,6 +135,7 @@ export function UserSettingsForm() {
   );
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
   const disableTelemetryToggle =
     currentOrg?.policy?.allowAnonymousTelemetry === false;
@@ -142,6 +143,8 @@ export function UserSettingsForm() {
     currentOrg?.policy?.allowCodebaseIndexing === false;
 
 >>>>>>> upstream/sigmasauer07
+=======
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
   return (
     <div className="flex flex-col">
       {/* {selectedProfile && isLocalProfile(selectedProfile) ? (
@@ -484,6 +487,7 @@ export function UserSettingsForm() {
                 />
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
                 <ToggleSwitch
                   isToggled={continueAfterToolRejection}
@@ -497,6 +501,8 @@ export function UserSettingsForm() {
                 />
 
 >>>>>>> upstream/sigmasauer07
+=======
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
                 {hasContinueEmail && (
                   <ContinueFeaturesMenu
                     enableStaticContextualization={

@@ -1,15 +1,21 @@
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
   "name": "echo-devcon",
   "icon": "media/branding/icons/echo-logo.png",
   "author": "Echo & Alsania Team",
   "version": "0.3.0",
+<<<<<<< HEAD
 =======
   "name": "continue",
   "icon": "media/icon.png",
   "author": "Continue Dev, Inc",
   "version": "1.3.4",
 >>>>>>> upstream/sigmasauer07
+=======
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
   "repository": {
     "type": "git",
     "url": "https://github.com/alsania-labs/echo-devcon"
