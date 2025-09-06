@@ -3,6 +3,9 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 28a5064bef6f33a4ac2c88832b9d39094322dc2b
 # EchoMCP + Echo-DevCon Setup Script
 # This script sets up the echo-devcon extension with the echomcp backend
 
@@ -12,8 +15,11 @@ echo "🚀 Setting up EchoMCP + Echo-DevCon..."
 =======
 =======
 >>>>>>> 55d4df0da (big push)
+<<<<<<< HEAD
 =======
 >>>>>>> 55d4df0da (big push)
+=======
+>>>>>>> 28a5064bef6f33a4ac2c88832b9d39094322dc2b
 # AlsaniaMCP + DevCon Setup Script
 # This script sets up the devcon extension with the alsaniamcp backend
 
@@ -22,11 +28,17 @@ set -e
 echo "🚀 Setting up AlsaniaMCP + DevCon..."
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
 =======
 >>>>>>> 55d4df0da (big push)
 =======
 >>>>>>> 55d4df0da (big push)
+=======
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
+=======
+>>>>>>> 55d4df0da (big push)
+>>>>>>> 28a5064bef6f33a4ac2c88832b9d39094322dc2b
 
 # Colors for output
 RED='\033[0;31m'
@@ -57,6 +69,9 @@ if [ ! -f "package.json" ]; then
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 28a5064bef6f33a4ac2c88832b9d39094322dc2b
     print_error "Please run this script from the echo-devcon root directory"
     exit 1
 fi
@@ -65,8 +80,11 @@ print_status "Building Echo-DevCon extension..."
 =======
 =======
 >>>>>>> 55d4df0da (big push)
+<<<<<<< HEAD
 =======
 >>>>>>> 55d4df0da (big push)
+=======
+>>>>>>> 28a5064bef6f33a4ac2c88832b9d39094322dc2b
     print_error "Please run this script from the devcon root directory"
     exit 1
 fi
@@ -74,11 +92,17 @@ fi
 print_status "Building DevCon extension..."
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
 =======
 >>>>>>> 55d4df0da (big push)
 =======
 >>>>>>> 55d4df0da (big push)
+=======
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
+=======
+>>>>>>> 55d4df0da (big push)
+>>>>>>> 28a5064bef6f33a4ac2c88832b9d39094322dc2b
 
 # Build the extension
 cd extensions/vscode
@@ -108,6 +132,9 @@ cat > ~/.continue/config.json << 'EOF'
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 28a5064bef6f33a4ac2c88832b9d39094322dc2b
       "title": "EchoMCP",
       "provider": "openai",
       "model": "echo-mcp",
@@ -121,11 +148,14 @@ cat > ~/.continue/config.json << 'EOF'
       "provider": "openai",
       "model": "alsaniamcp",
 >>>>>>> 55d4df0da (big push)
+<<<<<<< HEAD
 =======
       "title": "AlsaniaMCP",
       "provider": "openai",
       "model": "alsaniamcp",
 >>>>>>> 55d4df0da (big push)
+=======
+>>>>>>> 28a5064bef6f33a4ac2c88832b9d39094322dc2b
       "apiBase": "http://localhost:8000/v1",
       "requestOptions": {
         "headers": {
@@ -138,6 +168,9 @@ cat > ~/.continue/config.json << 'EOF'
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 28a5064bef6f33a4ac2c88832b9d39094322dc2b
   "defaultModel": "EchoMCP",
 =======
   "defaultModel": "AlsaniaMCP",
@@ -145,9 +178,12 @@ cat > ~/.continue/config.json << 'EOF'
 =======
   "defaultModel": "AlsaniaMCP",
 >>>>>>> 55d4df0da (big push)
+<<<<<<< HEAD
 =======
   "defaultModel": "AlsaniaMCP",
 >>>>>>> 55d4df0da (big push)
+=======
+>>>>>>> 28a5064bef6f33a4ac2c88832b9d39094322dc2b
   "contextProviders": [
     {
       "name": "http",
@@ -156,6 +192,9 @@ cat > ~/.continue/config.json << 'EOF'
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 28a5064bef6f33a4ac2c88832b9d39094322dc2b
         "title": "EchoMCP Context",
         "description": "Get context from EchoMCP backend",
         "displayTitle": "EchoMCP"
@@ -169,11 +208,14 @@ cat > ~/.continue/config.json << 'EOF'
         "description": "Get context from AlsaniaMCP backend",
         "displayTitle": "AlsaniaMCP"
 >>>>>>> 55d4df0da (big push)
+<<<<<<< HEAD
 =======
         "title": "AlsaniaMCP Context",
         "description": "Get context from AlsaniaMCP backend",
         "displayTitle": "AlsaniaMCP"
 >>>>>>> 55d4df0da (big push)
+=======
+>>>>>>> 28a5064bef6f33a4ac2c88832b9d39094322dc2b
       }
     },
     {
@@ -190,6 +232,9 @@ cat > ~/.continue/config.json << 'EOF'
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 28a5064bef6f33a4ac2c88832b9d39094322dc2b
     "You are EchoMCP, a helpful AI assistant connected to the EchoMCP backend.",
     "Always provide clear and concise responses.",
     "When asked about your capabilities, mention that you're connected to the EchoMCP backend running on localhost:8000.",
@@ -197,12 +242,16 @@ cat > ~/.continue/config.json << 'EOF'
 =======
 =======
 >>>>>>> 55d4df0da (big push)
+<<<<<<< HEAD
 =======
 >>>>>>> 55d4df0da (big push)
+=======
+>>>>>>> 28a5064bef6f33a4ac2c88832b9d39094322dc2b
     "You are AlsaniaMCP, a helpful AI assistant connected to the AlsaniaMCP backend.",
     "Always provide clear and concise responses.",
     "When asked about your capabilities, mention that you're connected to the AlsaniaMCP backend running on localhost:8000.",
     "Use the AlsaniaMCP backend for all chat interactions and context retrieval."
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
@@ -210,6 +259,11 @@ cat > ~/.continue/config.json << 'EOF'
 >>>>>>> 55d4df0da (big push)
 =======
 >>>>>>> 55d4df0da (big push)
+=======
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
+=======
+>>>>>>> 55d4df0da (big push)
+>>>>>>> 28a5064bef6f33a4ac2c88832b9d39094322dc2b
   ],
   "ui": {
     "displayRawMarkdown": false
@@ -222,6 +276,9 @@ print_success "Configuration created at ~/.continue/config.json"
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 28a5064bef6f33a4ac2c88832b9d39094322dc2b
 # Setup EchoMCP backend
 print_status "Setting up EchoMCP backend..."
 
@@ -229,12 +286,16 @@ cd ../../../echomcp
 =======
 =======
 >>>>>>> 55d4df0da (big push)
+<<<<<<< HEAD
 =======
 >>>>>>> 55d4df0da (big push)
+=======
+>>>>>>> 28a5064bef6f33a4ac2c88832b9d39094322dc2b
 # Setup AlsaniaMCP backend
 print_status "Setting up AlsaniaMCP backend..."
 
 cd ../../../alsaniamcp
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
@@ -242,6 +303,11 @@ cd ../../../alsaniamcp
 >>>>>>> 55d4df0da (big push)
 =======
 >>>>>>> 55d4df0da (big push)
+=======
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
+=======
+>>>>>>> 55d4df0da (big push)
+>>>>>>> 28a5064bef6f33a4ac2c88832b9d39094322dc2b
 
 # Create virtual environment if it doesn't exist
 if [ ! -d "venv" ]; then
@@ -257,6 +323,9 @@ pip install fastapi uvicorn
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 28a5064bef6f33a4ac2c88832b9d39094322dc2b
 print_success "EchoMCP backend dependencies installed!"
 
 # Create startup script for the backend
@@ -264,12 +333,16 @@ cat > start-echomcp.sh << 'EOF'
 =======
 =======
 >>>>>>> 55d4df0da (big push)
+<<<<<<< HEAD
 =======
 >>>>>>> 55d4df0da (big push)
+=======
+>>>>>>> 28a5064bef6f33a4ac2c88832b9d39094322dc2b
 print_success "AlsaniaMCP backend dependencies installed!"
 
 # Create startup script for the backend
 cat > start-alsaniamcp.sh << 'EOF'
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
@@ -277,6 +350,11 @@ cat > start-alsaniamcp.sh << 'EOF'
 >>>>>>> 55d4df0da (big push)
 =======
 >>>>>>> 55d4df0da (big push)
+=======
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
+=======
+>>>>>>> 55d4df0da (big push)
+>>>>>>> 28a5064bef6f33a4ac2c88832b9d39094322dc2b
 #!/bin/bash
 cd "$(dirname "$0")"
 source venv/bin/activate
@@ -287,6 +365,9 @@ EOF
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 28a5064bef6f33a4ac2c88832b9d39094322dc2b
 chmod +x start-echomcp.sh
 
 print_success "EchoMCP startup script created!"
@@ -300,11 +381,14 @@ chmod +x start-alsaniamcp.sh
 
 print_success "AlsaniaMCP startup script created!"
 >>>>>>> 55d4df0da (big push)
+<<<<<<< HEAD
 =======
 chmod +x start-alsaniamcp.sh
 
 print_success "AlsaniaMCP startup script created!"
 >>>>>>> 55d4df0da (big push)
+=======
+>>>>>>> 28a5064bef6f33a4ac2c88832b9d39094322dc2b
 
 # Create installation script for the extension
 cat > install-extension.sh << 'EOF'
@@ -312,6 +396,9 @@ cat > install-extension.sh << 'EOF'
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 28a5064bef6f33a4ac2c88832b9d39094322dc2b
 cd "$(dirname "$0")/../echo-devcon/extensions/vscode"
 =======
 cd "$(dirname "$0")/../devcon/extensions/vscode"
@@ -319,9 +406,12 @@ cd "$(dirname "$0")/../devcon/extensions/vscode"
 =======
 cd "$(dirname "$0")/../devcon/extensions/vscode"
 >>>>>>> 55d4df0da (big push)
+<<<<<<< HEAD
 =======
 cd "$(dirname "$0")/../devcon/extensions/vscode"
 >>>>>>> 55d4df0da (big push)
+=======
+>>>>>>> 28a5064bef6f33a4ac2c88832b9d39094322dc2b
 code --install-extension build/continue-1.1.72.vsix
 EOF
 
@@ -333,6 +423,9 @@ print_success "Extension installation script created!"
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 28a5064bef6f33a4ac2c88832b9d39094322dc2b
 cat > README-ECHO-DEVCON.md << 'EOF'
 # EchoMCP + Echo-DevCon Setup
 
@@ -353,8 +446,11 @@ cd echomcp
 =======
 =======
 >>>>>>> 55d4df0da (big push)
+<<<<<<< HEAD
 =======
 >>>>>>> 55d4df0da (big push)
+=======
+>>>>>>> 28a5064bef6f33a4ac2c88832b9d39094322dc2b
 cat > README-DEVCON.md << 'EOF'
 # AlsaniaMCP + DevCon Setup
 
@@ -374,11 +470,17 @@ cd alsaniamcp
 ./start-alsaniamcp.sh
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
 =======
 >>>>>>> 55d4df0da (big push)
 =======
 >>>>>>> 55d4df0da (big push)
+=======
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
+=======
+>>>>>>> 55d4df0da (big push)
+>>>>>>> 28a5064bef6f33a4ac2c88832b9d39094322dc2b
 ```
 
 The backend will be available at `http://localhost:8000`
@@ -389,6 +491,9 @@ The backend will be available at `http://localhost:8000`
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 28a5064bef6f33a4ac2c88832b9d39094322dc2b
 cd echomcp
 =======
 cd alsaniamcp
@@ -396,9 +501,12 @@ cd alsaniamcp
 =======
 cd alsaniamcp
 >>>>>>> 55d4df0da (big push)
+<<<<<<< HEAD
 =======
 cd alsaniamcp
 >>>>>>> 55d4df0da (big push)
+=======
+>>>>>>> 28a5064bef6f33a4ac2c88832b9d39094322dc2b
 ./install-extension.sh
 ```
 
@@ -407,6 +515,9 @@ Or manually install the VSIX file:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 28a5064bef6f33a4ac2c88832b9d39094322dc2b
 code --install-extension echo-devcon/extensions/vscode/build/continue-1.1.72.vsix
 =======
 code --install-extension devcon/extensions/vscode/build/continue-1.1.72.vsix
@@ -414,9 +525,12 @@ code --install-extension devcon/extensions/vscode/build/continue-1.1.72.vsix
 =======
 code --install-extension devcon/extensions/vscode/build/continue-1.1.72.vsix
 >>>>>>> 55d4df0da (big push)
+<<<<<<< HEAD
 =======
 code --install-extension devcon/extensions/vscode/build/continue-1.1.72.vsix
 >>>>>>> 55d4df0da (big push)
+=======
+>>>>>>> 28a5064bef6f33a4ac2c88832b9d39094322dc2b
 ```
 
 ### 3. Configure VSCode
@@ -424,6 +538,9 @@ code --install-extension devcon/extensions/vscode/build/continue-1.1.72.vsix
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 28a5064bef6f33a4ac2c88832b9d39094322dc2b
 The extension is configured to connect to the EchoMCP backend automatically. The configuration is stored in `~/.continue/config.json`.
 
 ## Features
@@ -432,8 +549,11 @@ The extension is configured to connect to the EchoMCP backend automatically. The
 =======
 =======
 >>>>>>> 55d4df0da (big push)
+<<<<<<< HEAD
 =======
 >>>>>>> 55d4df0da (big push)
+=======
+>>>>>>> 28a5064bef6f33a4ac2c88832b9d39094322dc2b
 The extension is configured to connect to the AlsaniaMCP backend automatically. The configuration is stored in `~/.continue/config.json`.
 
 ## Features
@@ -441,11 +561,17 @@ The extension is configured to connect to the AlsaniaMCP backend automatically. 
 - **OpenAI-Compatible API**: The AlsaniaMCP backend provides OpenAI-compatible endpoints
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
 =======
 >>>>>>> 55d4df0da (big push)
 =======
 >>>>>>> 55d4df0da (big push)
+=======
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
+=======
+>>>>>>> 55d4df0da (big push)
+>>>>>>> 28a5064bef6f33a4ac2c88832b9d39094322dc2b
 - **Real-time Chat**: Connect to the backend for chat interactions
 - **Context Providers**: Access file, codebase, and diff context
 - **Streaming Responses**: Real-time streaming of responses from the backend
@@ -465,6 +591,9 @@ The extension is configured to use:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 28a5064bef6f33a4ac2c88832b9d39094322dc2b
 - **Model**: EchoMCP (echo-mcp)
 =======
 - **Model**: AlsaniaMCP (alsaniamcp)
@@ -472,9 +601,12 @@ The extension is configured to use:
 =======
 - **Model**: AlsaniaMCP (alsaniamcp)
 >>>>>>> 55d4df0da (big push)
+<<<<<<< HEAD
 =======
 - **Model**: AlsaniaMCP (alsaniamcp)
 >>>>>>> 55d4df0da (big push)
+=======
+>>>>>>> 28a5064bef6f33a4ac2c88832b9d39094322dc2b
 - **API Base**: http://localhost:8000/v1
 - **Context Providers**: HTTP, File, Codebase, Diff
 
@@ -490,6 +622,9 @@ To modify the backend:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 28a5064bef6f33a4ac2c88832b9d39094322dc2b
 1. Edit files in `echomcp/backend/`
 2. Restart the backend with `./start-echomcp.sh`
 
@@ -498,8 +633,11 @@ To modify the extension:
 =======
 =======
 >>>>>>> 55d4df0da (big push)
+<<<<<<< HEAD
 =======
 >>>>>>> 55d4df0da (big push)
+=======
+>>>>>>> 28a5064bef6f33a4ac2c88832b9d39094322dc2b
 1. Edit files in `alsaniamcp/backend/`
 2. Restart the backend with `./start-alsaniamcp.sh`
 
@@ -507,11 +645,17 @@ To modify the extension:
 1. Edit files in `devcon/extensions/vscode/src/`
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
 =======
 >>>>>>> 55d4df0da (big push)
 =======
 >>>>>>> 55d4df0da (big push)
+=======
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
+=======
+>>>>>>> 55d4df0da (big push)
+>>>>>>> 28a5064bef6f33a4ac2c88832b9d39094322dc2b
 2. Run `npm run esbuild` to rebuild
 3. Run `npm run package` to create a new VSIX
 
@@ -520,6 +664,9 @@ To modify the extension:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 28a5064bef6f33a4ac2c88832b9d39094322dc2b
 This is a fork of Continue.dev with custom EchoMCP integration.
 =======
 This is a fork of Continue.dev with custom AlsaniaMCP integration.
@@ -527,9 +674,12 @@ This is a fork of Continue.dev with custom AlsaniaMCP integration.
 =======
 This is a fork of Continue.dev with custom AlsaniaMCP integration.
 >>>>>>> 55d4df0da (big push)
+<<<<<<< HEAD
 =======
 This is a fork of Continue.dev with custom AlsaniaMCP integration.
 >>>>>>> 55d4df0da (big push)
+=======
+>>>>>>> 28a5064bef6f33a4ac2c88832b9d39094322dc2b
 EOF
 
 print_success "Documentation created!"
@@ -540,6 +690,9 @@ echo "Next steps:"
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 28a5064bef6f33a4ac2c88832b9d39094322dc2b
 echo "1. Start the EchoMCP backend: cd echomcp && ./start-echomcp.sh"
 echo "2. Install the extension: cd echomcp && ./install-extension.sh"
 echo "3. Open VSCode and start using Echo-DevCon!"
@@ -548,19 +701,28 @@ echo "For more information, see README-ECHO-DEVCON.md"
 =======
 =======
 >>>>>>> 55d4df0da (big push)
+<<<<<<< HEAD
 =======
 >>>>>>> 55d4df0da (big push)
+=======
+>>>>>>> 28a5064bef6f33a4ac2c88832b9d39094322dc2b
 echo "1. Start the AlsaniaMCP backend: cd alsaniamcp && ./start-alsaniamcp.sh"
 echo "2. Install the extension: cd alsaniamcp && ./install-extension.sh"
 echo "3. Open VSCode and start using DevCon!"
 echo ""
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 28a5064bef6f33a4ac2c88832b9d39094322dc2b
 echo "For more information, see README-DEVCON.md" 
 >>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
 =======
 echo "For more information, see README-DEVCON.md" 
 >>>>>>> 55d4df0da (big push)
+<<<<<<< HEAD
 =======
 echo "For more information, see README-DEVCON.md" 
 >>>>>>> 55d4df0da (big push)
+=======
+>>>>>>> 28a5064bef6f33a4ac2c88832b9d39094322dc2b

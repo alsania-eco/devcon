@@ -2,6 +2,9 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 28a5064bef6f33a4ac2c88832b9d39094322dc2b
   "name": "echo-devcon-plugin",
   "icon": "media/echo-icon.png",
   "author": "Echo & Alsania Team",
@@ -27,6 +30,7 @@
     "type": "git",
     "url": "https://github.com/alsania-labs/echo-devcon"
 >>>>>>> 55d4df0da (big push)
+<<<<<<< HEAD
 =======
   "name": "echo-devcon",
   "icon": "media/branding/icons/echo-logo.png",
@@ -36,6 +40,8 @@
     "type": "git",
     "url": "https://github.com/alsania-labs/echo-devcon"
 >>>>>>> 55d4df0da (big push)
+=======
+>>>>>>> 28a5064bef6f33a4ac2c88832b9d39094322dc2b
   },
   "extensionKind": [
     "ui",
@@ -45,6 +51,9 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 28a5064bef6f33a4ac2c88832b9d39094322dc2b
     "url": "https://github.com/SigmaSauer07/echo-dev/issues",
     "email": "support@alsania.com"
   },
@@ -79,6 +88,7 @@
   "description": "Echo AI agent for substantial codebase changes, chat, edit, and autocomplete",
   "publisher": "alsania",
 >>>>>>> 55d4df0da (big push)
+<<<<<<< HEAD
 =======
     "url": "https://github.com/alsania-labs/echo-devcon/issues",
     "email": "support@alsania.com"
@@ -91,6 +101,8 @@
   "description": "Echo AI agent for substantial codebase changes, chat, edit, and autocomplete",
   "publisher": "alsania",
 >>>>>>> 55d4df0da (big push)
+=======
+>>>>>>> 28a5064bef6f33a4ac2c88832b9d39094322dc2b
   "engines": {
     "vscode": "^1.70.0",
     "node": ">=20.19.0"
@@ -100,6 +112,9 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 28a5064bef6f33a4ac2c88832b9d39094322dc2b
     "color": "#0A2472",
 =======
     "color": "#1a1a2e",
@@ -107,9 +122,12 @@
 =======
     "color": "#1a1a2e",
 >>>>>>> 55d4df0da (big push)
+<<<<<<< HEAD
 =======
     "color": "#1a1a2e",
 >>>>>>> 55d4df0da (big push)
+=======
+>>>>>>> 28a5064bef6f33a4ac2c88832b9d39094322dc2b
     "theme": "dark"
   },
   "categories": [
@@ -117,14 +135,20 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 28a5064bef6f33a4ac2c88832b9d39094322dc2b
     "Programming Languages",
     "Education",
 =======
 >>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
 =======
 >>>>>>> 55d4df0da (big push)
+<<<<<<< HEAD
 =======
 >>>>>>> 55d4df0da (big push)
+=======
+>>>>>>> 28a5064bef6f33a4ac2c88832b9d39094322dc2b
     "Machine Learning",
     "Other"
   ],
@@ -132,6 +156,9 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 28a5064bef6f33a4ac2c88832b9d39094322dc2b
     "echo",
     "alsania",
     "devcon",
@@ -144,8 +171,11 @@
 =======
 =======
 >>>>>>> 55d4df0da (big push)
+<<<<<<< HEAD
 =======
 >>>>>>> 55d4df0da (big push)
+=======
+>>>>>>> 28a5064bef6f33a4ac2c88832b9d39094322dc2b
     "ai",
     "assistant",
     "echo",
@@ -154,11 +184,17 @@
     "autocomplete"
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
 =======
 >>>>>>> 55d4df0da (big push)
 =======
 >>>>>>> 55d4df0da (big push)
+=======
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
+=======
+>>>>>>> 55d4df0da (big push)
+>>>>>>> 28a5064bef6f33a4ac2c88832b9d39094322dc2b
   ],
   "activationEvents": [
     "onStartupFinished",
@@ -196,6 +232,9 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 28a5064bef6f33a4ac2c88832b9d39094322dc2b
       "title": "Echo DevCon Plugin",
       "properties": {
         "echoDevCon.telemetryEnabled": {
@@ -265,6 +304,7 @@
           "markdownDescription": "Echo DevCon collects anonymous usage data, cleaned of PII, to help us improve the product for our users. Read more at [alsania.com/devcon › Telemetry](https://alsania.com/devcon/telemetry)."
         },
 >>>>>>> 55d4df0da (big push)
+<<<<<<< HEAD
 =======
       "title": "Echo DevCon",
       "properties": {
@@ -294,6 +334,8 @@
           "markdownDescription": "Echo DevCon collects anonymous usage data, cleaned of PII, to help us improve the product for our users. Read more at [alsania.com/devcon › Telemetry](https://alsania.com/devcon/telemetry)."
         },
 >>>>>>> 55d4df0da (big push)
+=======
+>>>>>>> 28a5064bef6f33a4ac2c88832b9d39094322dc2b
         "echoDevCon.showInlineTip": {
           "type": "boolean",
           "default": true,
@@ -301,11 +343,17 @@
         },
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
 =======
 >>>>>>> 55d4df0da (big push)
 =======
 >>>>>>> 55d4df0da (big push)
+=======
+>>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
+=======
+>>>>>>> 55d4df0da (big push)
+>>>>>>> 28a5064bef6f33a4ac2c88832b9d39094322dc2b
         "echo.disableQuickFix": {
           "type": "boolean",
           "default": false,
@@ -317,6 +365,9 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 28a5064bef6f33a4ac2c88832b9d39094322dc2b
           "markdownDescription": "Enable the experimental Quick Actions feature. Read our walkthrough to learn about configuration and how to share feedback: [alsania.com/echo-devcon › Walkthrough: Quick Actions (experimental)](https://alsania.com/echo-devcon/customize/deep-dives/vscode-actions#quick-actions)"
 =======
           "markdownDescription": "Enable the experimental Quick Actions feature. Read our walkthrough to learn about configuration and how to share feedback: [alsania.com/devcon › Walkthrough: Quick Actions (experimental)](https://alsania.com/devcon/customize/deep-dives/vscode-actions#quick-actions)"
@@ -324,9 +375,12 @@
 =======
           "markdownDescription": "Enable the experimental Quick Actions feature. Read our walkthrough to learn about configuration and how to share feedback: [alsania.com/devcon › Walkthrough: Quick Actions (experimental)](https://alsania.com/devcon/customize/deep-dives/vscode-actions#quick-actions)"
 >>>>>>> 55d4df0da (big push)
+<<<<<<< HEAD
 =======
           "markdownDescription": "Enable the experimental Quick Actions feature. Read our walkthrough to learn about configuration and how to share feedback: [alsania.com/devcon › Walkthrough: Quick Actions (experimental)](https://alsania.com/devcon/customize/deep-dives/vscode-actions#quick-actions)"
 >>>>>>> 55d4df0da (big push)
+=======
+>>>>>>> 28a5064bef6f33a4ac2c88832b9d39094322dc2b
         },
         "echo.enableTabAutocomplete": {
           "type": "boolean",
@@ -334,6 +388,9 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 28a5064bef6f33a4ac2c88832b9d39094322dc2b
           "markdownDescription": "Enable Echo's tab autocomplete feature. Read our walkthrough to learn about configuration and how to share feedback: [alsania.com/echo-devcon › Walkthrough: Tab Autocomplete (beta)](https://alsania.com/echo-devcon/features/tab-autocomplete)"
 =======
           "markdownDescription": "Enable Echo's tab autocomplete feature. Read our walkthrough to learn about configuration and how to share feedback: [alsania.com/devcon › Walkthrough: Tab Autocomplete (beta)](https://alsania.com/devcon/features/tab-autocomplete)"
@@ -341,9 +398,12 @@
 =======
           "markdownDescription": "Enable Echo's tab autocomplete feature. Read our walkthrough to learn about configuration and how to share feedback: [alsania.com/devcon › Walkthrough: Tab Autocomplete (beta)](https://alsania.com/devcon/features/tab-autocomplete)"
 >>>>>>> 55d4df0da (big push)
+<<<<<<< HEAD
 =======
           "markdownDescription": "Enable Echo's tab autocomplete feature. Read our walkthrough to learn about configuration and how to share feedback: [alsania.com/devcon › Walkthrough: Tab Autocomplete (beta)](https://alsania.com/devcon/features/tab-autocomplete)"
 >>>>>>> 55d4df0da (big push)
+=======
+>>>>>>> 28a5064bef6f33a4ac2c88832b9d39094322dc2b
         },
         "echo.pauseTabAutocompleteOnBattery": {
           "type": "boolean",
@@ -892,6 +952,9 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 28a5064bef6f33a4ac2c88832b9d39094322dc2b
           "icon": "../../echo-devcon-brand-kit/plugin-assets/echo_toolbar_16.svg"
 =======
           "icon": "../../devcon-brand-kit/plugin-assets/echo_toolbar_16.svg"
@@ -899,9 +962,12 @@
 =======
           "icon": "../../devcon-brand-kit/plugin-assets/echo_toolbar_16.svg"
 >>>>>>> 55d4df0da (big push)
+<<<<<<< HEAD
 =======
           "icon": "../../devcon-brand-kit/plugin-assets/echo_toolbar_16.svg"
 >>>>>>> 55d4df0da (big push)
+=======
+>>>>>>> 28a5064bef6f33a4ac2c88832b9d39094322dc2b
         }
       ],
       "panel": [
@@ -921,6 +987,9 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 28a5064bef6f33a4ac2c88832b9d39094322dc2b
           "icon": "../../echo-devcon-brand-kit/plugin-assets/sidebar-icon.svg",
 =======
           "icon": "../../devcon-brand-kit/plugin-assets/sidebar-icon.svg",
@@ -928,9 +997,12 @@
 =======
           "icon": "../../devcon-brand-kit/plugin-assets/sidebar-icon.svg",
 >>>>>>> 55d4df0da (big push)
+<<<<<<< HEAD
 =======
           "icon": "../../devcon-brand-kit/plugin-assets/sidebar-icon.svg",
 >>>>>>> 55d4df0da (big push)
+=======
+>>>>>>> 28a5064bef6f33a4ac2c88832b9d39094322dc2b
           "visibility": "visible"
         }
       ],

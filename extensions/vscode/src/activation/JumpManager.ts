@@ -54,8 +54,11 @@ export class JumpManager {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> fe9dda39e (docs: add comments on jump manager)
+=======
+>>>>>>> 28a5064bef6f33a4ac2c88832b9d39094322dc2b
 =======
   private _createSvgJumpIcon() {
     const baseTextConfig = {
@@ -117,10 +120,13 @@ export class JumpManager {
 
 >>>>>>> 2007d0a41 (docs: add comments on jump manager)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> 55d4df0da (big push)
 =======
 >>>>>>> fe9dda39e (docs: add comments on jump manager)
+=======
+>>>>>>> 28a5064bef6f33a4ac2c88832b9d39094322dc2b
   public async suggestJump(
     currentPosition: vscode.Position,
     nextJumpLocation: vscode.Position,
@@ -288,10 +294,13 @@ export class JumpManager {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> 55d4df0da (big push)
 =======
 >>>>>>> fe9dda39e (docs: add comments on jump manager)
+=======
+>>>>>>> 28a5064bef6f33a4ac2c88832b9d39094322dc2b
     this._jumpDecoration = vscode.window.createTextEditorDecorationType({
       before: {
         contentText: "🦘 Press Tab to jump, Esc to cancel",
@@ -302,18 +311,24 @@ export class JumpManager {
     });
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> fe9dda39e (docs: add comments on jump manager)
+=======
+>>>>>>> 28a5064bef6f33a4ac2c88832b9d39094322dc2b
 =======
     if (!this._jumpDecoration) {
       this._createSvgJumpIcon(); // makes both the icon & decoration
     }
 >>>>>>> 2007d0a41 (docs: add comments on jump manager)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> 55d4df0da (big push)
 =======
 >>>>>>> fe9dda39e (docs: add comments on jump manager)
+=======
+>>>>>>> 28a5064bef6f33a4ac2c88832b9d39094322dc2b
 
     // Apply the decoration.
     const lastIndexOfLine = editor.document.lineAt(lineToRenderOn).text.length;

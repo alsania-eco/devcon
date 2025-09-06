@@ -14,6 +14,9 @@ If you find a bug, please [create an issue](https://github.com/SigmaSauer07/echo
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 28a5064bef6f33a4ac2c88832b9d39094322dc2b
 - [Contributing to Echo DevCon](#contributing-to-echo-devcon)
   - [Table of Contents](#table-of-contents)
 - [❤️ Ways to Contribute](#️-ways-to-contribute)
@@ -30,12 +33,15 @@ If you find a bug, please [create an issue](https://github.com/SigmaSauer07/echo
 - [❤️ Ways to Contribute](#️-ways-to-contribute)
   - [👋 Echo DevCon Contribution Ideas](#-devcon-contribution-ideas)
 >>>>>>> 55d4df0da (big push)
+<<<<<<< HEAD
 =======
 - [Contributing to Echo DevCon](#contributing-to-devcon)
   - [Table of Contents](#table-of-contents)
 - [❤️ Ways to Contribute](#️-ways-to-contribute)
   - [👋 Echo DevCon Contribution Ideas](#-devcon-contribution-ideas)
 >>>>>>> 55d4df0da (big push)
+=======
+>>>>>>> 28a5064bef6f33a4ac2c88832b9d39094322dc2b
   - [🐛 Report Bugs](#-report-bugs)
   - [✨ Suggest Enhancements](#-suggest-enhancements)
   - [📖 Updating / Improving Documentation](#-updating--improving-documentation)
@@ -48,6 +54,9 @@ If you find a bug, please [create an issue](https://github.com/SigmaSauer07/echo
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 28a5064bef6f33a4ac2c88832b9d39094322dc2b
       - [Fork the Echo DevCon Repository](#fork-the-echo-devcon-repository)
 =======
       - [Fork the Echo DevCon Repository](#fork-the-devcon-repository)
@@ -55,9 +64,12 @@ If you find a bug, please [create an issue](https://github.com/SigmaSauer07/echo
 =======
       - [Fork the Echo DevCon Repository](#fork-the-devcon-repository)
 >>>>>>> 55d4df0da (big push)
+<<<<<<< HEAD
 =======
       - [Fork the Echo DevCon Repository](#fork-the-devcon-repository)
 >>>>>>> 55d4df0da (big push)
+=======
+>>>>>>> 28a5064bef6f33a4ac2c88832b9d39094322dc2b
       - [VS Code](#vs-code)
         - [Debugging](#debugging)
       - [JetBrains](#jetbrains)
