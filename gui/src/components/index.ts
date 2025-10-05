@@ -99,7 +99,12 @@ export const ButtonSubtext = styled.span`
 export const CustomScrollbarDiv = styled.div`
   scrollbar-base-color: transparent;
   scrollbar-width: thin;
+  /* Glass gradient background with subtle pattern */
+  background:
+    radial-gradient(1200px 600px at 10% -10%, rgba(57, 255, 20, 0.07), transparent 60%),
+    linear-gradient(180deg, rgba(10, 36, 114, 0.7), rgba(0, 31, 63, 0.9));
   background-color: ${vscBackground};
+  backdrop-filter: blur(6px) saturate(130%);
 
   & * {
     ::-webkit-scrollbar {

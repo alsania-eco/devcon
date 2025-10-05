@@ -1,7 +1,9 @@
 // All vscode variables https://gist.github.com/estruyf/ba49203e1a7d6868e9320a4ea480c27a
 // Examples for vscode https://github.com/githubocto/tailwind-vscode/blob/main/index.js
 
-// The current default theme is dark with blue accents
+// Default theme: Alsania futuristic/cyberpunk palette
+// Primary highlight: Neon Green #39FF14
+// Backgrounds: Midnight/Navy #0A2472 / #001F3F
 export const THEME_COLORS = {
   background: {
     vars: [
@@ -9,7 +11,7 @@ export const THEME_COLORS = {
       "--vscode-editor-background",
       "--vscode-panel-background",
     ],
-    default: "#1e1e1e", // dark gray
+    default: "#001F3F", // Alsania midnight navy
   },
   foreground: {
     vars: [
@@ -17,80 +19,80 @@ export const THEME_COLORS = {
       "--vscode-editor-foreground",
       "--vscode-panel-foreground",
     ],
-    default: "#e6e6e6", // light gray
+    default: "#E6E6E6", // light neutral for readability
   },
   "editor-background": {
     vars: ["--vscode-editor-background"],
-    default: "#1e1e1e", // dark gray
+    default: "#0A1E4F", // deep midnight blue
   },
   "editor-foreground": {
     vars: ["--vscode-editor-foreground"],
-    default: "#e6e6e6", // light gray
+    default: "#E6E6E6", // light gray
   },
   "primary-background": {
     vars: ["--vscode-button-background"],
-    default: "#2c5aa0", // medium blue
+    default: "#39FF14", // neon green
   },
   "primary-foreground": {
     vars: ["--vscode-button-foreground"],
-    default: "#ffffff", // white
+    default: "#001F3F", // dark navy for contrast on neon
   },
   "primary-hover": {
     vars: ["--vscode-button-hoverBackground"],
-    default: "#3a6db3", // lighter blue
+    default: "#58FF39", // brighter neon on hover
   },
   "secondary-background": {
     vars: ["--vscode-button-secondaryBackground"],
-    default: "#303030", // medium dark gray
+    default: "#0E2A66", // muted navy for secondary controls
   },
   "secondary-foreground": {
     vars: ["--vscode-button-secondaryForeground"],
-    default: "#e6e6e6", // light gray
+    default: "#E6E6E6", // light gray
   },
   "secondary-hover": {
     vars: ["--vscode-button-secondaryHoverBackground"],
-    default: "#3a3a3a", // medium gray
+    default: "#1739A0", // brighter blue on hover
   },
   border: {
     vars: ["--vscode-sideBar-border", "--vscode-panel-border"],
-    default: "#2a2a2a", // dark gray border
+    default: "#13315C", // cool dark border
   },
   "border-focus": {
     vars: ["--vscode-focusBorder"],
-    default: "#3a6db3", // lighter blue
+    default: "#39FF14", // neon green focus
   },
   // Command styles are used for tip-tap editor
   "command-background": {
     vars: ["--vscode-commandCenter-background"],
-    default: "#252525", // dark gray
+    default: "#0C214F",
   },
   "command-foreground": {
     vars: ["--vscode-commandCenter-foreground"],
-    default: "#e6e6e6", // light gray
+    default: "#E6E6E6",
   },
   "command-border": {
     vars: ["--vscode-commandCenter-inactiveBorder"],
-    default: "#555555", // medium gray
+    default: "#26406D",
   },
   "command-border-focus": {
     vars: ["--vscode-commandCenter-activeBorder"],
-    default: "#4d8bf0", // bright blue
+    default: "#39FF14", // neon focus
   },
   description: {
     vars: ["--vscode-descriptionForeground"],
-    default: "#b3b3b3", // medium light gray
+    default: "#93A4C6", // cool muted text
   },
   "description-muted": {
     vars: ["--vscode-list-deemphasizedForeground"],
-    default: "#8c8c8c", // medium gray
+    default: "#6B7A99", // dimmer muted text
   },
   "input-background": {
     vars: ["--vscode-input-background"],
-    default: "#2d2d2d", // dark gray
+    default: "#0D1B3A", // dark glassy input
   },
   "input-foreground": {
     vars: ["--vscode-input-foreground"],
-    default: "#e6e6e6", // light gray
+    default: "#E6F1FF",
   },
   "input-border": {
     vars: [
@@ -98,23 +100,23 @@ export const THEME_COLORS = {
       "--vscode-commandCenter-inactiveBorder",
       "vscode-border",
     ],
-    default: "#555555", // medium gray
+    default: "#26406D",
   },
   "input-placeholder": {
     vars: ["--vscode-input-placeholderForeground"],
-    default: "#9e9e9e", // medium light gray
+    default: "#6B7A99",
   },
   "table-oddRow": {
     vars: ["--vscode-tree-tableOddRowsBackground"],
-    default: "#2d2d2d", // dark gray
+    default: "#0E234A",
   },
   "badge-background": {
     vars: ["--vscode-badge-background"],
-    default: "#4d4d4d", // medium dark gray
+    default: "#123457",
   },
   "badge-foreground": {
     vars: ["--vscode-badge-foreground"],
-    default: "#ffffff", // white
+    default: "#E6E6E6",
   },
   success: {
     vars: [
@@ -123,51 +125,50 @@ export const THEME_COLORS = {
       "--vscode-gitDecoration-addedResourceForeground",
       "--vscode-charts-green",
     ],
-    default: "#4caf50", // green
+    default: "#39FF14",
   },
   warning: {
     vars: [
       "--vscode-editorWarning-foreground",
       "--vscode-list-warningForeground",
     ],
-    default: "#ffb74d", // amber/yellow
+    default: "#FFC857",
   },
   error: {
     vars: ["--vscode-editorError-foreground", "--vscode-list-errorForeground"],
-    default: "#f44336", // red
+    default: "#FF3864",
   },
   link: {
     vars: ["--vscode-textLink-foreground"],
-    default: "#5c9ce6", // medium blue
+    default: "#39FF14", // neon links
   },
   textCodeBlockBackground: {
     vars: ["--vscode-textCodeBlock-background"],
-    default: "#1e1e1e", // same as editor-background
+    default: "#0A1E4F",
   },
   accent: {
     vars: ["--vscode-tab-activeBorderTop", "--vscode-focusBorder"],
-    default: "#4d8bf0", // bright blue
+    default: "#39FF14",
   },
   "find-match": {
-    vars: ["--vscode-editor-findMatchBackground"], // Can't get "var(--vscode-editor-findMatchBackground, rgba(237, 18, 146, 0.5))" to work
-    default: "#264f7840", // translucent blue
+    vars: ["--vscode-editor-findMatchBackground"],
+    default: "#39FF1440", // translucent neon
   },
   "find-match-selected": {
     vars: ["--vscode-editor-findMatchHighlightBackground"],
-    default: "#ffb74d40", // translucent amber
+    default: "#58FF3940", // translucent brighter neon
   },
   "list-hover": {
-    // --vscode-tab-hoverBackground
     vars: ["--vscode-list-hoverBackground"],
-    default: "#383838", // medium dark gray
+    default: "#102B6F",
   },
   "list-active": {
     vars: ["--vscode-list-activeSelectionBackground"],
-    default: "#2c5aa050", // translucent medium blue
+    default: "#0A2472",
   },
   "list-active-foreground": {
     vars: ["--vscode-list-activeSelectionForeground"],
-    default: "#ffffff", // white
+    default: "#E6E6E6",
   },
 };
 
