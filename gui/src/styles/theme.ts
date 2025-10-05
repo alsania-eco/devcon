@@ -9,7 +9,7 @@ export const THEME_COLORS = {
       "--vscode-editor-background",
       "--vscode-panel-background",
     ],
-    default: "#0A2472", // cyberpunk midnight
+    default: "rgba(10, 36, 114, 0.8)", // cyberpunk midnight with transparency
   },
   foreground: {
     vars: [
@@ -21,7 +21,7 @@ export const THEME_COLORS = {
   },
   "editor-background": {
     vars: ["--vscode-editor-background"],
-    default: "#001F3F", // cyberpunk navy
+    default: "rgba(0, 31, 63, 0.9)", // cyberpunk navy with transparency
   },
   "editor-foreground": {
     vars: ["--vscode-editor-foreground"],
@@ -29,7 +29,7 @@ export const THEME_COLORS = {
   },
   "primary-background": {
     vars: ["--vscode-button-background"],
-    default: "#39FF14", // cyberpunk neon green
+    default: "rgba(57, 255, 20, 0.2)", // cyberpunk neon green with transparency
   },
   "primary-foreground": {
     vars: ["--vscode-button-foreground"],
@@ -41,7 +41,7 @@ export const THEME_COLORS = {
   },
   "secondary-background": {
     vars: ["--vscode-button-secondaryBackground"],
-    default: "#001F3F", // cyberpunk navy
+    default: "rgba(0, 31, 63, 0.3)", // cyberpunk navy with transparency
   },
   "secondary-foreground": {
     vars: ["--vscode-button-secondaryForeground"],
@@ -62,7 +62,7 @@ export const THEME_COLORS = {
   // Command styles are used for tip-tap editor
   "command-background": {
     vars: ["--vscode-commandCenter-background"],
-    default: "#001F3F", // cyberpunk navy
+    default: "rgba(0, 31, 63, 0.4)", // cyberpunk navy with transparency
   },
   "command-foreground": {
     vars: ["--vscode-commandCenter-foreground"],
@@ -86,11 +86,11 @@ export const THEME_COLORS = {
   },
   "input-background": {
     vars: ["--vscode-input-background"],
-    default: "#2d2d2d", // dark gray
+    default: "rgba(0, 31, 63, 0.3)", // cyberpunk navy with transparency
   },
   "input-foreground": {
     vars: ["--vscode-input-foreground"],
-    default: "#e6e6e6", // light gray
+    default: "#39FF14", // cyberpunk neon green
   },
   "input-border": {
     vars: [
@@ -98,11 +98,11 @@ export const THEME_COLORS = {
       "--vscode-commandCenter-inactiveBorder",
       "vscode-border",
     ],
-    default: "#555555", // medium gray
+    default: "#39FF14", // cyberpunk neon green
   },
   "input-placeholder": {
     vars: ["--vscode-input-placeholderForeground"],
-    default: "#9e9e9e", // medium light gray
+    default: "#2ECC40", // darker neon green
   },
   "table-oddRow": {
     vars: ["--vscode-tree-tableOddRowsBackground"],

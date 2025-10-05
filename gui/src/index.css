@@ -62,6 +62,17 @@
   --cyberpunk-glow-green: 0 0 10px #39FF14, 0 0 20px #39FF14, 0 0 30px #39FF14;
   --cyberpunk-glow-blue: 0 0 10px #0A2472, 0 0 20px #0A2472, 0 0 30px #0A2472;
   --cyberpunk-glow-soft: 0 0 5px rgba(57, 255, 20, 0.3);
+  
+  /* Glass Morphism Effects */
+  --glass-bg-primary: rgba(10, 36, 114, 0.15);
+  --glass-bg-secondary: rgba(0, 31, 63, 0.2);
+  --glass-bg-accent: rgba(57, 255, 20, 0.1);
+  --glass-border: rgba(57, 255, 20, 0.3);
+  --glass-border-strong: rgba(57, 255, 20, 0.6);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  --glass-shadow-strong: 0 12px 40px rgba(0, 0, 0, 0.4);
+  --glass-backdrop-blur: blur(10px);
+  --glass-backdrop-blur-strong: blur(20px);
 }
 
 html,
@@ -69,8 +80,13 @@ body,
 #root {
   height: 100%;
   line-height: 1.3;
-  background-color: var(--vscode-editor-background);
+  background: 
+    linear-gradient(135deg, #0A2472 0%, #001F3F 50%, #000000 100%),
+    radial-gradient(circle at 20% 20%, rgba(57, 255, 20, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(10, 36, 114, 0.1) 0%, transparent 50%);
+  background-attachment: fixed;
   font-family:
+    "Open Sans",
     system-ui,
     -apple-system,
     BlinkMacSystemFont,
@@ -79,7 +95,6 @@ body,
     Oxygen,
     Ubuntu,
     Cantarell,
-    "Open Sans",
     "Helvetica Neue",
     sans-serif;
 }
@@ -330,4 +345,373 @@ body {
   height: 1px;
   background: var(--cyberpunk-neon-green);
   animation: cyberpunk-scan 3s linear infinite;
+}
+
+/* Glass Morphism Utility Classes */
+.glass {
+  background: var(--glass-bg-primary);
+  backdrop-filter: var(--glass-backdrop-blur);
+  -webkit-backdrop-filter: var(--glass-backdrop-blur);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  transition: all 0.3s ease;
+}
+
+.glass:hover {
+  background: var(--glass-bg-secondary);
+  border-color: var(--glass-border-strong);
+  box-shadow: var(--glass-shadow-strong);
+}
+
+.glass-strong {
+  background: var(--glass-bg-secondary);
+  backdrop-filter: var(--glass-backdrop-blur-strong);
+  -webkit-backdrop-filter: var(--glass-backdrop-blur-strong);
+  border: 1px solid var(--glass-border-strong);
+  box-shadow: var(--glass-shadow-strong);
+}
+
+.glass-accent {
+  background: var(--glass-bg-accent);
+  backdrop-filter: var(--glass-backdrop-blur);
+  -webkit-backdrop-filter: var(--glass-backdrop-blur);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+}
+
+/* Glass Button Styles */
+.glass-btn {
+  @apply px-6 py-3 rounded-lg font-medium transition-all duration-300;
+  background: var(--glass-bg-primary);
+  backdrop-filter: var(--glass-backdrop-blur);
+  -webkit-backdrop-filter: var(--glass-backdrop-blur);
+  border: 1px solid var(--glass-border);
+  color: var(--cyberpunk-neon-green);
+  box-shadow: var(--glass-shadow);
+  font-family: "Rajdhani", "Arial", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(57, 255, 20, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.glass-btn:hover::before {
+  left: 100%;
+}
+
+.glass-btn:hover {
+  background: var(--glass-bg-secondary);
+  border-color: var(--glass-border-strong);
+  box-shadow: var(--glass-shadow-strong), var(--cyberpunk-glow-soft);
+  transform: translateY(-2px);
+}
+
+.glass-btn:active {
+  transform: translateY(0);
+}
+
+/* Glass Card Styles */
+.glass-card {
+  background: var(--glass-bg-primary);
+  backdrop-filter: var(--glass-backdrop-blur);
+  -webkit-backdrop-filter: var(--glass-backdrop-blur);
+  border: 1px solid var(--glass-border);
+  border-radius: 1rem;
+  box-shadow: var(--glass-shadow);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--cyberpunk-neon-green), transparent);
+  opacity: 0.6;
+}
+
+.glass-card:hover {
+  background: var(--glass-bg-secondary);
+  border-color: var(--glass-border-strong);
+  box-shadow: var(--glass-shadow-strong), var(--cyberpunk-glow-soft);
+  transform: translateY(-4px);
+}
+
+.glass-card:hover::before {
+  animation: cyberpunk-scan 2s linear infinite;
+}
+
+/* Glass Input Styles */
+.glass-input {
+  background: var(--glass-bg-primary);
+  backdrop-filter: var(--glass-backdrop-blur);
+  -webkit-backdrop-filter: var(--glass-backdrop-blur);
+  border: 1px solid var(--glass-border);
+  border-radius: 0.5rem;
+  color: var(--cyberpunk-neon-green);
+  padding: 0.75rem 1rem;
+  font-family: "Rajdhani", "Arial", sans-serif;
+  transition: all 0.3s ease;
+  box-shadow: var(--glass-shadow);
+}
+
+.glass-input:focus {
+  outline: none;
+  background: var(--glass-bg-secondary);
+  border-color: var(--glass-border-strong);
+  box-shadow: var(--glass-shadow-strong), var(--cyberpunk-glow-soft);
+}
+
+.glass-input::placeholder {
+  color: rgba(57, 255, 20, 0.6);
+}
+
+/* Glass Panel Styles */
+.glass-panel {
+  background: var(--glass-bg-primary);
+  backdrop-filter: var(--glass-backdrop-blur);
+  -webkit-backdrop-filter: var(--glass-backdrop-blur);
+  border: 1px solid var(--glass-border);
+  border-radius: 1rem;
+  box-shadow: var(--glass-shadow);
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 20%, rgba(57, 255, 20, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(10, 36, 114, 0.05) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+/* Glass Navigation Styles */
+.glass-nav {
+  background: var(--glass-bg-primary);
+  backdrop-filter: var(--glass-backdrop-blur);
+  -webkit-backdrop-filter: var(--glass-backdrop-blur);
+  border-bottom: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+/* Glass Modal/Overlay Styles */
+.glass-modal {
+  background: var(--glass-bg-secondary);
+  backdrop-filter: var(--glass-backdrop-blur-strong);
+  -webkit-backdrop-filter: var(--glass-backdrop-blur-strong);
+  border: 1px solid var(--glass-border-strong);
+  border-radius: 1.5rem;
+  box-shadow: var(--glass-shadow-strong);
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-modal::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--cyberpunk-neon-green), transparent);
+  animation: cyberpunk-scan 3s linear infinite;
+}
+
+/* Glass Background Patterns */
+.glass-bg-pattern {
+  background-image: 
+    radial-gradient(circle at 25% 25%, rgba(57, 255, 20, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 75% 75%, rgba(10, 36, 114, 0.05) 0%, transparent 50%),
+    linear-gradient(45deg, transparent 40%, rgba(57, 255, 20, 0.02) 50%, transparent 60%);
+  background-size: 300px 300px, 400px 400px, 150px 150px;
+}
+
+.glass-bg-geometric {
+  background-image: 
+    linear-gradient(30deg, transparent 40%, rgba(57, 255, 20, 0.03) 50%, transparent 60%),
+    linear-gradient(-30deg, transparent 40%, rgba(10, 36, 114, 0.03) 50%, transparent 60%);
+  background-size: 80px 80px;
+}
+
+/* Glass Animations */
+@keyframes glass-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.glass-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(57, 255, 20, 0.1), transparent);
+  background-size: 200% 100%;
+  animation: glass-shimmer 2s ease-in-out infinite;
+}
+
+@keyframes glass-pulse {
+  0%, 100% {
+    box-shadow: var(--glass-shadow);
+  }
+  50% {
+    box-shadow: var(--glass-shadow-strong), var(--cyberpunk-glow-soft);
+  }
+}
+
+.glass-pulse {
+  animation: glass-pulse 3s ease-in-out infinite;
+}
+
+/* Cyberpunk Background Patterns */
+.cyberpunk-bg-main {
+  background: 
+    linear-gradient(135deg, #0A2472 0%, #001F3F 50%, #000000 100%),
+    radial-gradient(circle at 20% 20%, rgba(57, 255, 20, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(10, 36, 114, 0.1) 0%, transparent 50%);
+  background-attachment: fixed;
+}
+
+.cyberpunk-bg-grid {
+  background-image: 
+    linear-gradient(rgba(57, 255, 20, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(57, 255, 20, 0.1) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+.cyberpunk-bg-circuit {
+  background-image: 
+    radial-gradient(circle at 25% 25%, rgba(57, 255, 20, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 75% 75%, rgba(10, 36, 114, 0.05) 0%, transparent 50%),
+    linear-gradient(45deg, transparent 40%, rgba(57, 255, 20, 0.02) 50%, transparent 60%),
+    linear-gradient(-45deg, transparent 40%, rgba(10, 36, 114, 0.02) 50%, transparent 60%);
+  background-size: 200px 200px, 300px 300px, 100px 100px, 100px 100px;
+}
+
+.cyberpunk-bg-splatter {
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(57, 255, 20, 0.1) 0%, transparent 20%),
+    radial-gradient(circle at 80% 10%, rgba(57, 255, 20, 0.05) 0%, transparent 30%),
+    radial-gradient(circle at 20% 80%, rgba(10, 36, 114, 0.1) 0%, transparent 25%),
+    radial-gradient(circle at 90% 90%, rgba(10, 36, 114, 0.05) 0%, transparent 35%);
+  background-size: 400px 400px, 300px 300px, 350px 350px, 250px 250px;
+}
+
+/* Cyberpunk Text Effects */
+.cyberpunk-text-glow {
+  text-shadow: 
+    0 0 5px var(--cyberpunk-neon-green),
+    0 0 10px var(--cyberpunk-neon-green),
+    0 0 15px var(--cyberpunk-neon-green);
+}
+
+.cyberpunk-text-outline {
+  -webkit-text-stroke: 1px var(--cyberpunk-neon-green);
+  text-stroke: 1px var(--cyberpunk-neon-green);
+  color: transparent;
+}
+
+/* Cyberpunk Loading Spinner */
+.cyberpunk-spinner {
+  width: 40px;
+  height: 40px;
+  border: 2px solid transparent;
+  border-top: 2px solid var(--cyberpunk-neon-green);
+  border-radius: 50%;
+  animation: cyberpunk-spin 1s linear infinite;
+}
+
+@keyframes cyberpunk-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Cyberpunk Progress Bar */
+.cyberpunk-progress {
+  width: 100%;
+  height: 4px;
+  background: rgba(57, 255, 20, 0.2);
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+}
+
+.cyberpunk-progress::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: linear-gradient(90deg, var(--cyberpunk-neon-green), #2ECC40);
+  border-radius: 2px;
+  animation: cyberpunk-progress 2s ease-in-out infinite;
+}
+
+@keyframes cyberpunk-progress {
+  0% { width: 0%; }
+  50% { width: 100%; }
+  100% { width: 0%; }
+}
+
+/* Cyberpunk Terminal */
+.cyberpunk-terminal {
+  background: rgba(0, 0, 0, 0.8);
+  border: 1px solid var(--cyberpunk-neon-green);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  font-family: "JetBrains Mono", monospace;
+  color: var(--cyberpunk-neon-green);
+  position: relative;
+  overflow: hidden;
+}
+
+.cyberpunk-terminal::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--cyberpunk-neon-green), transparent);
+  animation: cyberpunk-scan 3s linear infinite;
+}
+
+/* Cyberpunk Hologram Effect */
+.cyberpunk-hologram {
+  position: relative;
+  background: linear-gradient(45deg, transparent 30%, rgba(57, 255, 20, 0.1) 50%, transparent 70%);
+  background-size: 200% 200%;
+  animation: cyberpunk-hologram 3s ease-in-out infinite;
+}
+
+@keyframes cyberpunk-hologram {
+  0%, 100% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
 }
