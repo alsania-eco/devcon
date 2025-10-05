@@ -1,7 +1,7 @@
 // All vscode variables https://gist.github.com/estruyf/ba49203e1a7d6868e9320a4ea480c27a
 // Examples for vscode https://github.com/githubocto/tailwind-vscode/blob/main/index.js
 
-// The current default theme is dark with blue accents
+// Alsania Cyberpunk Theme - Dark with neon green accents
 export const THEME_COLORS = {
   background: {
     vars: [
@@ -9,7 +9,7 @@ export const THEME_COLORS = {
       "--vscode-editor-background",
       "--vscode-panel-background",
     ],
-    default: "#1e1e1e", // dark gray
+    default: "#0A2472", // midnight navy
   },
   foreground: {
     vars: [
@@ -17,7 +17,7 @@ export const THEME_COLORS = {
       "--vscode-editor-foreground",
       "--vscode-panel-foreground",
     ],
-    default: "#e6e6e6", // light gray
+    default: "#FFFFFF", // white
   },
   "editor-background": {
     vars: ["--vscode-editor-background"],
@@ -29,7 +29,7 @@ export const THEME_COLORS = {
   },
   "primary-background": {
     vars: ["--vscode-button-background"],
-    default: "#2c5aa0", // medium blue
+    default: "#39FF14", // neon green
   },
   "primary-foreground": {
     vars: ["--vscode-button-foreground"],
