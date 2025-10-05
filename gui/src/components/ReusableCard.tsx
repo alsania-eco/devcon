@@ -5,10 +5,15 @@ import { CloseButton, defaultBorderRadius, vscInputBackground } from ".";
 const StyledCard = styled.div`
   margin: auto;
   border-radius: ${defaultBorderRadius};
-  background-color: ${vscInputBackground};
+  /* Glassmorphism card */
+  background: rgba(13, 27, 58, 0.45);
+  backdrop-filter: blur(10px) saturate(130%);
+  -webkit-backdrop-filter: blur(10px) saturate(130%);
+  border: 1px solid rgba(57, 255, 20, 0.25);
   box-shadow:
-    0 20px 25px -5px rgb(0 0 0 / 0.1),
-    0 8px 10px -6px rgb(0 0 0 / 0.1);
+    0 20px 25px -5px rgba(0, 0, 0, 0.35),
+    0 8px 10px -6px rgba(0, 0, 0, 0.25),
+    0 0 12px rgba(57, 255, 20, 0.15);
 `;
 
 interface ReusableCardProps {

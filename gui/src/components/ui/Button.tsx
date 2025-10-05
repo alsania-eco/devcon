@@ -11,7 +11,7 @@ type ButtonProps = React.ComponentProps<"button"> & {
 
 const buttonVariants = {
   primary:
-    "border-none text-primary-foreground bg-primary hover:enabled:brightness-125",
+    "border-none text-primary-foreground bg-primary hover:enabled:brightness-125 neon-border neon-glow",
   secondary:
     "border-none text-foreground bg-border hover:enabled:brightness-125",
   outline:
@@ -31,7 +31,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       <button
         ref={ref}
         className={cn(
-          "my-1.5 cursor-pointer rounded transition-all duration-200",
+          "my-1.5 cursor-pointer rounded transition-all duration-200 ui-label",
           "hover:enabled:cursor-pointer",
           "disabled:text-description-muted disabled:pointer-events-none disabled:opacity-50",
           buttonVariants[variant],
@@ -39,7 +39,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           className,
         )}
         style={{
-          fontFamily: "system-ui, -apple-system, sans-serif",
+          fontFamily: 'Rajdhani, "Open Sans", system-ui, -apple-system, sans-serif',
           ...props.style,
         }}
         {...props}
