@@ -18,9 +18,9 @@ export function PageHeader({
 
   return (
     <div
-      className={`sticky top-0 z-20 m-0 flex items-center justify-between bg-inherit py-1 ${
+      className={`sticky top-0 z-20 m-0 flex items-center justify-between glass py-2 px-4 ${
         showBorder
-          ? "border-0 border-b-[1px] border-solid border-b-zinc-700"
+          ? "border-0 border-b-[1px] border-solid border-b-primary"
           : ""
       }`}
     >
@@ -31,9 +31,10 @@ export function PageHeader({
         >
           <ArrowLeftIcon className="ml-3 inline-block h-3 w-3" />
           <span
-            className="mx-2 inline-block text-lg font-bold"
+            className="mx-2 inline-block text-lg font-bold cyberpunk-heading neon-glow"
             style={{
               fontSize,
+              fontFamily: "Orbitron, monospace",
             }}
           >
             {title}
