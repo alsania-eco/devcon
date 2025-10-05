@@ -9,7 +9,7 @@ export const THEME_COLORS = {
       "--vscode-editor-background",
       "--vscode-panel-background",
     ],
-    default: "#1e1e1e", // dark gray
+    default: "#0A2472", // cyberpunk midnight
   },
   foreground: {
     vars: [
@@ -17,72 +17,72 @@ export const THEME_COLORS = {
       "--vscode-editor-foreground",
       "--vscode-panel-foreground",
     ],
-    default: "#e6e6e6", // light gray
+    default: "#39FF14", // cyberpunk neon green
   },
   "editor-background": {
     vars: ["--vscode-editor-background"],
-    default: "#1e1e1e", // dark gray
+    default: "#001F3F", // cyberpunk navy
   },
   "editor-foreground": {
     vars: ["--vscode-editor-foreground"],
-    default: "#e6e6e6", // light gray
+    default: "#39FF14", // cyberpunk neon green
   },
   "primary-background": {
     vars: ["--vscode-button-background"],
-    default: "#2c5aa0", // medium blue
+    default: "#39FF14", // cyberpunk neon green
   },
   "primary-foreground": {
     vars: ["--vscode-button-foreground"],
-    default: "#ffffff", // white
+    default: "#000000", // black for contrast
   },
   "primary-hover": {
     vars: ["--vscode-button-hoverBackground"],
-    default: "#3a6db3", // lighter blue
+    default: "#2ECC40", // darker neon green
   },
   "secondary-background": {
     vars: ["--vscode-button-secondaryBackground"],
-    default: "#303030", // medium dark gray
+    default: "#001F3F", // cyberpunk navy
   },
   "secondary-foreground": {
     vars: ["--vscode-button-secondaryForeground"],
-    default: "#e6e6e6", // light gray
+    default: "#39FF14", // cyberpunk neon green
   },
   "secondary-hover": {
     vars: ["--vscode-button-secondaryHoverBackground"],
-    default: "#3a3a3a", // medium gray
+    default: "#0A2472", // cyberpunk midnight
   },
   border: {
     vars: ["--vscode-sideBar-border", "--vscode-panel-border"],
-    default: "#2a2a2a", // dark gray border
+    default: "#39FF14", // cyberpunk neon green border
   },
   "border-focus": {
     vars: ["--vscode-focusBorder"],
-    default: "#3a6db3", // lighter blue
+    default: "#39FF14", // cyberpunk neon green focus
   },
   // Command styles are used for tip-tap editor
   "command-background": {
     vars: ["--vscode-commandCenter-background"],
-    default: "#252525", // dark gray
+    default: "#001F3F", // cyberpunk navy
   },
   "command-foreground": {
     vars: ["--vscode-commandCenter-foreground"],
-    default: "#e6e6e6", // light gray
+    default: "#39FF14", // cyberpunk neon green
   },
   "command-border": {
     vars: ["--vscode-commandCenter-inactiveBorder"],
-    default: "#555555", // medium gray
+    default: "#0A2472", // cyberpunk midnight
   },
   "command-border-focus": {
     vars: ["--vscode-commandCenter-activeBorder"],
-    default: "#4d8bf0", // bright blue
+    default: "#39FF14", // cyberpunk neon green
   },
   description: {
     vars: ["--vscode-descriptionForeground"],
-    default: "#b3b3b3", // medium light gray
+    default: "#39FF14", // cyberpunk neon green
   },
   "description-muted": {
     vars: ["--vscode-list-deemphasizedForeground"],
-    default: "#8c8c8c", // medium gray
+    default: "#2ECC40", // darker neon green
   },
   "input-background": {
     vars: ["--vscode-input-background"],
