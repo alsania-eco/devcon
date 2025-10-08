@@ -129,9 +129,6 @@ export class ContinueCompletionProvider
     return config.selectedModelByRole.rerank ?? undefined;
   }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
   /**
    * Updates this class and the prefetch queue's usingFullFileDiff flag.
    * @param usingFullFileDiff New value to set.
@@ -147,9 +144,6 @@ export class ContinueCompletionProvider
    * @param position The current cursor position.
    * @param context Contextual information about the inline completion request.
    */
->>>>>>> upstream/sigmasauer07
-=======
->>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
   public async provideInlineCompletionItems(
     document: vscode.TextDocument,
     position: vscode.Position,
@@ -157,9 +151,6 @@ export class ContinueCompletionProvider
     token: vscode.CancellationToken,
     //@ts-ignore
   ): ProviderResult<InlineCompletionItem[] | InlineCompletionList> {
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
     // This method is triggered on every keystroke, tab keypress, and cursor move.
     // We need to determine why it was triggered:
     // 1. Typing (chain doesn't exist)
@@ -171,9 +162,6 @@ export class ContinueCompletionProvider
     // The code in this block is meant for gathering context for autocomplete and next edit requests.
     // e.g. filepath, cursor position, editor, notebook-ness, etc.
 
->>>>>>> upstream/sigmasauer07
-=======
->>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
     const enableTabAutocomplete =
       getStatusBarStatus() === StatusBarStatus.Enabled;
     if (token.isCancellationRequested || !enableTabAutocomplete) {

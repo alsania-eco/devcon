@@ -1,12 +1,13 @@
+import { ApplyToFilePayload } from "core";
 import { ConfigHandler } from "core/config/ConfigHandler";
+import { myersDiff } from "core/diff/myers";
+import { generateLines } from "core/diff/util";
+import { ApplyAbortManager } from "core/edit/applyAbortManager";
 import { applyCodeBlock } from "core/edit/lazy/applyCodeBlock";
 import { getUriPathBasename } from "core/util/uri";
 import * as vscode from "vscode";
 
-import { ApplyToFilePayload } from "core";
-import { myersDiff } from "core/diff/myers";
-import { generateLines } from "core/diff/util";
-import { ApplyAbortManager } from "core/edit/applyAbortManager";
+
 import { VerticalDiffManager } from "../diff/vertical/manager";
 import { VsCodeIde } from "../VsCodeIde";
 import { VsCodeWebviewProtocol } from "../webviewProtocol";

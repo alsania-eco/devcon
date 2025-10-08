@@ -14,6 +14,7 @@ import {
 import { Repository } from "./otherExtensions/git";
 import { SecretStorage } from "./stubs/SecretStorage";
 import { VsCodeIdeUtils } from "./util/ideUtils";
+import { getExtensionVersion, isExtensionPrerelease } from "./util/util";
 import { getExtensionUri, openEditorAndRevealRange } from "./util/vscode";
 import { VsCodeWebviewProtocol } from "./webviewProtocol";
 
@@ -32,7 +33,6 @@ import type {
   TerminalOptions,
   Thread,
 } from "core";
-import { getExtensionVersion, isExtensionPrerelease } from "./util/util";
 
 class VsCodeIde implements IDE {
   ideUtils: VsCodeIdeUtils;

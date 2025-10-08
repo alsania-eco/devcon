@@ -61,11 +61,7 @@ import {
   getEsbuildBinaryPath,
 } from "../util/paths";
 import { localPathToUri } from "../util/pathToUri";
-
-<<<<<<< HEAD
-<<<<<<< HEAD
 import { getToolsForIde } from "../tools";
-=======
 import { PolicySingleton } from "../control-plane/PolicySingleton";
 import CustomContextProviderClass from "../context/providers/CustomContextProvider";
 import { getBaseToolDefinitions } from "../tools";
