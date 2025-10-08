@@ -5,10 +5,13 @@ import { CloseButton, defaultBorderRadius, vscInputBackground } from ".";
 const StyledCard = styled.div`
   margin: auto;
   border-radius: ${defaultBorderRadius};
-  background-color: ${vscInputBackground};
+  background: rgba(0, 31, 63, 0.9);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(57, 255, 20, 0.15);
   box-shadow:
-    0 20px 25px -5px rgb(0 0 0 / 0.1),
-    0 8px 10px -6px rgb(0 0 0 / 0.1);
+    0 4px 24px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(57, 255, 20, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
 `;
 
 interface ReusableCardProps {

@@ -2,8 +2,9 @@
  * This is the entry point for the extension.
  */
 
-import { setupCa } from "core/util/ca";
 import * as os from "os"; // Fix: import os for homedir
+
+import { setupCa } from "core/util/ca";
 import * as vscode from "vscode";
 
 export { default as buildTimestamp } from "./.buildTimestamp";
@@ -124,7 +125,7 @@ export async function activate(context: vscode.ExtensionContext) {
       placeHolder: "Ask Echo about the selected code...",
       prompt: "What would you like Echo to help with?",
     });
-    if (!prompt) return;
+    if (!prompt) {return;}
 
     await vscode.commands.executeCommand("echo.open");
     vscode.window.showInformationMessage("Echo: Processing your request...");

@@ -1,7 +1,7 @@
 import * as React from "react";
 import { cn } from "../../util/cn";
 
-type ButtonVariant = "ghost" | "primary" | "secondary" | "outline";
+type ButtonVariant = "ghost" | "primary" | "secondary" | "outline" | "cyberpunk" | "glass" | "neon";
 type ButtonSize = "sm" | "lg";
 
 type ButtonProps = React.ComponentProps<"button"> & {
@@ -11,13 +11,19 @@ type ButtonProps = React.ComponentProps<"button"> & {
 
 const buttonVariants = {
   primary:
-    "border-none text-primary-foreground bg-primary hover:enabled:brightness-125",
+    "border-none text-primary-foreground bg-primary hover:enabled:brightness-125 neon-glow",
   secondary:
     "border-none text-foreground bg-border hover:enabled:brightness-125",
   outline:
-    "border border-solid border-badge border-border text-foreground bg-transparent hover:enabled:bg-input",
+    "border border-solid border-badge border-border text-foreground bg-transparent hover:enabled:bg-input neon-border",
   ghost:
     "border-none text-foreground bg-inherit hover:enabled:brightness-125 hover:enabled:bg-input",
+  cyberpunk:
+    "glass-button neon-glow text-white font-bold cyberpunk-ui",
+  glass:
+    "glass-button text-white cyberpunk-ui hover:enabled:bg-opacity-80",
+  neon:
+    "neon-border bg-transparent text-primary cyberpunk-ui font-bold hover:enabled:bg-primary hover:enabled:text-primary-foreground",
 };
 
 const buttonSizes = {
@@ -39,7 +45,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           className,
         )}
         style={{
-          fontFamily: "system-ui, -apple-system, sans-serif",
+          fontFamily: "Rajdhani, sans-serif",
           ...props.style,
         }}
         {...props}

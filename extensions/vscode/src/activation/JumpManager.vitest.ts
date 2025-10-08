@@ -2,6 +2,7 @@ import { NextEditProvider } from "core/nextEdit/NextEditProvider";
 import { NextEditOutcome } from "core/nextEdit/types";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import * as vscode from "vscode";
+
 import { CompletionDataForAfterJump, JumpManager } from "./JumpManager";
 
 // Mock VSCode API

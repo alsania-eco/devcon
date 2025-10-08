@@ -6,8 +6,16 @@ import { CompletionProvider } from "core/autocomplete/CompletionProvider";
 import { ConfigHandler } from "core/config/ConfigHandler";
 import { EXTENSION_NAME } from "core/control-plane/env";
 import { Core } from "core/core";
+import { myersDiff } from "core/diff/myers";
 import { walkDirAsync } from "core/indexing/walkDir";
 import { isModelInstaller } from "core/llm";
+import {
+  NEXT_EDIT_EDITABLE_REGION_BOTTOM_MARGIN,
+  NEXT_EDIT_EDITABLE_REGION_TOP_MARGIN,
+} from "core/nextEdit/constants";
+import { checkFim } from "core/nextEdit/diff/diff";
+import { NextEditLoggingService } from "core/nextEdit/NextEditLoggingService";
+import { NextEditProvider } from "core/nextEdit/NextEditProvider";
 import { extractMinimalStackTraceInfo } from "core/util/extractMinimalStackTraceInfo";
 import { startLocalOllama } from "core/util/ollamaHelper";
 import { getConfigJsonPath, getConfigYamlPath } from "core/util/paths";
@@ -17,14 +25,7 @@ import * as YAML from "yaml";
 
 import { convertJsonToYamlConfig } from "../../../packages/config-yaml/dist";
 
-import { myersDiff } from "core/diff/myers";
-import {
-  NEXT_EDIT_EDITABLE_REGION_BOTTOM_MARGIN,
-  NEXT_EDIT_EDITABLE_REGION_TOP_MARGIN,
-} from "core/nextEdit/constants";
-import { checkFim } from "core/nextEdit/diff/diff";
-import { NextEditLoggingService } from "core/nextEdit/NextEditLoggingService";
-import { NextEditProvider } from "core/nextEdit/NextEditProvider";
+
 import { CompletionDataForAfterJump } from "./activation/JumpManager";
 import { NextEditWindowManager } from "./activation/NextEditWindowManager";
 import {

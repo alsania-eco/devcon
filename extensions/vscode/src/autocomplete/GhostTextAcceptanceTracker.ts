@@ -69,7 +69,7 @@ export class GhostTextAcceptanceTracker {
     document: vscode.TextDocument,
     newPosition: vscode.Position,
   ): boolean {
-    if (!this.expectedAcceptance) return false;
+    if (!this.expectedAcceptance) {return false;}
 
     // Check document match.
     if (this.expectedAcceptance.documentUri !== document.uri.toString()) {

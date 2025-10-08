@@ -1,4 +1,5 @@
 import crypto from "crypto";
+import { EventEmitter as NodeEventEmitter } from "node:events";
 
 import {
   AuthType,
@@ -8,7 +9,6 @@ import {
 } from "core/control-plane/AuthTypes";
 import { getControlPlaneEnvSync } from "core/control-plane/env";
 import fetch from "node-fetch";
-import { EventEmitter as NodeEventEmitter } from "node:events";
 import { v4 as uuidv4 } from "uuid";
 import {
   authentication,

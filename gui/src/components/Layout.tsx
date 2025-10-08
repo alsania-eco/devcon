@@ -38,6 +38,13 @@ const GridDiv = styled.div`
   grid-template-rows: 1fr auto;
   height: 100vh;
   overflow-x: visible;
+  background: linear-gradient(135deg, #0A2472 0%, #001F3F 100%);
+  background-image:
+    radial-gradient(circle at 25% 25%, rgba(57, 255, 20, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 75% 75%, rgba(0, 246, 255, 0.1) 0%, transparent 50%),
+    linear-gradient(45deg, transparent 40%, rgba(57, 255, 20, 0.05) 50%, transparent 60%);
+  background-size: 200px 200px, 150px 150px, 100px 100px;
+  background-attachment: fixed;
 `;
 
 const Layout = () => {

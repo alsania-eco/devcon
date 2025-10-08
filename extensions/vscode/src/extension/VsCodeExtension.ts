@@ -1,9 +1,17 @@
 import fs from "fs";
 
 import { IContextProvider } from "core";
+import { getAst } from "core/autocomplete/util/ast";
 import { ConfigHandler } from "core/config/ConfigHandler";
 import { EXTENSION_NAME, getControlPlaneEnv } from "core/control-plane/env";
 import { Core } from "core/core";
+import { DocumentHistoryTracker } from "core/nextEdit/DocumentHistoryTracker";
+import {
+  EditableRegionStrategy,
+  getNextEditableRegion,
+} from "core/nextEdit/NextEditEditableRegionCalculator";
+import { NextEditProvider } from "core/nextEdit/NextEditProvider";
+import { isModelCapableOfNextEdit } from "core/nextEdit/utils";
 import { FromCoreProtocol, ToCoreProtocol } from "core/protocol";
 import { InProcessMessenger } from "core/protocol/messenger";
 import {
@@ -11,10 +19,17 @@ import {
   getConfigTsPath,
   getConfigYamlPath,
 } from "core/util/paths";
+import { localPathOrUriToPath } from "core/util/pathToUri";
 import { v4 as uuidv4 } from "uuid";
 import * as vscode from "vscode";
 
+import { JumpManager } from "../activation/JumpManager";
+import setupNextEditWindowManager, {
+  NextEditWindowManager,
+} from "../activation/NextEditWindowManager";
 import { ContinueCompletionProvider } from "../autocomplete/completionProvider";
+import { GhostTextAcceptanceTracker } from "../autocomplete/GhostTextAcceptanceTracker";
+import { getDefinitionsFromLsp } from "../autocomplete/lsp";
 import {
   monitorBatteryChanges,
   setupStatusBar,
@@ -42,22 +57,9 @@ import { VsCodeIde } from "../VsCodeIde";
 import { ConfigYamlDocumentLinkProvider } from "./ConfigYamlDocumentLinkProvider";
 import { VsCodeMessenger } from "./VsCodeMessenger";
 
-import { getAst } from "core/autocomplete/util/ast";
-import { DocumentHistoryTracker } from "core/nextEdit/DocumentHistoryTracker";
-import {
-  EditableRegionStrategy,
-  getNextEditableRegion,
-} from "core/nextEdit/NextEditEditableRegionCalculator";
-import { NextEditProvider } from "core/nextEdit/NextEditProvider";
-import { isModelCapableOfNextEdit } from "core/nextEdit/utils";
-import { localPathOrUriToPath } from "core/util/pathToUri";
-import { JumpManager } from "../activation/JumpManager";
-import setupNextEditWindowManager, {
-  NextEditWindowManager,
-} from "../activation/NextEditWindowManager";
-import { GhostTextAcceptanceTracker } from "../autocomplete/GhostTextAcceptanceTracker";
-import { getDefinitionsFromLsp } from "../autocomplete/lsp";
+
 import { handleTextDocumentChange } from "../util/editLoggingUtils";
+
 import type { VsCodeWebviewProtocol } from "../webviewProtocol";
 
 export class VsCodeExtension {
@@ -84,19 +86,13 @@ export class VsCodeExtension {
   private typingTimer: NodeJS.Timeout | null = null;
   private lastDocumentChangeTime = 0;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
   // Reset typing session after a delay
   resetTypingSession = () => {
-    if (this.typingTimer) clearTimeout(this.typingTimer);
+    if (this.typingTimer) {clearTimeout(this.typingTimer);}
     this.typingTimer = setTimeout(() => {
       this.isTypingSession = false;
     }, 2000); // Typing session considered over after 2 seconds of inactivity
   };
-<<<<<<< HEAD
-=======
   private ARBITRARY_TYPING_DELAY = 2000;
 
   /**
@@ -186,9 +182,6 @@ export class VsCodeExtension {
       GhostTextAcceptanceTracker.clearInstance();
     }
   }
->>>>>>> upstream/sigmasauer07
-=======
->>>>>>> 28516c7fabf170e523ba3466dde6fb413f3b0d92
 
   constructor(context: vscode.ExtensionContext) {
     // Register auth provider
@@ -456,7 +449,7 @@ export class VsCodeExtension {
         getDefinitionsFromLsp,
       );
 
-      if (editInfo) this.core.invoke("files/smallEdit", editInfo);
+      if (editInfo) {this.core.invoke("files/smallEdit", editInfo);}
     });
 
     vscode.workspace.onDidSaveTextDocument(async (event) => {

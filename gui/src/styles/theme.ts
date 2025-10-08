@@ -1,7 +1,7 @@
 // All vscode variables https://gist.github.com/estruyf/ba49203e1a7d6868e9320a4ea480c27a
 // Examples for vscode https://github.com/githubocto/tailwind-vscode/blob/main/index.js
 
-// The current default theme is dark with blue accents
+// Alsania Cyberpunk Theme - Dark with neon green accents
 export const THEME_COLORS = {
   background: {
     vars: [
@@ -9,7 +9,7 @@ export const THEME_COLORS = {
       "--vscode-editor-background",
       "--vscode-panel-background",
     ],
-    default: "#1e1e1e", // dark gray
+    default: "#0A2472", // midnight navy
   },
   foreground: {
     vars: [
@@ -17,7 +17,7 @@ export const THEME_COLORS = {
       "--vscode-editor-foreground",
       "--vscode-panel-foreground",
     ],
-    default: "#e6e6e6", // light gray
+    default: "#FFFFFF", // white
   },
   "editor-background": {
     vars: ["--vscode-editor-background"],
@@ -29,19 +29,19 @@ export const THEME_COLORS = {
   },
   "primary-background": {
     vars: ["--vscode-button-background"],
-    default: "#2c5aa0", // medium blue
+    default: "#39FF14", // neon green
   },
   "primary-foreground": {
     vars: ["--vscode-button-foreground"],
-    default: "#ffffff", // white
+    default: "#000000", // black for contrast with neon green
   },
   "primary-hover": {
     vars: ["--vscode-button-hoverBackground"],
-    default: "#3a6db3", // lighter blue
+    default: "#72FF5D", // lighter neon green
   },
   "secondary-background": {
     vars: ["--vscode-button-secondaryBackground"],
-    default: "#303030", // medium dark gray
+    default: "#001F3F", // deep navy
   },
   "secondary-foreground": {
     vars: ["--vscode-button-secondaryForeground"],
@@ -49,15 +49,15 @@ export const THEME_COLORS = {
   },
   "secondary-hover": {
     vars: ["--vscode-button-secondaryHoverBackground"],
-    default: "#3a3a3a", // medium gray
+    default: "#0A2472", // midnight navy
   },
   border: {
     vars: ["--vscode-sideBar-border", "--vscode-panel-border"],
-    default: "#2a2a2a", // dark gray border
+    default: "#0A2472", // midnight navy border
   },
   "border-focus": {
     vars: ["--vscode-focusBorder"],
-    default: "#3a6db3", // lighter blue
+    default: "#39FF14", // neon green
   },
   // Command styles are used for tip-tap editor
   "command-background": {
@@ -86,7 +86,7 @@ export const THEME_COLORS = {
   },
   "input-background": {
     vars: ["--vscode-input-background"],
-    default: "#2d2d2d", // dark gray
+    default: "#001F3F", // deep navy
   },
   "input-foreground": {
     vars: ["--vscode-input-foreground"],
@@ -146,7 +146,7 @@ export const THEME_COLORS = {
   },
   accent: {
     vars: ["--vscode-tab-activeBorderTop", "--vscode-focusBorder"],
-    default: "#4d8bf0", // bright blue
+    default: "#39FF14", // neon green
   },
   "find-match": {
     vars: ["--vscode-editor-findMatchBackground"], // Can't get "var(--vscode-editor-findMatchBackground, rgba(237, 18, 146, 0.5))" to work
